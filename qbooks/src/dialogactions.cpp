@@ -73,7 +73,7 @@ void DialogActions::setListActions(QList<QAction*>* listActions,
 {
 
     QTreeWidgetItem* itemSep = new QTreeWidgetItem;
-    itemSep->setText(0, trUtf8("ـــــــــ فاصل ـــــــــ"));
+    itemSep->setText(0, tr("ـــــــــ فاصل ـــــــــ"));
     itemSep->setData(1, 1, 1000);
     ui->treeWidgetOrig->addTopLevelItem(itemSep);
 
@@ -93,7 +93,7 @@ void DialogActions::setListActions(QList<QAction*>* listActions,
 
     if (!listToAdd.contains(2000)) {
         QTreeWidgetItem* item = new QTreeWidgetItem;
-        item->setText(0, trUtf8("ادوات البحث"));
+        item->setText(0, tr("ادوات البحث"));
         item->setIcon(0, QIcon(":/images/image/findbook.png"));
         item->setData(1, 1, 2000);
         ui->treeWidgetOrig->addTopLevelItem(item);
@@ -106,10 +106,10 @@ void DialogActions::setListActions(QList<QAction*>* listActions,
 
         int indx = listToAdd.at(i).toInt();
         if (indx == 1000) {
-            item->setText(0, trUtf8("ـــــــــ فاصل ـــــــــ"));
+            item->setText(0, tr("ـــــــــ فاصل ـــــــــ"));
             item->setData(1, 1, 1000);
         } else if (indx == 2000) {
-            item->setText(0, trUtf8("ادوات البحث"));
+            item->setText(0, tr("ادوات البحث"));
             item->setIcon(0, QIcon(":/images/image/findbook.png"));
             item->setData(1, 1, 2000);
         } else {

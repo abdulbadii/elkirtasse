@@ -1,5 +1,4 @@
-QT += \
-    widgets
+QT += widgets core gui
 
 #! [0]
 TEMPLATE    = subdirs

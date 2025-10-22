@@ -392,7 +392,7 @@ void Dialognet::on_treeWidget_itemSelectionChanged()
         ui->lineEditUrl->setText(PathUrl);
     } else {
         ui->lineEditUrl->setText("");
-        m_bkUrlPath = QString::null;
+        m_bkUrlPath = "";
     }
 }
 ////--------------------------
@@ -460,9 +460,10 @@ bool Dialognet::searchTreeForString(const QString& searchString,
 bool Dialognet::showAllItems(QTreeWidgetItem* parent, QTreeWidget* view)
 {
     for (int i = 0; i < parent->childCount(); i++) {
-        view->setItemHidden(parent->child(i), false);
-        showAllItems(parent->child(i), view);
-    }
+      QTreeWidgetItem* child = parent->child(i);
+        child->setHidden(false);          // Qt6 replacement
+        showAllItems(child, view);
+        }
     return true;
 }
 

@@ -53,11 +53,11 @@ void dialogfavo::charge_combo()
 void dialogfavo::on_pushButton_clicked()
 {
     QInputDialog* dff = new QInputDialog(this);
-    dff->setOkButtonText(trUtf8("موافق"));
+    dff->setOkButtonText(tr("موافق"));
     dff->setLayoutDirection(Qt::RightToLeft);
-    dff->setCancelButtonText(trUtf8("الغاء"));
-    dff->setLabelText(trUtf8("ادخل اسما للمجلد الجديد"));
-    dff->setWindowTitle(trUtf8("انشاء مجلد جديد"));
+    dff->setCancelButtonText(tr("الغاء"));
+    dff->setLabelText(tr("ادخل اسما للمجلد الجديد"));
+    dff->setWindowTitle(tr("انشاء مجلد جديد"));
 
     // استرجاع نص البحث
     if (dff->exec() == QInputDialog::Accepted) {

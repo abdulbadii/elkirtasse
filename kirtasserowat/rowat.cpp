@@ -65,9 +65,9 @@ void rowat::treeChargeRowtName(QTreeWidget* view)
 
                         if (xml.name() == "name") {
                             textRowat = xml.readElementText();
-                            textRowat.remove(trUtf8("\330\214 "));
+                            textRowat.remove(tr("\330\214 "));
                             textRowat.remove(":");
-                            textRowat.replace("W", trUtf8("صلى الله عليه وسلم"));
+                            textRowat.replace("W", tr("صلى الله عليه وسلم"));
                             //                         }else if (xml.name() == "AQUAL"){
                             //                             AQUAL= xml.readElementText();
                             //                         }else if (xml.name() == "sheok"){
@@ -167,7 +167,7 @@ QString rowat::readxml(int pos)
     xml.setDevice(&filex);
 
     //**********
-    //    QProgressDialog progress(trUtf8("الرجاء الانتظار...."), trUtf8("الغاء"),
+    //    QProgressDialog progress(tr("الرجاء الانتظار...."), tr("الغاء"),
     //    0, pos, 0); progress.setWindowModality(Qt::WindowModal);
     //    progress.setEnabled(false);
     //    progress.show();
@@ -234,39 +234,39 @@ QString rowat::readxml(int pos)
 name+"\n"+TABAQA+"\n"+WHO+"\n"+AQUAL+"\n"+ROTBA+"\n"+R_ZAHBI+"\n"+sheok+"\n"+telmez+"\n"+birth+"\n"+death;
 
 
-    TABAQA.replace("1 : F",trUtf8("1 : صحابى"));
-    TABAQA.replace("G",trUtf8("2  : من كبار التابعين"));
-    TABAQA.replace("H",trUtf8("3  : من الوسطى من التابعين"));
-    TABAQA.replace("I",trUtf8("4  : طبقة تلى الوسطى من التابعين"));
-    TABAQA.replace("J",trUtf8("5  : من صغار التابعين"));
-    TABAQA.replace("K",trUtf8("6  : من الذين عاصروا صغارالتابعين"));
-    TABAQA.replace("L",trUtf8("7  : من كبار أتباع التابعين"));
-    TABAQA.replace("M",trUtf8("8  : من الوسطى من أتباع التابعين"));
-    TABAQA.replace("N",trUtf8("9  : من صغار أتباع التابعين"));
-    TABAQA.replace("O",trUtf8("10 : كبارالآخذين عن تبع الأتباع"));
-    TABAQA.replace("P",trUtf8("11 : أوساط الآخذين عن تبع الأتباع"));
-    TABAQA.replace("Q",trUtf8("12 : صغارالآخذين عن تبع الأتباع"));
+    TABAQA.replace("1 : F",tr("1 : صحابى"));
+    TABAQA.replace("G",tr("2  : من كبار التابعين"));
+    TABAQA.replace("H",tr("3  : من الوسطى من التابعين"));
+    TABAQA.replace("I",tr("4  : طبقة تلى الوسطى من التابعين"));
+    TABAQA.replace("J",tr("5  : من صغار التابعين"));
+    TABAQA.replace("K",tr("6  : من الذين عاصروا صغارالتابعين"));
+    TABAQA.replace("L",tr("7  : من كبار أتباع التابعين"));
+    TABAQA.replace("M",tr("8  : من الوسطى من أتباع التابعين"));
+    TABAQA.replace("N",tr("9  : من صغار أتباع التابعين"));
+    TABAQA.replace("O",tr("10 : كبارالآخذين عن تبع الأتباع"));
+    TABAQA.replace("P",tr("11 : أوساط الآخذين عن تبع الأتباع"));
+    TABAQA.replace("Q",tr("12 : صغارالآخذين عن تبع الأتباع"));
 
-    AQUAL.replace("C",trUtf8("قال المزي في تهذيب الكمال"));
-    AQUAL.replace("E",trUtf8("قال الحافظ في تهذيب التهذيب"));
-    AQUAL.replace("A",trUtf8("قال المزي في تهذيب الكمال : روى عن"));
-    AQUAL.replace("B",trUtf8("قال المزي في تهذيب الكمال : روى عنه"));
-    AQUAL.replace("D",trUtf8("ذكر المزي في تهذيب الكمال"));
-    AQUAL.replace("W",trUtf8("صلى الله عليه وسلم"));
+    AQUAL.replace("C",tr("قال المزي في تهذيب الكمال"));
+    AQUAL.replace("E",tr("قال الحافظ في تهذيب التهذيب"));
+    AQUAL.replace("A",tr("قال المزي في تهذيب الكمال : روى عن"));
+    AQUAL.replace("B",tr("قال المزي في تهذيب الكمال : روى عنه"));
+    AQUAL.replace("D",tr("ذكر المزي في تهذيب الكمال"));
+    AQUAL.replace("W",tr("صلى الله عليه وسلم"));
 
-    sheok.replace("C",trUtf8("قال المزي في تهذيب الكمال"));
-    sheok.replace("E",trUtf8("قال الحافظ في تهذيب التهذيب"));
-    sheok.replace("A",trUtf8("قال المزي في تهذيب الكمال : روى عن"));
-    sheok.replace("B",trUtf8("قال المزي في تهذيب الكمال : روى عنه"));
-    sheok.replace("D",trUtf8("ذكر المزي في تهذيب الكمال"));
-    sheok.replace("W",trUtf8("صلى الله عليه وسلم"));
+    sheok.replace("C",tr("قال المزي في تهذيب الكمال"));
+    sheok.replace("E",tr("قال الحافظ في تهذيب التهذيب"));
+    sheok.replace("A",tr("قال المزي في تهذيب الكمال : روى عن"));
+    sheok.replace("B",tr("قال المزي في تهذيب الكمال : روى عنه"));
+    sheok.replace("D",tr("ذكر المزي في تهذيب الكمال"));
+    sheok.replace("W",tr("صلى الله عليه وسلم"));
 
-    telmez.replace("C",trUtf8("قال المزي في تهذيب الكمال"));
-    telmez.replace("E",trUtf8("قال الحافظ في تهذيب التهذيب"));
-    telmez.replace("A",trUtf8("قال المزي في تهذيب الكمال : روى عن"));
-    telmez.replace("B",trUtf8("قال المزي في تهذيب الكمال : روى عنه"));
-    telmez.replace("D",trUtf8("ذكر المزي في تهذيب الكمال"));
-    telmez.replace("W",trUtf8("صلى الله عليه وسلم"));
+    telmez.replace("C",tr("قال المزي في تهذيب الكمال"));
+    telmez.replace("E",tr("قال الحافظ في تهذيب التهذيب"));
+    telmez.replace("A",tr("قال المزي في تهذيب الكمال : روى عن"));
+    telmez.replace("B",tr("قال المزي في تهذيب الكمال : روى عنه"));
+    telmez.replace("D",tr("ذكر المزي في تهذيب الكمال"));
+    telmez.replace("W",tr("صلى الله عليه وسلم"));
 
 sheok.remove(".");
 telmez.remove(".");
@@ -292,14 +292,14 @@ padding-top: 0in; padding-bottom: 0.04in; padding-left: 0.04in; padding-right:
 0.04in\">"
 ;
 
-    QString molakhasse=trUtf8("الطبقة :")+TABAQA+"<br>"+trUtf8("روى له
-:")+WHO+"<br>"+ trUtf8("رتبته عند ابن حجر :")+ROTBA+"<br>"+trUtf8("رتبته عند
-الذهبي :")+R_ZAHBI+"<br>"+ trUtf8("ولد :")+birth+"<br>"+trUtf8("توفي :")+death;
+    QString molakhasse=tr("الطبقة :")+TABAQA+"<br>"+tr("روى له
+:")+WHO+"<br>"+ tr("رتبته عند ابن حجر :")+ROTBA+"<br>"+tr("رتبته عند
+الذهبي :")+R_ZAHBI+"<br>"+ tr("ولد :")+birth+"<br>"+tr("توفي :")+death;
 
     QString tableMolakhass="<table align='center' width='100%' border='0'>"
                         "<tr bgcolor='#366833'>"
                         "<th width='100%' scope='col'><span style=\"
-color:#ffffff;\">"+ trUtf8("ملخص")+"</span></th>"
+color:#ffffff;\">"+ tr("ملخص")+"</span></th>"
                         "</tr>"
 
                         "<tr bgcolor='#EDF5DC'><td><div align='right'><span
@@ -310,7 +310,7 @@ style=\"color:#000000;\">"+molakhasse+"</span></div></td></tr>"
     QString tableAQUAL="<table align='center' width='100%' border='0'>"
                        "<tr bgcolor='#366833'>"
                        "<th width='100%' scope='col'><span style=\"
-color:#ffffff;\">"+ trUtf8("أقوال")+"</span></th>"
+color:#ffffff;\">"+ tr("أقوال")+"</span></th>"
                        "</tr>"
 
                        "<tr bgcolor='#EDF5DC'><td><div align='right'><span
@@ -326,7 +326,7 @@ style=\" color:#000000;\">"+AQUAL+"</span></div></td></tr>"
         QString item=listsheok.at(i);
 
         itemsheok=itemsheok+"<tr bgcolor='#EDF5DC'>";
-       if (item.contains(trUtf8("تهذيب"))){
+       if (item.contains(tr("تهذيب"))){
            itemsheok=itemsheok+"<td><div align='right'><span
 style=\"color:#000000;\">"+item+"</span></div></td>"; }else{
            itemsheok=itemsheok+"<td><div align='right'><span
@@ -335,7 +335,7 @@ style=\"color:#000000;\"><a href='#*"+item+"'>"+item+"</a></span></div></td>";
        }
        if (i<listsheok.count()-1){
            QString item2=listsheok.at(i+1);
-           if (item2.contains(trUtf8("تهذيب"))){
+           if (item2.contains(tr("تهذيب"))){
                itemsheok=itemsheok+"<td><div align='right'><span
 style=\"color:#000000;\">"+item2+"</span></div></td>"; }else{
                itemsheok=itemsheok+"<td><div align='right'><span
@@ -348,7 +348,7 @@ style=\"color:#000000;\"><a href='#*"+item2+"'>"+item2+"</a></span></div></td>";
     QString tablesheok="<table align='center' width='100%' border='0'>"
                        "<tr bgcolor='#366833'>"
                        "<th width='100%' scope='col'><span style=\"
-color:#ffffff;\">"+ trUtf8("شيوخ")+"</span></th>"
+color:#ffffff;\">"+ tr("شيوخ")+"</span></th>"
                        "</tr></table>"
 
                        "<table align='center' width='100%' border='0'>"
@@ -365,7 +365,7 @@ color:#ffffff;\">"+ trUtf8("شيوخ")+"</span></th>"
         itemtelmez=itemtelmez+"<tr bgcolor='#EDF5DC'>";
         QString tt=item.trimmed().left(1);
 
-        if (item.contains(trUtf8("تهذيب"))||tt=="("){
+        if (item.contains(tr("تهذيب"))||tt=="("){
             itemtelmez=itemtelmez+"<td><div align='right'><span
 style=\"color:#000000;\">"+item+"</span></div></td>"; }else{
             itemtelmez=itemtelmez+"<td><div align='right'><span
@@ -376,7 +376,7 @@ style=\"color:#000000;\"><a href='#*"+item+"'>"+item+"</a></span></div></td>";
             QString item2=listtelmez.at(i+1);
             QString t=item2.trimmed().left(1);
 
-            if (item2.contains(trUtf8("تهذيب"))||t=="("){
+            if (item2.contains(tr("تهذيب"))||t=="("){
                 itemtelmez=itemtelmez+"<td><div align='right'><span
 style=\"color:#000000;\">"+item2+"</span></div></td>"; }else{
                 itemtelmez=itemtelmez+"<td><div align='right'><span
@@ -389,7 +389,7 @@ style=\"color:#000000;\"><a href='#*"+item2+"'>"+item2+"</a></span></div></td>";
     QString tabletelmez="<table align='center' width='100%' border='0'>"
                        "<tr bgcolor='#366833'>"
                        "<th width='100%' scope='col'><span style=\"
-color:#ffffff;\">"+ trUtf8("تلاميذ")+"</span></th>"
+color:#ffffff;\">"+ tr("تلاميذ")+"</span></th>"
                        "</tr></table>"
 
                        "<table align='center' width='97%' border='0'>"
@@ -408,47 +408,47 @@ QString rowat::creatHtml()
     // name+"\n"+TABAQA+"\n"+WHO+"\n"+AQUAL+"\n"+ROTBA+"\n"+R_ZAHBI+"\n"+sheok+"\n"+telmez+"\n"+birth+"\n"+death;
     // خ م د ت س ق  ( البخاري - مسلم - أبو داود - الترمذي - النسائي - ابن ماجه )
 
-    TABAQA.replace("O", trUtf8("10 : كبارالآخذين عن تبع الأتباع"));
-    TABAQA.replace("Q", trUtf8("12 : صغارالآخذين عن تبع الأتباع"));
-    TABAQA.replace("P", trUtf8(" 11 : أوساط الآخذين عن تبع الأتباع"));
-    TABAQA.replace("N", trUtf8("9  : من صغار أتباع التابعين"));
-    TABAQA.replace("H", trUtf8("3  : من الوسطى من التابعين"));
-    TABAQA.replace("1 : F", trUtf8("1 : صحابى"));
-    TABAQA.replace("I", trUtf8("4  : طبقة تلى الوسطى من التابعين"));
-    TABAQA.replace("K", trUtf8(" 6  : من الذين عاصروا صغارالتابعين"));
-    TABAQA.replace("L", trUtf8("7  : من كبار أتباع التابعين"));
-    TABAQA.replace("M", trUtf8("8  : من الوسطى من أتباع التابعين"));
-    TABAQA.replace("G", trUtf8(" 2  : من كبار التابعين"));
-    TABAQA.replace("J", trUtf8(" 5  : من صغار التابعين "));
+    TABAQA.replace("O", tr("10 : كبارالآخذين عن تبع الأتباع"));
+    TABAQA.replace("Q", tr("12 : صغارالآخذين عن تبع الأتباع"));
+    TABAQA.replace("P", tr(" 11 : أوساط الآخذين عن تبع الأتباع"));
+    TABAQA.replace("N", tr("9  : من صغار أتباع التابعين"));
+    TABAQA.replace("H", tr("3  : من الوسطى من التابعين"));
+    TABAQA.replace("1 : F", tr("1 : صحابى"));
+    TABAQA.replace("I", tr("4  : طبقة تلى الوسطى من التابعين"));
+    TABAQA.replace("K", tr(" 6  : من الذين عاصروا صغارالتابعين"));
+    TABAQA.replace("L", tr("7  : من كبار أتباع التابعين"));
+    TABAQA.replace("M", tr("8  : من الوسطى من أتباع التابعين"));
+    TABAQA.replace("G", tr(" 2  : من كبار التابعين"));
+    TABAQA.replace("J", tr(" 5  : من صغار التابعين "));
 
     AQUAL.replace(": #", ":<br>");
 
     AQUAL.replace("#", "");
-    AQUAL.replace("C", trUtf8("قال المزي في تهذيب الكمال"));
-    AQUAL.replace("E", trUtf8(". قال الحافظ في تهذيب التهذيب"));
+    AQUAL.replace("C", tr("قال المزي في تهذيب الكمال"));
+    AQUAL.replace("E", tr(". قال الحافظ في تهذيب التهذيب"));
     AQUAL.replace(".", ".<br>");
-    sheok.replace("A", trUtf8("#قال المزي في تهذيب الكمال : روى عن"));
-    sheok.replace("C", trUtf8("#قال المزي في تهذيب الكمال  :"));
-    sheok.replace("E", trUtf8("#قال الحافظ في تهذيب التهذيب"));
-    sheok.replace("D", trUtf8("#ذكر المزي في تهذيب الكمال"));
-    // telmez=telmez.replace("A",trUtf8("***قال المزي في تهذيب الكمال : روى عن"));
-    telmez.replace("B", trUtf8("#قال المزي في تهذيب الكمال : روى عنه"));
-    telmez.replace("C", trUtf8(" #قال المزي في تهذيب الكمال  :"));
-    telmez.replace("E", trUtf8(" #قال الحافظ في تهذيب التهذيب"));
-    telmez.replace("D", trUtf8(" #ذكر المزي في تهذيب الكمال"));
+    sheok.replace("A", tr("#قال المزي في تهذيب الكمال : روى عن"));
+    sheok.replace("C", tr("#قال المزي في تهذيب الكمال  :"));
+    sheok.replace("E", tr("#قال الحافظ في تهذيب التهذيب"));
+    sheok.replace("D", tr("#ذكر المزي في تهذيب الكمال"));
+    // telmez=telmez.replace("A",tr("***قال المزي في تهذيب الكمال : روى عن"));
+    telmez.replace("B", tr("#قال المزي في تهذيب الكمال : روى عنه"));
+    telmez.replace("C", tr(" #قال المزي في تهذيب الكمال  :"));
+    telmez.replace("E", tr(" #قال الحافظ في تهذيب التهذيب"));
+    telmez.replace("D", tr(" #ذكر المزي في تهذيب الكمال"));
     //----------------------molakhes------------------
-    QString molakhasse = trUtf8("المولد : ") + birth + "<br>" + trUtf8("الوفاة : ") + death + "<br>" + trUtf8("الطبقة : ") + TABAQA + "<br>" + trUtf8("روى له : ") + WHO + "<br>" + trUtf8("رتبته عند ابن حجر : ") + ROTBA + "<br>" + trUtf8("رتبته عند الذهبي : ") + R_ZAHBI;
+    QString molakhasse = tr("المولد : ") + birth + "<br>" + tr("الوفاة : ") + death + "<br>" + tr("الطبقة : ") + TABAQA + "<br>" + tr("روى له : ") + WHO + "<br>" + tr("رتبته عند ابن حجر : ") + ROTBA + "<br>" + tr("رتبته عند الذهبي : ") + R_ZAHBI;
     //----------------------choyohk------------------
     sheok.replace("# #", "#");
     sheok.remove(".");
-    QStringList listsheok = sheok.split("#", QString::SkipEmptyParts);
+    QStringList listsheok = sheok.split("#", Qt::SkipEmptyParts);
     QString itemsheok;
     for (int i = 0; i < listsheok.count(); i = i + 2) {
         QString item = listsheok.at(i);
         QString t1 = item.trimmed().left(1);
         QString ismnabi = item.trimmed().section(" ", 0, 0);
         itemsheok = itemsheok + "<tr>";
-        if (item.contains(trUtf8("تهذيب")) || t1 == "(" || ismnabi == trUtf8("النبى")) {
+        if (item.contains(tr("تهذيب")) || t1 == "(" || ismnabi == tr("النبى")) {
             itemsheok = itemsheok + "<td bgcolor=\"#FFFFE6\" scope=\"col\"><div align='right'>" + item + "</div></td>";
         } else {
             itemsheok = itemsheok + "<td bgcolor=\"#FFFFE6\" scope=\"col\"><div align='right'><a "
@@ -459,7 +459,7 @@ QString rowat::creatHtml()
             QString item2 = listsheok.at(i + 1);
             QString t2 = item2.trimmed().left(1);
             QString ismnabi2 = item2.trimmed().section(" ", 0, 0);
-            if (item2.contains(trUtf8("تهذيب")) || t2 == "(" || ismnabi2 == trUtf8("النبى")) {
+            if (item2.contains(tr("تهذيب")) || t2 == "(" || ismnabi2 == tr("النبى")) {
                 itemsheok = itemsheok + "<td bgcolor=\"#FFFFE6\" scope=\"col\"><div align='right'>" + item2 + "</div></td>";
             } else {
                 itemsheok = itemsheok + "<td bgcolor=\"#FFFFE6\" scope=\"col\"><div "
@@ -475,14 +475,14 @@ QString rowat::creatHtml()
     //----------------------telmez------------------
     telmez.replace("# #", "#");
     telmez.remove(".");
-    QStringList listtelmiz = telmez.split("#", QString::SkipEmptyParts);
+    QStringList listtelmiz = telmez.split("#", Qt::SkipEmptyParts);
     QString itemtelmiz;
     for (int i = 0; i < listtelmiz.count(); i = i + 2) {
         QString itemT = listtelmiz.at(i);
         QString t1 = itemT.trimmed().left(1);
 
         itemtelmiz = itemtelmiz + "<tr>";
-        if (itemT.contains(trUtf8("تهذيب")) || t1 == "(") {
+        if (itemT.contains(tr("تهذيب")) || t1 == "(") {
             itemtelmiz = itemtelmiz + "<td bgcolor=\"#FFFFE6\" scope=\"col\"><div align='right'>" + itemT + "</div></td>";
         } else {
             itemtelmiz = itemtelmiz + "<td bgcolor=\"#FFFFE6\" scope=\"col\"><div "
@@ -493,7 +493,7 @@ QString rowat::creatHtml()
             QString itemT2 = listtelmiz.at(i + 1);
             QString t2 = itemT2.trimmed().left(1);
 
-            if (itemT2.contains(trUtf8("تهذيب")) || t2 == "(") {
+            if (itemT2.contains(tr("تهذيب")) || t2 == "(") {
                 itemtelmiz = itemtelmiz + "<td bgcolor=\"#FFFFE6\" scope=\"col\"><div align='right'>" + itemT2 + "</div></td</div>";
             } else {
                 itemtelmiz = itemtelmiz + "<td bgcolor=\"#FFFFE6\" scope=\"col\"><div "
@@ -524,21 +524,21 @@ QString rowat::creatHtml()
                  "<tr><td bgcolor=\"#87AD6F\"><table width=\"100%\" border=\"0\">"
 
                  "<tr><th width=\"100%\" bgcolor=\"#366833\" scope=\"col\">"
-        + trUtf8("ملخص") + "</th></tr>"
+        + tr("ملخص") + "</th></tr>"
 
                            "<tr><td bgcolor=\"#FFFFE6\" ><div align='right'>"
         + molakhasse + "</div></td></tr></table>"
 
                        "<table width=\"100%\" border=\"0\"><tr> <th bgcolor=\"#366833\" "
                        "scope=\"col\">"
-        + trUtf8("الجرح والتعديل") + "</th></tr>"
+        + tr("الجرح والتعديل") + "</th></tr>"
 
                                      "<tr><td bgcolor=\"#FFFFE6\"><div align='right'>"
         + AQUAL + "</div></td></tr></table>"
 
                   "<table width=\"100%\" border=\"0\"><tr><th bgcolor=\"#366833\" "
                   "scope=\"col\">"
-        + trUtf8("شيوخ") + "</th></tr>"
+        + tr("شيوخ") + "</th></tr>"
 
                            "<tr><td><table width=\"100%\" border=\"0\" align=\"right\">"
         + itemsheok +
@@ -548,14 +548,14 @@ QString rowat::creatHtml()
 
         "<table width=\"100%\" border=\"0\"><tr><th bgcolor=\"#366833\" "
         "scope=\"col\">"
-        + trUtf8("تلاميذ") + "</th></tr>"
+        + tr("تلاميذ") + "</th></tr>"
 
                              "<tr><td><table width=\"100%\" border=\"0\" align=\"right\">"
         + itemtelmiz + "</table></td></tr>"
                        "</table>"
                        "</td></tr></table></body>";
 
-    htm.replace("W", trUtf8("صلى الله عليه وسلم"));
+    htm.replace("W", tr("صلى الله عليه وسلم"));
 
     return htm;
 }
@@ -605,7 +605,7 @@ void rowat::rawiFind(QString rawi, QTreeWidget* viewS, QTreeWidget* viewD)
     QString tt = rawi.trimmed().section(" ", 0, 1);
     QString td = rawi.trimmed().section(" ", 0, 0);
 
-    if (tt == (trUtf8("أبو عبد")) || tt == (trUtf8("أبى عبد"))) {
+    if (tt == (tr("أبو عبد")) || tt == (tr("أبى عبد"))) {
 
         if (rawiFindAbou(rawi, viewS, viewD) == true) {
             return;
@@ -613,17 +613,17 @@ void rowat::rawiFind(QString rawi, QTreeWidget* viewS, QTreeWidget* viewD)
 
             rawi.remove(rawi.section(" ", 0, 2));
             lastTxt = rawi.section(" ", -1);
-            // lastTxt.replace(trUtf8("أبى"),trUtf8("أبو"));
+            // lastTxt.replace(tr("أبى"),tr("أبو"));
         }
 
-    } else if (td == (trUtf8("أبو")) || td == (trUtf8("أبى"))) {
+    } else if (td == (tr("أبو")) || td == (tr("أبى"))) {
         if (rawiFindAbou(rawi, viewS, viewD) == true) {
             return;
         } else {
 
             rawi.remove(rawi.section(" ", 0, 1));
             lastTxt = rawi.section(" ", -1);
-            // lastTxt.replace(trUtf8("أبى"),trUtf8("أبو"));
+            // lastTxt.replace(tr("أبى"),tr("أبو"));
         }
 
     } else {
@@ -638,7 +638,7 @@ void rowat::rawiFind(QString rawi, QTreeWidget* viewS, QTreeWidget* viewD)
         loop = -1;
     for (int i = iC; i > loop; i--) {
         QString txt = rawi.trimmed().section(" ", 0, i);
-        if (txt.section(" ", -1) != trUtf8("بن") && txt.section(" ", -1) != trUtf8("أبى") && txt.section(" ", -1) != trUtf8("عبد")) {
+        if (txt.section(" ", -1) != tr("بن") && txt.section(" ", -1) != tr("أبى") && txt.section(" ", -1) != tr("عبد")) {
             list.append(txt);
             //  QMessageBox::information(0,"",txt);
         }
@@ -730,38 +730,38 @@ void rowat::rawiFind(QString rawi, QTreeWidget* viewS, QTreeWidget* viewD)
 }
 QString rowat::fullRawi(QString rawi)
 {
-    if (rawi == trUtf8("البخارى"))
-        return (trUtf8("محمد بن إسماعيل بن إبراهيم بن المغيرة الجعفى مولاهم"));
-    if (rawi == trUtf8("النسائى"))
-        return (trUtf8("أحمد بن شعيب بن على بن سنان بن بحر بن دينار"));
-    if (rawi == trUtf8("ابن ماجة"))
-        return (trUtf8("محمد بن يزيد الربعى مولاهم"));
-    if (rawi == trUtf8("الترمذى"))
-        return (trUtf8("محمد بن عيسى بن سورة بن موسى بن الضحاك السلمى"));
-    if (rawi == trUtf8("أبو داود"))
-        return (trUtf8("سليمان بن الأشعث بن إسحاق بن بشير بن شداد"));
-    if (rawi == trUtf8("مسلم"))
-        return (trUtf8("مسلم بن الحجاج بن مسلم القشيرى"));
-    if (rawi == trUtf8("أحمد بن حنبل"))
-        return (trUtf8("أحمد بن محمد بن حنبل بن هلال بن أسد الشيبانى"));
-    if (rawi == trUtf8("الزهرى"))
-        return (trUtf8("محمد بن مسلم بن عبيد الله بن عبد الله بن شهاب"));
+    if (rawi == tr("البخارى"))
+        return (tr("محمد بن إسماعيل بن إبراهيم بن المغيرة الجعفى مولاهم"));
+    if (rawi == tr("النسائى"))
+        return (tr("أحمد بن شعيب بن على بن سنان بن بحر بن دينار"));
+    if (rawi == tr("ابن ماجة"))
+        return (tr("محمد بن يزيد الربعى مولاهم"));
+    if (rawi == tr("الترمذى"))
+        return (tr("محمد بن عيسى بن سورة بن موسى بن الضحاك السلمى"));
+    if (rawi == tr("أبو داود"))
+        return (tr("سليمان بن الأشعث بن إسحاق بن بشير بن شداد"));
+    if (rawi == tr("مسلم"))
+        return (tr("مسلم بن الحجاج بن مسلم القشيرى"));
+    if (rawi == tr("أحمد بن حنبل"))
+        return (tr("أحمد بن محمد بن حنبل بن هلال بن أسد الشيبانى"));
+    if (rawi == tr("الزهرى"))
+        return (tr("محمد بن مسلم بن عبيد الله بن عبد الله بن شهاب"));
 
-    if (rawi == trUtf8("أبو بكر الصديق") || rawi == trUtf8("أبى بكر الصديق"))
-        return (trUtf8("عبد الله بن أبى قحافة"));
+    if (rawi == tr("أبو بكر الصديق") || rawi == tr("أبى بكر الصديق"))
+        return (tr("عبد الله بن أبى قحافة"));
 
-    if (rawi == trUtf8("عمر بن الخطاب"))
-        return (trUtf8("عمر بن الخطاب بن نفيل بن عبد العزى"));
+    if (rawi == tr("عمر بن الخطاب"))
+        return (tr("عمر بن الخطاب بن نفيل بن عبد العزى"));
 
-    if (rawi == trUtf8("أبى هريرة") || rawi == trUtf8("أبو هريرة"))
-        return (trUtf8("أبو هريرة الدوسى اليمانى"));
-    if (rawi == trUtf8("عائشة"))
-        return (trUtf8("عائشة بنت أبى بكر"));
-    if (rawi == trUtf8("الشعبى"))
-        return (trUtf8("عامر بن شراحيل"));
+    if (rawi == tr("أبى هريرة") || rawi == tr("أبو هريرة"))
+        return (tr("أبو هريرة الدوسى اليمانى"));
+    if (rawi == tr("عائشة"))
+        return (tr("عائشة بنت أبى بكر"));
+    if (rawi == tr("الشعبى"))
+        return (tr("عامر بن شراحيل"));
 
-    if (rawi == trUtf8("أم سلمة"))
-        return (trUtf8("هند بنت أبى أمية"));
+    if (rawi == tr("أم سلمة"))
+        return (tr("هند بنت أبى أمية"));
     return rawi;
 }
 // abou
@@ -770,7 +770,7 @@ bool rowat::rawiFindAbou(QString rawi, QTreeWidget* viewS, QTreeWidget* viewD)
     viewD->clear();
     QString abou = rawi.section(" ", 0, 0);
     rawi.remove(abou);
-    rawi = trUtf8("أبو") + rawi;
+    rawi = tr("أبو") + rawi;
     // QMessageBox::information(0,"",rawi);
     QTreeWidgetItem* itemB = new QTreeWidgetItem;
     // 1--كل النص في بدايته
@@ -810,10 +810,10 @@ bool rowat::rawiFindAbou(QString rawi, QTreeWidget* viewS, QTreeWidget* viewD)
 
     QString tt = rawi.trimmed().section(" ", 0, 1);
     QString td = rawi.trimmed().section(" ", 0, 0);
-    if (tt == (trUtf8("أبو عبد"))) {
+    if (tt == (tr("أبو عبد"))) {
         firstTxt = rawi.section(" ", 0, 2);
         rawi.remove(firstTxt);
-    } else if (td == trUtf8("أبو")) {
+    } else if (td == tr("أبو")) {
         firstTxt = rawi.section(" ", 0, 1);
         rawi.remove(firstTxt);
     }
@@ -822,7 +822,7 @@ bool rowat::rawiFindAbou(QString rawi, QTreeWidget* viewS, QTreeWidget* viewD)
     iC = rawi.trimmed().count(" ");
     for (int i = iC; i > 0; i--) {
         QString txt = rawi.trimmed().section(" ", 0, i);
-        if (txt.section(" ", -1) != trUtf8("بن") && txt.section(" ", -1) != trUtf8("أبى") && txt.section(" ", -1) != trUtf8("عبد")) {
+        if (txt.section(" ", -1) != tr("بن") && txt.section(" ", -1) != tr("أبى") && txt.section(" ", -1) != tr("عبد")) {
             list.append(txt);
             // QMessageBox::information(0,"",txt);
         }

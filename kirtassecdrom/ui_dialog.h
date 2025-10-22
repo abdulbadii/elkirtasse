@@ -12,18 +12,18 @@
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QFrame>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QToolButton>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -214,7 +214,7 @@ public:
             "Dialog",
             "\330\252\330\255\331\210\331\212\331\204 \331\203\330\252\330\250 "
             "\330\247\331\204\330\264\330\247\331\205\331\204\330\251",
-            0, QApplication::UnicodeUTF8));
+            0));
         label_4->setText(QApplication::translate(
             "Dialog",
             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
@@ -264,15 +264,15 @@ public:
             "<p align=\"right\" style=\"-qt-paragraph-type:empty; margin-top:0px; "
             "margin-bottom:0px; margin-left:0px; margin-right:0px; "
             "-qt-block-indent:0; text-indent:0px;\"></p></body></html>",
-            0, QApplication::UnicodeUTF8));
+            0));
         label->setText(QApplication::translate(
             "Dialog",
             "\331\205\330\263\330\247\330\261 \331\205\331\204\331\201 "
             "\330\250\331\212\330\247\331\206\330\247\330\252 "
             "\330\247\331\204\330\264\330\247\331\205\331\204\330\251 main.mdb",
-            0, QApplication::UnicodeUTF8));
+            0));
         toolButtonMain->setText(
-            QApplication::translate("Dialog", "...", 0, QApplication::UnicodeUTF8));
+            QApplication::translate("Dialog", "...", 0));
         lineEditPathMain->setText(QString());
         labelPathMain->setText(QString());
         label_2->setText(QApplication::translate(
@@ -283,9 +283,9 @@ public:
             "\330\247\331\204\330\260\331\212 "
             "\331\212\330\255\330\252\331\210\331\212 \331\203\330\252\330\250 "
             "\330\247\331\204\330\264\330\247\331\205\331\204\330\251",
-            0, QApplication::UnicodeUTF8));
+            0));
         toolButtonBooks->setText(
-            QApplication::translate("Dialog", "...", 0, QApplication::UnicodeUTF8));
+            QApplication::translate("Dialog", "...", 0));
         lineEditBooks->setText(QString());
         labelPathBooks->setText(QString());
         label_3->setText(QApplication::translate(
@@ -294,9 +294,9 @@ public:
             "\330\247\331\204\330\260\331\212 \330\263\331\212\330\252\331\205 "
             "\330\247\331\206\330\264\330\247\330\241 "
             "\330\247\331\204\331\203\330\252\330\250 \331\201\331\212\331\207",
-            0, QApplication::UnicodeUTF8));
+            0));
         toolButtonBooksNew->setText(
-            QApplication::translate("Dialog", "...", 0, QApplication::UnicodeUTF8));
+            QApplication::translate("Dialog", "...", 0));
         lineEditPathBooksNew->setText(QString());
         labelPathBooksNew->setText(QString());
     } // retranslateUi

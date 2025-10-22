@@ -27,6 +27,8 @@ w'.
 ** $elkirtasse_END_LICENSE$
 **
 ****************************************************************************/
+#include <QGraphicsScene>
+
 #ifndef ABOUT_H
 #define ABOUT_H
 #include <QDialog>

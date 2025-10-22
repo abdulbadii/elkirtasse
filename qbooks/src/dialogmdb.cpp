@@ -36,7 +36,6 @@ w'.
 // #include  "qsql_odbc.h"
 
 #include <QFileDialog>
-#include <QTextCodec>
 #include <QtGui>
 Dialogmdb::Dialogmdb(QWidget* parent)
     : QDialog(parent)
@@ -69,7 +68,7 @@ void Dialogmdb::on_toolButton_fileNam_clicked()
 {
     QStringList fn = QFileDialog::getOpenFileNames(
         this, tr("Open File..."), QString(),
-        trUtf8("ملفات الشاملة (*.mdb *.bok);;كل الملفات (*)"));
+        tr("ملفات الشاملة (*.mdb *.bok);;كل الملفات (*)"));
     if (!fn.isEmpty()) {
         ui->listWidget->addItems(fn);
     }
@@ -81,7 +80,7 @@ void Dialogmdb::creatBook(QString fn)
     QFile file;
     if (!file.exists(fn)) // التاكد من وجود مجلد الكتاب
     {
-        QMessageBox::information(this, trUtf8("خطأ"), trUtf8("غير موجود") + fn);
+        QMessageBox::information(this, tr("خطأ"), tr("غير موجود") + fn);
         return;
     }
 
@@ -104,7 +103,7 @@ void Dialogmdb::creatBook(QString fn)
                 Add_Book_Name = (modelsInfo->record().field("Bk").value().toString());
                 Add_Autor_Name = (modelsInfo->record().field("Auth").value().toString());
                 Add_Betaka = (modelsInfo->record().field("Betaka").value().toString());
-                // QMessageBox::information(this,trUtf8("خطأ"),tableTitle);
+                // QMessageBox::information(this,tr("خطأ"),tableTitle);
             }
         } else if (fn.contains(".mdb")) {
             tableBook = "book";
@@ -144,9 +143,9 @@ void Dialogmdb::creatBook(QString fn)
 
         ui->progressBar->setVisible(true);
         ui->progressBar->setMaximum(0);
-        QTextCodec::setCodecForLocale(QTextCodec::codecForLocale());
-        QTextCodec* codec = QTextCodec::codecForName("Windows-1256");
-        stream.setCodec(QTextCodec::codecForName("UTF-8"));
+        
+        
+        
 
         while (models->next()) {
             qApp->processEvents();
@@ -156,13 +155,13 @@ void Dialogmdb::creatBook(QString fn)
 
             string = models->record().field("nass").value().toByteArray();
 
-            QString nass = codec->toUnicode(string);
+            QString nass = QString::fromUtf8(string);
             string = models->record().field("id").value().toByteArray();
-            QString id = codec->toUnicode(string);
+            QString id = QString::fromUtf8(string);
             string = models->record().field("part").value().toByteArray();
-            QString part = codec->toUnicode(string);
+            QString part = QString::fromUtf8(string);
             string = models->record().field("page").value().toByteArray();
-            QString page = codec->toUnicode(string);
+            QString page = QString::fromUtf8(string);
 
             stream.writeStartElement("book"); //"book" or "title"
             stream.writeTextElement("nass", nass);
@@ -194,13 +193,13 @@ void Dialogmdb::creatBook(QString fn)
 
             QByteArray string;
             string = modeltitle->record().field("tit").value().toByteArray();
-            QString tit = codec->toUnicode(string);
+            QString tit = QString::fromUtf8(string);
 
             string = modeltitle->record().field("lvl").value().toByteArray();
-            QString lvl = codec->toUnicode(string);
+            QString lvl = QString::fromUtf8(string);
 
             string = modeltitle->record().field("id").value().toByteArray();
-            QString id = codec->toUnicode(string);
+            QString id = QString::fromUtf8(string);
             int newid = listId.indexOf(id);
             if (newid == -1) {
                 newid = 0;
@@ -229,18 +228,18 @@ void Dialogmdb::creatBook(QString fn)
             m_addGroupeId, checked)
         == false) {
 
-        QMessageBox::information(this, trUtf8("خطأ"),
-            trUtf8("ربما احد بيانات الكتاب خاطئة "));
+        QMessageBox::information(this, tr("خطأ"),
+            tr("ربما احد بيانات الكتاب خاطئة "));
 
         return;
     } else {
         Messages->saveBookInfo(m_bookDir, Add_Book_Name, Add_Autor_Name,
             Add_Betaka);
 
-        // QMessageBox::information(this,trUtf8("معلومات"),Add_Book_Name
+        // QMessageBox::information(this,tr("معلومات"),Add_Book_Name
         // +"\n"+m_bookDir);
     }
-    msgTitle = msgTitle + trUtf8("الكتاب :") + Add_Book_Name + trUtf8(" المسار :") + m_bookDir + "\n";
+    msgTitle = msgTitle + tr("الكتاب :") + Add_Book_Name + tr(" المسار :") + m_bookDir + "\n";
     Add_Book_Name = "";
     Add_Autor_Name = "";
     Add_Betaka = "";
@@ -271,7 +270,7 @@ void Dialogmdb::on_buttonBox_clicked(QAbstractButton* button)
 
         QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
         for (int i = 0; i < countItem; i++) {
-            ui->label_6->setText(trUtf8(" الرجاء الانتظار جاري انشاء الكتاب") + QString::number(i) + " / " + QString::number(countItem));
+            ui->label_6->setText(tr(" الرجاء الانتظار جاري انشاء الكتاب") + QString::number(i) + " / " + QString::number(countItem));
             QString filname = ui->listWidget->item(i)->text();
             creatBook(filname);
             qApp->processEvents();
@@ -281,13 +280,13 @@ void Dialogmdb::on_buttonBox_clicked(QAbstractButton* button)
 
             QMessageBox msgBox;
             msgBox.setText(
-                trUtf8(" لقد تم انشاء الكتب التالية بنجاح داخل المجموعة :  ") + m_addGroupeName);
+                tr(" لقد تم انشاء الكتب التالية بنجاح داخل المجموعة :  ") + m_addGroupeName);
             msgBox.setInformativeText(
-                trUtf8("انقر على اظهار التفاصيل لمعرفة قائمة الكتب "));
+                tr("انقر على اظهار التفاصيل لمعرفة قائمة الكتب "));
             msgBox.setDetailedText(msgTitle);
             msgBox.setIcon(QMessageBox::Information);
             msgBox.setLayoutDirection(Qt::RightToLeft);
-            msgBox.setWindowTitle(trUtf8("تعليمات"));
+            msgBox.setWindowTitle(tr("تعليمات"));
             msgBox.setStandardButtons(QMessageBox::Ok);
             msgBox.exec();
 
@@ -363,14 +362,14 @@ void Dialogmdb::on_toolButtonInfo_clicked()
                 QString titleName = (modelsInfo->record().field("Bk").value().toString());
                 QString AutorName = (modelsInfo->record().field("Auth").value().toString());
                 QString BetakaName = (modelsInfo->record().field("Betaka").value().toString());
-                QMessageBox::information(this, trUtf8("معلومات الكتاب"),
+                QMessageBox::information(this, tr("معلومات الكتاب"),
                     titleName + "\n" + AutorName + "\n" + BetakaName + "\n");
             }
         }
     } else if (fn.contains(".mdb")) {
         QMessageBox::information(
-            this, trUtf8("معلومات الكتاب"),
-            trUtf8("مالفات من نوع mdb لاتحمل معلومات عن الكتاب \n يمكنك اضافتها "
+            this, tr("معلومات الكتاب"),
+            tr("مالفات من نوع mdb لاتحمل معلومات عن الكتاب \n يمكنك اضافتها "
                    "يدويا بعد اضافة الكتاب"));
     }
 }

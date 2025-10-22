@@ -29,18 +29,18 @@ Dialogoption::Dialogoption(QWidget* parent)
     Arabic.setNumberOptions(QLocale::OmitGroupSeparator);
     QString txt = "1234567890";
     QString s2 = Arabic.toString(txt.toInt());
-    ui->comboBoxNumber->addItem(trUtf8("system"));
-    ui->comboBoxNumber->addItem(trUtf8("Arabic") + " (" + txt + ")");
-    ui->comboBoxNumber->addItem(trUtf8("Arabic India") + " (" + s2 + ")");
+    ui->comboBoxNumber->addItem(tr("system"));
+    ui->comboBoxNumber->addItem(tr("Arabic") + " (" + txt + ")");
+    ui->comboBoxNumber->addItem(tr("Arabic India") + " (" + s2 + ")");
     //------------
-    ui->comboBoxLng->addItem(trUtf8("النظام"));
+    ui->comboBoxLng->addItem(tr("النظام"));
     ui->comboBoxLng->addItem(QString::fromUtf8("العربية"));
     ui->comboBoxLng->addItem(QString::fromUtf8("اوردو  باكستان"));
     ui->comboBoxLng->addItem(QString::fromUtf8("english"));
     ui->comboBoxLng->addItem(QString::fromUtf8("francais"));
     //------------
     ui->comboBoxCadre->addItem(QIcon(":/images/image/top.png"),
-        trUtf8("الافتراضي"));
+        tr("الافتراضي"));
     QDir appDir(qApp->applicationDirPath());
     appDir.cdUp();
     QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
@@ -143,7 +143,7 @@ void Dialogoption::setThemesStyle(QString arg)
 {
     themesStyle = arg;
     QStringList styles;
-    styles << trUtf8("النظام") << QStyleFactory::keys();
+    styles << tr("النظام") << QStyleFactory::keys();
     int df = styles.indexOf(themesStyle);
     ui->comboBox->addItems(styles);
     ui->comboBox->setCurrentIndex(df);
@@ -222,7 +222,7 @@ QString Dialogoption::getStyleSheetName()
 // variable---------------------------------------------------------
 void Dialogoption::on_pushButton_fontcolor_clicked()
 {
-    QColor couleur = QColorDialog::getColor(colorFont, this, trUtf8("اختيار لون خط النص"),
+    QColor couleur = QColorDialog::getColor(colorFont, this, tr("اختيار لون خط النص"),
         QColorDialog::DontUseNativeDialog);
     if (couleur.isValid()) {
         colorFont = couleur.name();
@@ -232,7 +232,7 @@ void Dialogoption::on_pushButton_fontcolor_clicked()
 
 void Dialogoption::on_pushButton_titlecolor_clicked()
 {
-    QColor couleur = QColorDialog::getColor(colorTitle, this, trUtf8("اختيار لون العناوين"),
+    QColor couleur = QColorDialog::getColor(colorTitle, this, tr("اختيار لون العناوين"),
         QColorDialog::DontUseNativeDialog);
     if (couleur.isValid()) {
         colorTitle = couleur.name();
@@ -242,7 +242,7 @@ void Dialogoption::on_pushButton_titlecolor_clicked()
 
 void Dialogoption::on_pushButton_prefercolor_clicked()
 {
-    QColor couleur = QColorDialog::getColor(colorPrefer, this, trUtf8("اختيار لون الترميز"),
+    QColor couleur = QColorDialog::getColor(colorPrefer, this, tr("اختيار لون الترميز"),
         QColorDialog::DontUseNativeDialog);
     if (couleur.isValid()) {
         colorPrefer = couleur.name();
@@ -252,7 +252,7 @@ void Dialogoption::on_pushButton_prefercolor_clicked()
 
 void Dialogoption::on_pushButton_findcolor_clicked()
 {
-    QColor couleur = QColorDialog::getColor(colorFind, this, trUtf8("اختيار لون ترميز البحث"),
+    QColor couleur = QColorDialog::getColor(colorFind, this, tr("اختيار لون ترميز البحث"),
         QColorDialog::DontUseNativeDialog);
     if (couleur.isValid()) {
         colorFind = couleur.name();
@@ -262,7 +262,7 @@ void Dialogoption::on_pushButton_findcolor_clicked()
 
 void Dialogoption::on_pushButton_backcolor_clicked()
 {
-    QColor couleur = QColorDialog::getColor(colorBack, this, trUtf8("اختيار لون خلفية النص"),
+    QColor couleur = QColorDialog::getColor(colorBack, this, tr("اختيار لون خلفية النص"),
         QColorDialog::DontUseNativeDialog);
     if (couleur.isValid()) {
         colorBack = couleur.name();
@@ -273,7 +273,7 @@ void Dialogoption::on_pushButton_backcolor_clicked()
 void Dialogoption::on_toolButton_clicked()
 {
     bool ok = false;
-    QFont police = QFontDialog::getFont(&ok, fontName, this, trUtf8("اختيار خط الصفحة"));
+    QFont police = QFontDialog::getFont(&ok, fontName, this, tr("اختيار خط الصفحة"));
     if (ok) {
         fontName = (police);
         QVariant fs = police.pointSize();
@@ -307,7 +307,7 @@ void Dialogoption::on_toolButton_2_clicked()
     bool ok = false;
     QVariant fs = fontTitleSize;
     QFont police = QFontDialog::getFont(&ok, QFont(fontTitleName, fs.toInt()),
-        this, trUtf8("اختيار خط عنوان الصفحة"));
+        this, tr("اختيار خط عنوان الصفحة"));
     if (ok) {
 
         fs = police.pointSize();
@@ -321,7 +321,7 @@ void Dialogoption::on_toolButton_3_clicked()
 {
     bool ok = false;
     QFont police = QFontDialog::getFont(&ok, fontHachiaName, this,
-        trUtf8("اختيار خط حاشية الصفحة"));
+        tr("اختيار خط حاشية الصفحة"));
     if (ok) {
         fontHachiaName = (police.family());
         ui->label_fontHachia->setText(police.family());
@@ -338,7 +338,7 @@ void Dialogoption::on_toolButton_3_clicked()
 //     if (file.exists()){
 //         ui->labelCadre->setPixmap(image);
 //     }else{
-//         ui->labelCadre->setText(trUtf8("المعاينة غير متوفرة"));
+//         ui->labelCadre->setText(tr("المعاينة غير متوفرة"));
 //     }
 
 //}
@@ -347,7 +347,7 @@ void Dialogoption::on_toolButton_10_clicked()
 {
     bool ok = false;
     QFont police = QFontDialog::getFont(&ok, fontHachiaName, this,
-        trUtf8("اختيار خط حاشية الصفحة"));
+        tr("اختيار خط حاشية الصفحة"));
     if (ok) {
         fontKhasse = (police.family());
         ui->label_fontKhasse->setText(police.family());
@@ -357,7 +357,7 @@ void Dialogoption::on_toolButton_10_clicked()
 void Dialogoption::on_checkBoxStandardTool_clicked()
 {
     QMessageBox::information(
-        0, "", trUtf8("سيتم تطبيق التغيير بعد اعادة تشغيل التطبيق"));
+        0, "", tr("سيتم تطبيق التغيير بعد اعادة تشغيل التطبيق"));
 }
 
 void Dialogoption::on_toolButtonStyleCostum_clicked()

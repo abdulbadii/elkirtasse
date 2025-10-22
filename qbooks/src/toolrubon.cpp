@@ -6,7 +6,7 @@ toolrubon::toolrubon(QWidget* parent)
     : QToolBar(parent)
 {
     this->setObjectName("maintoolBar");
-    this->setWindowTitle(trUtf8("ازرار قياسية"));
+    this->setWindowTitle(tr("ازرار قياسية"));
 
     this->setMovable(false);
     toolFile = new QToolBar;
@@ -38,26 +38,26 @@ void toolrubon::setRubonStyle()
     QHBoxLayout* layoutFind = new QHBoxLayout(widgetFind);
     QHBoxLayout* layoutHelp = new QHBoxLayout(widgetHelp);
 
-    layoutFile->setMargin(0);
-    layoutEdit->setMargin(0);
-    layoutNavig->setMargin(0);
-    layoutView->setMargin(0);
-    layoutFind->setMargin(0);
-    layoutHelp->setMargin(0);
+    layoutFile->setContentsMargins(0, 0, 0, 0);
+    layoutEdit->setContentsMargins(0, 0, 0, 0);
+    layoutNavig->setContentsMargins(0, 0, 0, 0);
+    layoutView->setContentsMargins(0, 0, 0, 0);
+    layoutFind->setContentsMargins(0, 0, 0, 0);
+    layoutHelp->setContentsMargins(0, 0, 0, 0);
 
-    TabWidgetTool->addTab(widgetFile, trUtf8("&ملف"));
-    TabWidgetTool->addTab(widgetEdit, trUtf8("&تحرير"));
-    TabWidgetTool->addTab(widgetFind, trUtf8("بحث&"));
-    TabWidgetTool->addTab(widgetNavig, trUtf8("ادوات"));
-    TabWidgetTool->addTab(widgetView, trUtf8("&عرض"));
-    TabWidgetTool->addTab(widgetHelp, trUtf8("التع&ليمات"));
+    TabWidgetTool->addTab(widgetFile, tr("&ملف"));
+    TabWidgetTool->addTab(widgetEdit, tr("&تحرير"));
+    TabWidgetTool->addTab(widgetFind, tr("بحث&"));
+    TabWidgetTool->addTab(widgetNavig, tr("ادوات"));
+    TabWidgetTool->addTab(widgetView, tr("&عرض"));
+    TabWidgetTool->addTab(widgetHelp, tr("التع&ليمات"));
 
-    //    TabWidgetTool->addTab(trUtf8("&ملف"));
-    //    TabWidgetTool->addTab(trUtf8("&تحرير"));
-    //    TabWidgetTool->addTab(trUtf8("بحث&"));
-    //    TabWidgetTool->addTab(trUtf8("ادوات"));
-    //       TabWidgetTool->addTab(trUtf8("&عرض"));
-    //    TabWidgetTool->addTab(trUtf8("التع&ليمات"));
+    //    TabWidgetTool->addTab(tr("&ملف"));
+    //    TabWidgetTool->addTab(tr("&تحرير"));
+    //    TabWidgetTool->addTab(tr("بحث&"));
+    //    TabWidgetTool->addTab(tr("ادوات"));
+    //       TabWidgetTool->addTab(tr("&عرض"));
+    //    TabWidgetTool->addTab(tr("التع&ليمات"));
 
     layoutFile->addWidget(toolFile);
     layoutEdit->addWidget(toolEdit);
@@ -74,7 +74,7 @@ void toolrubon::setRubonStyle()
         " QToolButton  {  border: 0px solid #8f8f91;}"
         " QToolButton:hover  {  border: 1px solid #8f8f91; border-radius: 3px;}");
     btnAddtab->setCheckable(true);
-    btnAddtab->setToolTip(trUtf8("غلق"));
+    btnAddtab->setToolTip(tr("غلق"));
     TabWidgetTool->setCornerWidget(btnAddtab, Qt::TopLeftCorner);
     connect(btnAddtab, SIGNAL(toggled(bool)), this, SLOT(collapsTab(bool)));
     connect(TabWidgetTool, SIGNAL(currentChanged(int)), this,

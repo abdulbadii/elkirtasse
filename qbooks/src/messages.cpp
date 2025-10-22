@@ -371,7 +371,7 @@ void messages::treeChargeFahrass(QTreeWidget* view, QString Bname)
     QString lvl;
 
     item = new QTreeWidgetItem(view);
-    item->setText(0, trUtf8("بسم الله الرحمن الرحيم"));
+    item->setText(0, tr("بسم الله الرحمن الرحيم"));
     item->setData(1, 1, 1);
 
     QXmlStreamReader xml;
@@ -712,10 +712,10 @@ bool messages::addNewBook(QString bkpath, QString bktitle, QString bkauth,
     }
     //  if (!filepath.exists()){return false;}
     if (bktitle.isEmpty()) {
-        bktitle = trUtf8("بدون اسم");
+        bktitle = tr("بدون اسم");
     }
     if (bkauth.isEmpty()) {
-        bkauth = trUtf8("غير معروف");
+        bkauth = tr("غير معروف");
     }
     file.open(QIODevice::ReadOnly);
     if (!m_doc.setContent(&file)) {
@@ -1091,7 +1091,7 @@ bool messages::loadTarGz(QString path)
     // verifier
     QProcess prosses;
     QString pathToExtract = QDir::homePath() + "/.kirtasse/download";
-    QProgressDialog progress(trUtf8("الرجاء الانتظار...."), trUtf8("الغاء"), 0, 0,
+    QProgressDialog progress(tr("الرجاء الانتظار...."), tr("الغاء"), 0, 0,
         0);
     progress.setWindowModality(Qt::WindowModal);
     progress.setEnabled(false);
@@ -1115,10 +1115,10 @@ bool messages::loadTarGz(QString path)
 
     // extract
     QByteArray result = prosses.readAll();
-    //  QMessageBox::critical(this,trUtf8("خطأ"),result);
+    //  QMessageBox::critical(this,tr("خطأ"),result);
     if (!result.contains("book.xml") && !result.contains("bookinfo.info")) {
-        QMessageBox::critical(0, trUtf8("خطأ"),
-            trUtf8("الارشيف لا يحتوي على كتاب\n") + path);
+        QMessageBox::critical(0, tr("خطأ"),
+            tr("الارشيف لا يحتوي على كتاب\n") + path);
         return false;
     }
     prosses.start("7z e \"" + pathToExtract + "\"/*.tar -o\"" + pathToExtract + "\" -y");
@@ -1133,15 +1133,15 @@ bool messages::loadTarGz(QString path)
     prosses.start("tar -tf  \"" + path + "\"");
     prosses.waitForFinished();
     QByteArray result = prosses.readAll();
-    QTextCodec* codec = QTextCodec::codecForName("UTF-8");
-    QString string = codec->toUnicode(result);
+    
+    QString string = QString::fromUtf8(result);
     if (!string.contains("book.xml") && !string.contains("bookinfo.info")) {
-        QMessageBox::critical(0, trUtf8("خطأ"),
-            trUtf8("الارشيف لا يحتوي على كتاب\n") + path);
+        QMessageBox::critical(0, tr("خطأ"),
+            tr("الارشيف لا يحتوي على كتاب\n") + path);
         return false;
     }
     QString archiveDir = string.section("/", 0, 0);
-    // QMessageBox::critical(0,trUtf8("خطأ"),archiveDir);
+    // QMessageBox::critical(0,tr("خطأ"),archiveDir);
 
     prosses.execute("mkdir -p " + pathToExtract);
     prosses.waitForFinished();
@@ -1182,7 +1182,7 @@ void messages::removeTempDirs(QString dirName)
         dir.entryList(QDir::AllDirs | QDir::NoDotAndDotDot | QDir::Hidden)) {
 
         if (removeTempFiles(dirName + subdir) == true) {
-            // QMessageBox::information(0,trUtf8("خطأ"),dirName+"/"+subdir);
+            // QMessageBox::information(0,tr("خطأ"),dirName+"/"+subdir);
             removeTempDirs(dirName + "/" + subdir);
             dir.rmdir(subdir);
         }

@@ -126,13 +126,13 @@ void Dialog::on_buttonBox_clicked(QAbstractButton* button)
 
             QMessageBox msgBox;
             msgBox.setText(
-                trUtf8(" لقد تم انشاء الكتب التالية بنجاح داخل المجموعة :  ") + m_addGroupeName);
+                tr(" لقد تم انشاء الكتب التالية بنجاح داخل المجموعة :  ") + m_addGroupeName);
             msgBox.setInformativeText(
-                trUtf8("انقر على اظهار التفاصيل لمعرفة قائمة الكتب "));
+                tr("انقر على اظهار التفاصيل لمعرفة قائمة الكتب "));
             msgBox.setDetailedText(msgTitle);
             msgBox.setIcon(QMessageBox::Information);
             msgBox.setLayoutDirection(Qt::RightToLeft);
-            msgBox.setWindowTitle(trUtf8("تعليمات"));
+            msgBox.setWindowTitle(tr("تعليمات"));
             msgBox.setStandardButtons(QMessageBox::Ok);
             msgBox.exec();
             Messages->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
@@ -147,23 +147,23 @@ void Dialog::on_buttonBox_clicked(QAbstractButton* button)
 bool Dialog::copyDir(QString filname, int)
 {
     if (creat_dir() == false) {
-        QMessageBox::information(this, trUtf8("خطأ"),
-            trUtf8("خطأ لم استطع انشاء المجلد"));
+        QMessageBox::information(this, tr("خطأ"),
+            tr("خطأ لم استطع انشاء المجلد"));
 
         return false;
     }
     // m_newPathDir=m_path+"/"+archiveDir;
-    // QMessageBox::information(this,trUtf8("خطأ"), m_newPathDir);
+    // QMessageBox::information(this,tr("خطأ"), m_newPathDir);
 
     QFile file; // نسخ الملفات الى وجهة المكتبة
     if (file.copy(filname + "/title.xml", m_newPathDir + "/title.xml") == false) {
-        QMessageBox::information(this, trUtf8("خطأ"),
-            trUtf8("خطأ لم استطع انشاء الملف title.xml"));
+        QMessageBox::information(this, tr("خطأ"),
+            tr("خطأ لم استطع انشاء الملف title.xml"));
         // return false;
     }
     if (file.copy(filname + "/book.xml", m_newPathDir + "/book.xml") == false) {
-        QMessageBox::information(this, trUtf8("خطأ"),
-            trUtf8("خطأ لم استطع انشاء الملف book.xml"));
+        QMessageBox::information(this, tr("خطأ"),
+            tr("خطأ لم استطع انشاء الملف book.xml"));
         return false;
     }
 
@@ -181,8 +181,8 @@ bool Dialog::copyDir(QString filname, int)
             m_addGroupeId, checked)
         == false) {
         QMessageBox::information(
-            this, trUtf8("خطأ"),
-            trUtf8("ربما نسيت ملأ احد اخانات الضرورية أو ان بيانات الكتاب خاطئة"));
+            this, tr("خطأ"),
+            tr("ربما نسيت ملأ احد اخانات الضرورية أو ان بيانات الكتاب خاطئة"));
         return false;
     } else {
 
@@ -268,7 +268,7 @@ void Dialog::on_toolButton_zipFileNam_clicked()
 
     QStringList fn = dlg.getOpenFileNames(
         this, tr("Open Archive Files..."), QString(),
-        trUtf8("ملفات ارشفة (*tar.gz *.krts *.epub);;krts (*.krts);;tar.gz "
+        tr("ملفات ارشفة (*tar.gz *.krts *.epub);;krts (*.krts);;tar.gz "
                "(*.tar.gz);;epub (*.epub) ;;كل الملفات (*)"));
     if (!fn.isEmpty()) {
         ui->listWidget->addItems(fn);
@@ -303,24 +303,24 @@ void Dialog::on_toolButtonInfo_clicked()
     if (path.contains(".tar.gz") || path.contains(".Krts")) {
 
 #ifdef Q_WS_WIN
-        QMessageBox::information(this, trUtf8("معلومات الكتاب"),
-            trUtf8("الكتاب حزمة مضغوطة"));
+        QMessageBox::information(this, tr("معلومات الكتاب"),
+            tr("الكتاب حزمة مضغوطة"));
         return;
 #endif
         QProcess prosses;
         prosses.start("tar -tf  " + path);
         prosses.waitForFinished();
         QByteArray result = prosses.readAll();
-        QTextCodec* codec = QTextCodec::codecForName("UTF-8");
-        QString string = codec->toUnicode(result);
+        
+        QString string = QString::fromUtf8(result);
         if (!string.contains("book.xml") && !string.contains("bookinfo.info")) {
-            QMessageBox::critical(this, trUtf8("خطأ"),
-                trUtf8("الارشيف لا يحتوي على كتاب\n"));
+            QMessageBox::critical(this, tr("خطأ"),
+                tr("الارشيف لا يحتوي على كتاب\n"));
             return;
         } else {
             QString titles = string.section("/", 0, 0);
-            QMessageBox::information(this, trUtf8("معلومات الكتاب"),
-                titles + "\n" + trUtf8("الكتاب حزمة مضغوطة"));
+            QMessageBox::information(this, tr("معلومات الكتاب"),
+                titles + "\n" + tr("الكتاب حزمة مضغوطة"));
         }
     }
     if (Messages->loadBookInfo(path) == false) {
@@ -330,6 +330,6 @@ void Dialog::on_toolButtonInfo_clicked()
     QString title = Messages->infoBookTitle;
     QString autor = Messages->infoBookAutor;
     QString betaka = Messages->infoBookBetaka;
-    QMessageBox::information(this, trUtf8("معلومات الكتاب"),
+    QMessageBox::information(this, tr("معلومات الكتاب"),
         title + "\n" + autor + "\n" + betaka);
 }

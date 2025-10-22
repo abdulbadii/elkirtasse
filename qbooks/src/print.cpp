@@ -45,9 +45,9 @@ Print::Print(QWidget* parent)
     Arabic.setNumberOptions(QLocale::OmitGroupSeparator);
     QString txt = "1234567890";
     QString s2 = Arabic.toString(txt.toInt());
-    ui->comboBoxNumber->addItem(trUtf8("system"));
-    ui->comboBoxNumber->addItem(trUtf8("Arabic") + " (" + txt + ")");
-    ui->comboBoxNumber->addItem(trUtf8("Arabic India") + " (" + s2 + ")");
+    ui->comboBoxNumber->addItem(tr("system"));
+    ui->comboBoxNumber->addItem(tr("Arabic") + " (" + txt + ")");
+    ui->comboBoxNumber->addItem(tr("Arabic India") + " (" + s2 + ")");
     ui->checkBox->setVisible(false);
     ui->radioButton_part->setVisible(false);
     ui->radioButton_nbr->setVisible(false);
@@ -90,8 +90,8 @@ void Print::on_buttonBox_clicked(QAbstractButton* button)
     if (ui->buttonBox->standardButton(button) == QDialogButtonBox::Ok) {
         if (ui->comboBox->currentIndex() == 2) {
             int reponse = QMessageBox::information(
-                this, trUtf8("تنبيه"),
-                trUtf8("ان حفظ الكتاب بهذه الصيغة يأخذ وقتا أطول سيما اذا كان الكتاب "
+                this, tr("تنبيه"),
+                tr("ان حفظ الكتاب بهذه الصيغة يأخذ وقتا أطول سيما اذا كان الكتاب "
                        "كبيرا \n هل تريد المتابعة؟"),
                 QMessageBox::Yes | QMessageBox::Cancel);
             if (reponse == QMessageBox::Cancel) {
@@ -104,8 +104,8 @@ void Print::on_buttonBox_clicked(QAbstractButton* button)
         }
         if (dir.mkdir(m_bookTitle) == false) {
             QMessageBox::critical(
-                this, trUtf8("خطأ"),
-                trUtf8(" لا يمكن انشاء الملف في هذا الدليل اختر دليلا اخر"));
+                this, tr("خطأ"),
+                tr(" لا يمكن انشاء الملف في هذا الدليل اختر دليلا اخر"));
             return;
         }
 
@@ -191,8 +191,8 @@ void Print::creatDocument()
                 if (bookPart.toInt() > mCurPart) {
                     if (fileSave() == false) {
                         QMessageBox::information(
-                            this, trUtf8("خطأ"),
-                            trUtf8("لا يمكن انشاء الملف في هذا الدليل"));
+                            this, tr("خطأ"),
+                            tr("لا يمكن انشاء الملف في هذا الدليل"));
                         return;
                     }
                     mCurPart = mCurPart + 1;
@@ -204,8 +204,8 @@ void Print::creatDocument()
         } else {
             if (counter == ui->spinBox->value()) {
                 if (fileSave() == false) {
-                    QMessageBox::information(this, trUtf8("خطأ"),
-                        trUtf8("لا يمكن انشاء الملف في هذا الدليل"));
+                    QMessageBox::information(this, tr("خطأ"),
+                        tr("لا يمكن انشاء الملف في هذا الدليل"));
                     return;
                 }
                 counter = 0;
@@ -220,11 +220,11 @@ void Print::creatDocument()
     }
 
     if (fileSave() == false) {
-        QMessageBox::critical(this, trUtf8("خطأ"), trUtf8("لا يمكن حفظ الملف"));
+        QMessageBox::critical(this, tr("خطأ"), tr("لا يمكن حفظ الملف"));
         return;
     }
-    QMessageBox::information(this, trUtf8("حفظ"),
-        trUtf8("تمت عملية الحفظ بنجاح"));
+    QMessageBox::information(this, tr("حفظ"),
+        tr("تمت عملية الحفظ بنجاح"));
     this->reject();
 }
 QString Print::convertTextBetaka(QString txt)
@@ -247,14 +247,21 @@ QString Print::convertText(QString txt, QString part, QString page, int id)
 
     QLocale lc(this->locale().name());
     lc.setNumberOptions(QLocale::OmitGroupSeparator);
-    //      qDebug()<<this->locale().name();
-    QRegExp rxD("(\\d+)");
+    //  qDebug()<<this->locale().name();
+    QRegularExpression rxD("(\\d+)");
     int pos = 0;
-    while ((pos = rxD.indexIn(txt, pos)) != -1) {
-        txt.remove(pos, rxD.matchedLength());
-        txt.insert(pos, lc.toString(rxD.cap(1).toInt()));
-        pos += rxD.matchedLength();
+
+    while (pos < txt.length()) {
+        QRegularExpressionMatch match = rxD.match(txt, pos);
+        if (!match.hasMatch())
+            break;
+        pos = match.capturedStart();
+        txt.remove(pos, match.capturedLength());
+        txt.insert(pos, lc.toString(match.captured(1).toInt()));
+
+        pos += match.capturedLength();
     }
+
     QVariant dd = id;
     QTreeWidgetItem* item = new QTreeWidgetItem;
     QList<QTreeWidgetItem*> found = treeviw->findItems(dd.toString(), Qt::MatchExactly | Qt::MatchRecursive,
@@ -262,7 +269,7 @@ QString Print::convertText(QString txt, QString part, QString page, int id)
 
     foreach (item, found) {
 
-        //    QMessageBox::information(this,trUtf8("llop"),item->text(0));
+        //    QMessageBox::information(this,tr("llop"),item->text(0));
         txt.replace(item->text(0) + "<br>", "<font face='" + m_WebFontTitle + "' color='" + m_WebFontTitleColor + "'> " + item->text(0) + "</font><br>");
         txt.replace("  " + item->text(0), "<font face='" + m_WebFontTitle + "' color='" + m_WebFontTitleColor + "'><br> " + item->text(0) + "</font><br>");
         txt.replace("<br>" + item->text(0), "<font face='" + m_WebFontTitle + "' color='" + m_WebFontTitleColor + "'><br> " + item->text(0) + "</font><br>");
@@ -282,18 +289,18 @@ QString Print::convertText(QString txt, QString part, QString page, int id)
     txt.replace("C تعالى", "<font color='" + m_WebFontPrefertColor + "' >رحمه الله تعالى</font> ");
     txt.replace("{", "<font color='" + m_WebFontPrefertColor + "' >﴿</font> ");
     txt.replace("}", "<font color='" + m_WebFontPrefertColor + "' >﴾</font> ");
-    txt.replace("رضي الله عنهم ", trUtf8("<font color='") + m_WebFontPrefertColor + trUtf8("'>رضي الله عنهم </font> "));
-    txt.replace("رضي الله عنه ", trUtf8("<font color='") + m_WebFontPrefertColor + trUtf8("'>رضي الله عنه </font> "));
-    txt.replace("رضي الله عنهما ", trUtf8("<font color='") + m_WebFontPrefertColor + trUtf8("' >رضي الله عنهما </font> "));
-    txt.replace(" A ", trUtf8("<font color='") + m_WebFontPrefertColor + trUtf8("'> صلى الله عليه سلم </font> "));
-    txt.replace("Bه", trUtf8("<font color='") + m_WebFontPrefertColor + trUtf8("'>رضي الله عنه </font> "));
-    txt.replace(" D ", trUtf8("<font color='") + m_WebFontPrefertColor + trUtf8("'>  تعالى </font> "));
-    txt.replace(" E ", trUtf8("<font color='") + m_WebFontPrefertColor + trUtf8("'> عليه السلام </font> "));
+    txt.replace("رضي الله عنهم ", tr("<font color='") + m_WebFontPrefertColor + tr("'>رضي الله عنهم </font> "));
+    txt.replace("رضي الله عنه ", tr("<font color='") + m_WebFontPrefertColor + tr("'>رضي الله عنه </font> "));
+    txt.replace("رضي الله عنهما ", tr("<font color='") + m_WebFontPrefertColor + tr("' >رضي الله عنهما </font> "));
+    txt.replace(" A ", tr("<font color='") + m_WebFontPrefertColor + tr("'> صلى الله عليه سلم </font> "));
+    txt.replace("Bه", tr("<font color='") + m_WebFontPrefertColor + tr("'>رضي الله عنه </font> "));
+    txt.replace(" D ", tr("<font color='") + m_WebFontPrefertColor + tr("'>  تعالى </font> "));
+    txt.replace(" E ", tr("<font color='") + m_WebFontPrefertColor + tr("'> عليه السلام </font> "));
 
     if (txt.contains("**")) {
-        QRegExp rx("(\\d\\d? )[(]");
+        QRegularExpression rx("(\\d\\d? )[(]");
         txt.replace(rx, "<br>(");
-        QRegExp rx1("(\\d\\d?)[(]");
+        QRegularExpression rx1("(\\d\\d?)[(]");
         txt.replace(rx1, "<br>(");
         txt.replace(") (", ")<br>(");
         txt.replace(")(", ")<br>(");
@@ -302,8 +309,8 @@ QString Print::convertText(QString txt, QString part, QString page, int id)
     txt.replace("<br> <br>", "<br>");
     txt.replace("<br>  <br>", "<br>");
 
-    QRegExp rxi("_____+");
-    QRegExp rxd("ـــــ+");
+    QRegularExpression rxi("_____+");
+    QRegularExpression rxd("ـــــ+");
     txt.replace(rxi, " <font size='1'><br>__________");
     txt.replace(rxd, " <font size='1'><br>__________");
 
@@ -366,25 +373,25 @@ void Print::creatEpubDocument()
     //! [0]
     if (creatEpubDIrectory() == false) {
         QMessageBox::information(this, "",
-            trUtf8("خطأ في انشاء الملفات اختر دليلا اخر"));
+            tr("خطأ في انشاء الملفات اختر دليلا اخر"));
         return;
     }
     //! [1]
     if (creatEpubContent() == false) {
         QMessageBox::information(this, "",
-            trUtf8("خطأ في انشاء الملفات اختر دليلا اخر"));
+            tr("خطأ في انشاء الملفات اختر دليلا اخر"));
         return;
     }
     //! [2]
     if (creatEpubToc() == false) {
         QMessageBox::information(this, "",
-            trUtf8("خطأ في انشاء الملفات اختر دليلا اخر"));
+            tr("خطأ في انشاء الملفات اختر دليلا اخر"));
         return;
     }
     //! [3]
     if (creatEpubInfo() == false) {
         QMessageBox::information(this, "",
-            trUtf8("خطأ في انشاء الملفات اختر دليلا اخر"));
+            tr("خطأ في انشاء الملفات اختر دليلا اخر"));
         return;
     }
     //! [4]
@@ -394,10 +401,10 @@ void Print::creatEpubDocument()
     QString epubFile = ui->lineEdit->text() + "/" + m_bookTitle + ".epub";
     QFile file(epubFile);
     if (file.exists()) {
-        QMessageBox::information(this, "", trUtf8("تم انشاء : ") + epubFile);
+        QMessageBox::information(this, "", tr("تم انشاء : ") + epubFile);
     } else {
         QMessageBox::information(this, "",
-            trUtf8("خطأ غير متوقع في انشاء الملف : "));
+            tr("خطأ غير متوقع في انشاء الملف : "));
     }
 }
 //! [0]
@@ -408,22 +415,22 @@ bool Print::creatEpubDIrectory()
         return false;
     }
     if (dir.mkdir("OEBPS") == false) {
-        //     QMessageBox::critical(this,trUtf8("خطأ"), trUtf8("لا يمكن انشاء الملف
+        //     QMessageBox::critical(this,tr("خطأ"), tr("لا يمكن انشاء الملف
         //     في هذا الدليل"));
         return false;
     }
     if (dir.mkdir("OEBPS/xhtml") == false) {
-        //  QMessageBox::critical(this,trUtf8("خطأ"), trUtf8("لا يمكن انشاء الملف في
+        //  QMessageBox::critical(this,tr("خطأ"), tr("لا يمكن انشاء الملف في
         //  هذا الدليل"));
         return false;
     }
     if (dir.mkdir("OEBPS/img") == false) {
-        //    QMessageBox::critical(this,trUtf8("خطأ"), trUtf8("لا يمكن انشاء الملف
+        //    QMessageBox::critical(this,tr("خطأ"), tr("لا يمكن انشاء الملف
         //    في هذا الدليل"));
         return false;
     }
     if (dir.mkdir("META-INF") == false) {
-        //  QMessageBox::critical(this,trUtf8("خطأ"), trUtf8("لا يمكن انشاء الملف في
+        //  QMessageBox::critical(this,tr("خطأ"), tr("لا يمكن انشاء الملف في
         //  هذا الدليل"));
         return false;
     }
@@ -443,7 +450,7 @@ bool Print::creatEpubDIrectory()
     if (!file.open(QFile::WriteOnly))
         return false;
     QTextStream out(&file);
-    out.setCodec(QTextCodec::codecForName("UTF-8"));
+    
     out << "application/epub+zip";
     // save container.xml
     file.close();
@@ -451,7 +458,7 @@ bool Print::creatEpubDIrectory()
     if (!file.open(QFile::WriteOnly))
         return false;
     QTextStream out1(&file);
-    out1.setCodec(QTextCodec::codecForName("UTF-8"));
+    
     out1 << "<?xml version=\"1.0\"?>"
             "<container version=\"1.0\" "
             "xmlns=\"urn:oasis:names:tc:opendocument:xmlns:container\">"
@@ -465,7 +472,7 @@ bool Print::creatEpubDIrectory()
     if (!file.open(QFile::WriteOnly))
         return false;
     QTextStream out2(&file);
-    out2.setCodec(QTextCodec::codecForName("UTF-8"));
+    
     out2 << "body {direction: rtl; margin: 2%; background-color: #FEFBE7; }"
             " body.rtl { direction: rtl; text-align: right; }"
             "body.ltr { direction: ltr; text-align: justify; } "
@@ -496,7 +503,7 @@ bool Print::creatEpubContent()
         return false;
     }
     QTextStream out(&fileContent);
-    out.setCodec(QTextCodec::codecForName("UTF-8"));
+    
 
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
     out << "<package xmlns=\"http://www.idpf.org/2007/opf\" "
@@ -543,14 +550,14 @@ bool Print::creatEpubContent()
 //! [2]
 bool Print::creatEpubToc()
 {
-    QString bkinf = trUtf8("بطاقة الكتاب");
+    QString bkinf = tr("بطاقة الكتاب");
     QFile fileToc(ui->lineEdit->text() + "/" + m_bookTitle + "/OEBPS/toc.ncx");
 
     if (!fileToc.open(QFile::WriteOnly)) {
         return false;
     }
     QTextStream out(&fileToc);
-    out.setCodec(QTextCodec::codecForName("UTF-8"));
+    
 
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
     out << "<!DOCTYPE ncx PUBLIC \"-//NISO//DTD ncx 2005-1//EN\"  "
@@ -618,9 +625,9 @@ bool Print::creatEpubInfo()
     if (!fileContent.open(QFile::WriteOnly)) {
         return false;
     }
-    QString elkirtasse = trUtf8("مكتبة القرطاس");
+    QString elkirtasse = tr("مكتبة القرطاس");
     QTextStream out(&fileContent);
-    out.setCodec(QTextCodec::codecForName("UTF-8"));
+    
     out << "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\n";
 
     out << "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" "
@@ -700,7 +707,7 @@ bool Print::creatEpubPages()
             return false;
         }
         QTextStream out(&fileContent);
-        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        
         out << txtContent1;
         out << Content;
         out << txtContent2;
@@ -751,8 +758,8 @@ QString Print::convertEpubStyle(QString txt, QString part, QString page,
     }
 
     //********************************************
-    QRegExp rxi("_____+");
-    QRegExp rxd("ـــــ+");
+    QRegularExpression rxi("_____+");
+    QRegularExpression rxd("ـــــ+");
     bool hachia = false;
     if (txt.contains(rxi) || txt.contains(rxd)) {
         txt.replace(
@@ -780,9 +787,9 @@ QString Print::convertEpubStyle(QString txt, QString part, QString page,
     txt.replace(" E ", "<span class=\"prifired\"> عليه السلام </span>");
 
     if (txt.contains("**")) {
-        QRegExp rx("(\\d\\d? )[(]");
+        QRegularExpression rx("(\\d\\d? )[(]");
         txt.replace(rx, "<br />(");
-        QRegExp rx1("(\\d\\d?)[(]");
+        QRegularExpression rx1("(\\d\\d?)[(]");
         txt.replace(rx1, "<br />(");
         txt.replace(") (", ")<br />(");
         txt.replace(")(", ")<br />(");
@@ -806,20 +813,26 @@ QString Print::convertEpubStyle(QString txt, QString part, QString page,
     }
 
     QLocale lc(this->locale().name());
-    // qDebug()<<this->locale().name();
-    QRegExp rxD("(\\d+)");
     lc.setNumberOptions(QLocale::OmitGroupSeparator);
+
+    QRegularExpression rxD("(\\d+)");
     int pos = 0;
 
-    while ((pos = rxD.indexIn(txt, pos)) != -1) {
+    while (pos < txt.length()) {
+        QRegularExpressionMatch match = rxD.match(txt, pos);  // store match
+        if (!match.hasMatch())
+            break;
 
-        txt.remove(pos, rxD.matchedLength());
-        txt.insert(pos, lc.toString(rxD.cap(1).toInt()));
+        pos = match.capturedStart();
+        txt.remove(pos, match.capturedLength());
+        txt.insert(pos, lc.toString(match.captured(1).toInt()));
 
-        pos += rxD.matchedLength();
+        pos += match.capturedLength();
     }
-    return txt;
+
+return txt;
 }
+
 bool Print::zipUpubDocument()
 {
     /*
@@ -922,7 +935,7 @@ void Print::creatHtmlDocument(bool isQml)
     }
 
     if (dir.mkdir("HTML") == false) {
-        //  QMessageBox::critical(this,trUtf8("خطأ"), trUtf8("لا يمكن انشاء الملف في
+        //  QMessageBox::critical(this,tr("خطأ"), tr("لا يمكن انشاء الملف في
         //  هذا الدليل"));
         return;
     }
@@ -948,7 +961,7 @@ void Print::creatHtmlDocument(bool isQml)
                 return;
             }
             QTextStream out(&fileQml);
-            out.setCodec(QTextCodec::codecForName("UTF-8"));
+            
             out << "import QtQuick 1.0 \n";
             out << "import QtWebKit 1.0 \n";
             out << "import \"content\" \n";
@@ -978,7 +991,7 @@ void Print::creatHtmlDocument(bool isQml)
         }
     }
     if (dir.mkdir("HTML/img") == false) {
-        //    QMessageBox::critical(this,trUtf8("خطأ"), trUtf8("لا يمكن انشاء الملف
+        //    QMessageBox::critical(this,tr("خطأ"), tr("لا يمكن انشاء الملف
         //    في هذا الدليل"));
         return;
     }
@@ -1022,7 +1035,7 @@ void Print::creatHtmlDocument(bool isQml)
     creatHtmlFahrassa(isQml);
     if (creatHtmlPages(isQml) == true) {
         QMessageBox msgBox;
-        msgBox.setText(trUtf8("تم انشاء الملفات بنجاح"));
+        msgBox.setText(tr("تم انشاء الملفات بنجاح"));
         msgBox.setInformativeText("هل تريد فتح الملف للمعاينة ؟");
         msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
         msgBox.setDefaultButton(QMessageBox::Ok);
@@ -1133,7 +1146,7 @@ bool Print::creatHtmlPages(bool isQml)
             return false;
         }
         QTextStream out(&fileContent);
-        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        
         out << txtContent1;
         if (isQml == false) {
             out << TableImages;
@@ -1158,7 +1171,7 @@ void Print::creatHtmlFahrassa(bool isQml)
         return;
     }
     QTextStream out(&fileToc);
-    out.setCodec(QTextCodec::codecForName("UTF-8"));
+    
     QString title = m_bookTitle;
     if (isQml == true) {
         title = "0";
@@ -1284,7 +1297,7 @@ void Print::removeTempDirs(QString dirName)
         dir.entryList(QDir::AllDirs | QDir::NoDotAndDotDot | QDir::Hidden)) {
 
         if (removeTempFiles(dirName + subdir) == true) {
-            // QMessageBox::information(0,trUtf8("خطأ"),dirName+"/"+subdir);
+            // QMessageBox::information(0,tr("خطأ"),dirName+"/"+subdir);
             removeTempDirs(dirName + "/" + subdir);
             dir.rmdir(subdir);
         }

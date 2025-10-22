@@ -180,13 +180,13 @@ void DialogConfigBooks::on_treeWidgetCurGroup_itemSelectionChanged()
 void DialogConfigBooks::on_toolButtonSectionAdd_clicked()
 {
     QInputDialog* dff = new QInputDialog(this);
-    dff->setOkButtonText(trUtf8("موافق"));
+    dff->setOkButtonText(tr("موافق"));
     dff->setLayoutDirection(Qt::RightToLeft);
-    dff->setCancelButtonText(trUtf8("الغاء"));
+    dff->setCancelButtonText(tr("الغاء"));
 
-    dff->setLabelText(trUtf8("ادخل اسما للقسم الجديدة"));
-    dff->setWindowTitle(trUtf8("قسم جديد"));
-    dff->setTextValue(trUtf8("قسم جديد"));
+    dff->setLabelText(tr("ادخل اسما للقسم الجديدة"));
+    dff->setWindowTitle(tr("قسم جديد"));
+    dff->setTextValue(tr("قسم جديد"));
 
     QString text;
     if (dff->exec() == QInputDialog::Accepted) {
@@ -211,13 +211,13 @@ void DialogConfigBooks::on_toolButtonGroupAdd_clicked()
     if (ui->comboBoxSection->currentIndex() < 0)
         return;
     QInputDialog* dff = new QInputDialog(this);
-    dff->setOkButtonText(trUtf8("موافق"));
+    dff->setOkButtonText(tr("موافق"));
     dff->setLayoutDirection(Qt::RightToLeft);
-    dff->setCancelButtonText(trUtf8("الغاء"));
+    dff->setCancelButtonText(tr("الغاء"));
 
-    dff->setLabelText(trUtf8("ادخل اسما للمجموعة الجديدة"));
-    dff->setWindowTitle(trUtf8("مجموعة جديدة"));
-    dff->setTextValue(trUtf8("مجموعة جديدة"));
+    dff->setLabelText(tr("ادخل اسما للمجموعة الجديدة"));
+    dff->setWindowTitle(tr("مجموعة جديدة"));
+    dff->setTextValue(tr("مجموعة جديدة"));
 
     QString text;
     if (dff->exec() == QInputDialog::Accepted) {
@@ -255,11 +255,11 @@ void DialogConfigBooks::on_toolButtonGrouprename_clicked()
         return;
     }
     QInputDialog* dff = new QInputDialog(this);
-    dff->setOkButtonText(trUtf8("موافق"));
+    dff->setOkButtonText(tr("موافق"));
     dff->setLayoutDirection(Qt::RightToLeft);
-    dff->setCancelButtonText(trUtf8("الغاء"));
-    dff->setLabelText(trUtf8("ادخل اسما جديدا"));
-    dff->setWindowTitle(trUtf8("اعادة تسمية العنصر"));
+    dff->setCancelButtonText(tr("الغاء"));
+    dff->setLabelText(tr("ادخل اسما جديدا"));
+    dff->setWindowTitle(tr("اعادة تسمية العنصر"));
     dff->setTextValue(item->text(0));
     if (dff->exec() == QInputDialog::Accepted) {
         QString newtext = dff->textValue();
@@ -279,11 +279,11 @@ void DialogConfigBooks::on_toolButtonSectionRname_clicked()
     if (!item)
         return;
     QInputDialog* dff = new QInputDialog(this);
-    dff->setOkButtonText(trUtf8("موافق"));
+    dff->setOkButtonText(tr("موافق"));
     dff->setLayoutDirection(Qt::RightToLeft);
-    dff->setCancelButtonText(trUtf8("الغاء"));
-    dff->setLabelText(trUtf8("ادخل اسما جديدا"));
-    dff->setWindowTitle(trUtf8("اعادة تسمية القسم"));
+    dff->setCancelButtonText(tr("الغاء"));
+    dff->setLabelText(tr("ادخل اسما جديدا"));
+    dff->setWindowTitle(tr("اعادة تسمية القسم"));
     dff->setTextValue(ui->comboBoxSection->currentText());
     if (dff->exec() == QInputDialog::Accepted) {
         QString newtext = dff->textValue();
@@ -301,8 +301,8 @@ void DialogConfigBooks::on_toolButtonSectionRemove_clicked()
     int index = ui->comboBoxSection->currentIndex();
     QTreeWidgetItem* item = ui->treeWidgetBooks->topLevelItem(index);
     if (item->childCount() > 0) {
-        int reponse = QMessageBox::warning(this, trUtf8("معلومات"),
-            trUtf8("القسم يحتوي على عناصر وكتب  تحته \n هل "
+        int reponse = QMessageBox::warning(this, tr("معلومات"),
+            tr("القسم يحتوي على عناصر وكتب  تحته \n هل "
                    "تريد بالفعل حذف القسم المحدد؟"),
             QMessageBox::Yes | QMessageBox::No);
         if (reponse == QMessageBox::Yes) {
@@ -313,7 +313,7 @@ void DialogConfigBooks::on_toolButtonSectionRemove_clicked()
         }
     } else {
         int reponse = QMessageBox::question(
-            this, trUtf8("معلومات"), trUtf8("هل تريد بالفعل حذف القسم المحدد؟"),
+            this, tr("معلومات"), tr("هل تريد بالفعل حذف القسم المحدد؟"),
             QMessageBox::Yes | QMessageBox::No);
         if (reponse == QMessageBox::Yes) {
             ui->comboBoxSection->removeItem(index);
@@ -337,8 +337,8 @@ void DialogConfigBooks::on_toolButtonGroupRemove_clicked()
         return;
     if (item->childCount() > 0) {
         int reponse = QMessageBox::warning(
-            this, trUtf8("معلومات"),
-            trUtf8("المجموعة تحتوي على عناصر وكتب  تحتها  \n سيتم حذف الكتب من "
+            this, tr("معلومات"),
+            tr("المجموعة تحتوي على عناصر وكتب  تحتها  \n سيتم حذف الكتب من "
                    "الجهاز نهائيا \n هل تريد بالفعل حذف المجموعة المحددة؟"),
             QMessageBox::Yes | QMessageBox::No);
         if (reponse == QMessageBox::Yes) {
@@ -377,7 +377,7 @@ void DialogConfigBooks::on_toolButtonGroupRemove_clicked()
         }
     } else {
         int reponse = QMessageBox::question(
-            this, trUtf8("معلومات"), trUtf8("هل تريد بالفعل حذف المجموعة المحددة؟"),
+            this, tr("معلومات"), tr("هل تريد بالفعل حذف المجموعة المحددة؟"),
             QMessageBox::Yes | QMessageBox::No);
         if (reponse == QMessageBox::Yes) {
             if (indexGroup == -1)
@@ -401,8 +401,8 @@ void DialogConfigBooks::on_toolButtonRemoveBooks_clicked()
     if (items.count() == 0)
         return;
     int reponse = QMessageBox::warning(
-        this, trUtf8("معلومات"),
-        trUtf8(
+        this, tr("معلومات"),
+        tr(
             " هل تريد بالفعل حذف الكنب المحددة؟ \n سيتم حذفهم نهائيا من الجهاز"),
         QMessageBox::Yes | QMessageBox::No);
     if (reponse == QMessageBox::No) {
@@ -446,7 +446,7 @@ void DialogConfigBooks::on_pushButtonImg_clicked()
 {
     QString fn = QFileDialog::getOpenFileName(
         this, tr("Open File..."), QString(),
-        trUtf8("ملفات الصور (*.png *.jpg);;كل الملفات (*)"));
+        tr("ملفات الصور (*.png *.jpg);;كل الملفات (*)"));
     if (!fn.isEmpty()) {
         ui->pushButtonImg->setIcon(QIcon(fn));
         imgChanged = true;
@@ -513,7 +513,7 @@ void DialogConfigBooks::on_toolButtonOPenGroup_clicked()
     QString homeDir = QDir::homePath();
     QString fn = dlg.getOpenFileName(
         0, tr("Open xml Files..."), homeDir,
-        trUtf8("ملف قائمة الكتب (group.xml );;xml (group.xml)"));
+        tr("ملف قائمة الكتب (group.xml );;xml (group.xml)"));
     qDebug() << fn;
     if (!dlg.AcceptOpen)
         //   return;
@@ -580,20 +580,20 @@ void DialogConfigBooks::on_toolButtonRenBkPath_clicked()
 
     QDir dir(path);
     QInputDialog* dff = new QInputDialog(this);
-    dff->setOkButtonText(trUtf8("موافق"));
+    dff->setOkButtonText(tr("موافق"));
     //    dff->setLayoutDirection(Qt::RightToLeft);
-    dff->setCancelButtonText(trUtf8("الغاء"));
-    dff->setLabelText(trUtf8("الاسم القديم : ") + name + "\n" + trUtf8("يحبذ ان لا يحتوي الاسم على فراغات"));
-    dff->setWindowTitle(trUtf8("اعادة تسمية دليل الكتاب"));
+    dff->setCancelButtonText(tr("الغاء"));
+    dff->setLabelText(tr("الاسم القديم : ") + name + "\n" + tr("يحبذ ان لا يحتوي الاسم على فراغات"));
+    dff->setWindowTitle(tr("اعادة تسمية دليل الكتاب"));
     dff->setTextValue(ui->lineEditBooknam->text().replace(" ", "_"));
     if (dff->exec() == QInputDialog::Accepted) {
         if (dff->textValue().isEmpty()) {
             return;
         }
-        QString newName = dff->textValue().replace("|", QString::Null());
+        QString newName = dff->textValue().replace("|", "");
         if (file.exists(pathCostm + "/" + newName)) {
-            QMessageBox::critical(this, trUtf8("خطأ"),
-                trUtf8("يوجد مجلد بنفس الاسم"));
+            QMessageBox::critical(this, tr("خطأ"),
+                tr("يوجد مجلد بنفس الاسم"));
             return;
         }
 
@@ -651,12 +651,12 @@ void DialogConfigBooks::on_toolButtonFindBKOld_clicked()
     // اضافة قسم جديد فارغ
     QIcon icon(":/images/image/groupb.png");
     QTreeWidgetItem* sectionNew = new QTreeWidgetItem;
-    sectionNew->setText(0, trUtf8("قسم غير مصنف"));
+    sectionNew->setText(0, tr("قسم غير مصنف"));
     sectionNew->setIcon(0, icon);
     ui->treeWidgetBooks->addTopLevelItem(sectionNew);
     // اضافة مجموعة جديدة فارغة
     QTreeWidgetItem* groupNew = new QTreeWidgetItem;
-    groupNew->setText(0, trUtf8("مجموعة غير مصنفة"));
+    groupNew->setText(0, tr("مجموعة غير مصنفة"));
     groupNew->setIcon(0, icon);
     QVariant newId = Messages->genirateId(ui->treeWidgetBooks);
     groupNew->setData(2, 1, newId.toString());
@@ -690,7 +690,7 @@ void DialogConfigBooks::addbook(QTreeWidgetItem* itemNew, QTreeWidgetItem* item,
 {
     bool exist = false;
     QString idName = name.section("_", 0, 0);
-    idName.replace("bk", QString::Null());
+    idName.replace("bk", "");
 
     int topCount = ui->treeWidgetBooks->topLevelItemCount();
     for (int i = 0; i < topCount; i++) { // section

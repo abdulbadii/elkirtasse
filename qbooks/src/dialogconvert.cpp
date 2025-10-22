@@ -60,8 +60,8 @@ void dialogconvert::on_pushButton_clicked()
 
     if (creat_dir() == false) {
 
-        QMessageBox::information(this, trUtf8("خطأ"),
-            trUtf8("خطأ لم استطع انشاء المجلد"));
+        QMessageBox::information(this, tr("خطأ"),
+            tr("خطأ لم استطع انشاء المجلد"));
         this->setCursor(QCursor(Qt::ArrowCursor));
         return;
     }
@@ -78,15 +78,15 @@ void dialogconvert::on_pushButton_clicked()
             == false) {
 
             QMessageBox::information(
-                this, trUtf8("خطأ"),
-                trUtf8(
+                this, tr("خطأ"),
+                tr(
                     "ربما نسيت ملأ احد اخانات الضرورية أو ان بيانات الكتاب خاطئة"));
         } else {
             Messages->saveBookInfo(m_newPathDir, Add_Book_Name, Add_Autor_Name,
                 Add_Betaka);
 
-            QMessageBox::information(this, trUtf8("معلومات"),
-                trUtf8("تمت عملية اظافة الكتاب بنجاح"));
+            QMessageBox::information(this, tr("معلومات"),
+                tr("تمت عملية اظافة الكتاب بنجاح"));
         }
     }
     this->setCursor(QCursor(Qt::ArrowCursor));
@@ -101,8 +101,8 @@ bool dialogconvert::load(const QString& f)
     if (!file.open(QFile::ReadOnly))
         return false;
     QByteArray data = file.readAll();
-    QTextCodec* codec = Qt::codecForHtml(data);
-    QString str = codec->toUnicode(data);
+    
+    QString str = QString::fromUtf8(data);
     if (Qt::mightBeRichText(str)) {
         m_textEdit.setHtml(str);
 
@@ -159,8 +159,8 @@ bool dialogconvert::creat_xmlfile(QString path)
 
     for (int i = 0; i < rr; i++) {
         if (load(ui->listWidget->item(i)->text()) == false) { // open document
-            QMessageBox::information(this, trUtf8("خطأ"),
-                trUtf8(" خطأ في القراءة من الملف"));
+            QMessageBox::information(this, tr("خطأ"),
+                tr(" خطأ في القراءة من الملف"));
             this->setCursor(QCursor(Qt::ArrowCursor));
             return false;
         }

@@ -64,8 +64,8 @@ void dialoggoto::on_buttonBox_clicked(QAbstractButton* button)
         QVariant spinPage = ui->spinBoxPage->value();
         QFile filx(pathBook); // فتح الكتاب
         if (!filx.open(QFile::ReadOnly | QFile::Text)) {
-            QMessageBox::information(this, trUtf8("تنبيه"),
-                trUtf8("خطأ في قراءة الملف"));
+            QMessageBox::information(this, tr("تنبيه"),
+                tr("خطأ في قراءة الملف"));
             return;
         }
         xml.setDevice(&filx);
@@ -76,13 +76,13 @@ void dialoggoto::on_buttonBox_clicked(QAbstractButton* button)
                     filx.close();
                     this->accept();
                 } else {
-                    QMessageBox::information(this, trUtf8("تنبيه"),
-                        trUtf8("الجزء أو الصفحة غير موجودين"));
+                    QMessageBox::information(this, tr("تنبيه"),
+                        tr("الجزء أو الصفحة غير موجودين"));
                     filx.close();
                 }
 
             } else {
-                QMessageBox::information(this, trUtf8("تنبيه"), trUtf8("خطأ غير محدد"));
+                QMessageBox::information(this, tr("تنبيه"), tr("خطأ غير محدد"));
             }
         }
         xml.clear();

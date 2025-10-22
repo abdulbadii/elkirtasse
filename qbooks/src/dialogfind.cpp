@@ -64,15 +64,15 @@ void Dialogfind::on_buttonBox_clicked(QAbstractButton* button)
 
     if (ui->buttonBox->standardButton(button) == QDialogButtonBox::Ok) {
         if (ui->lineEdit->text().isEmpty() || ui->lineEdit->text().length() < 3) {
-            QMessageBox::information(this, trUtf8("تنبيه"),
-                trUtf8("ادخل نص البحث في مربع النص"));
+            QMessageBox::information(this, tr("تنبيه"),
+                tr("ادخل نص البحث في مربع النص"));
             return;
         }
 
         if (ui->radioButtonJidre->isChecked()) {
             if (ui->lineEdit->text().length() != 3) {
-                QMessageBox::information(this, trUtf8("تنبيه"),
-                    trUtf8("أدخل نصا يتكون من ثلاثة أحرف"));
+                QMessageBox::information(this, tr("تنبيه"),
+                    tr("أدخل نصا يتكون من ثلاثة أحرف"));
 
                 return;
             }
@@ -114,8 +114,8 @@ void Dialogfind::on_buttonBox_clicked(QAbstractButton* button)
         }
 
         if (i == 0) {
-            QMessageBox::information(this, trUtf8("تنبيه"),
-                trUtf8("حدد الكتب التي تريد البحث فيها"));
+            QMessageBox::information(this, tr("تنبيه"),
+                tr("حدد الكتب التي تريد البحث فيها"));
             return;
         }
 
@@ -141,15 +141,15 @@ void Dialogfind::on_treeWidget_itemChanged(QTreeWidgetItem* item, int)
             }
             if (!m_listBookNoMash.isEmpty()) {
                 QMessageBox msgBox;
-                msgBox.setText(trUtf8("\n هناك بعض الكتب التي لا يمكن تحديدها لانها "
+                msgBox.setText(tr("\n هناك بعض الكتب التي لا يمكن تحديدها لانها "
                                       "غير موجودة في دليل الكتب ")
                     + bookPath);
                 msgBox.setInformativeText(
-                    trUtf8("انقر على اظهار التفاصيل لمعرفة قائمة الكتب المستثناة"));
+                    tr("انقر على اظهار التفاصيل لمعرفة قائمة الكتب المستثناة"));
                 msgBox.setDetailedText(m_listBookNoMash);
                 msgBox.setIcon(QMessageBox::Information);
                 msgBox.setLayoutDirection(Qt::RightToLeft);
-                msgBox.setWindowTitle(trUtf8("تعليمات"));
+                msgBox.setWindowTitle(tr("تعليمات"));
                 msgBox.setStandardButtons(QMessageBox::Ok);
                 msgBox.exec();
                 m_listBookNoMash.clear();

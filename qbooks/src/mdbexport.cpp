@@ -101,19 +101,19 @@ bool mdbexport::readMain(QString mdbSource)
         }
 
         QTextStream textStream(&fileCsv);
-        textStream.setCodec(QTextCodec::codecForName("Windows-1256"));
+        
 
         QString line;
 
         line = textStream.readLine(); // premier line
-        // QMessageBox::information(this,trUtf8("خطأ"),line);
+        // QMessageBox::information(this,tr("خطأ"),line);
 
         int tab = line.count("|*|"); // nombre col
         if (tab >= 38) {
             tab = 38;
         }
 
-        // QMessageBox::information(this,trUtf8("خطأ"),QString::number(tab));
+        // QMessageBox::information(this,tr("خطأ"),QString::number(tab));
         for (int i = 1; i < tab + 2; i++) {
             if (i == tab + 1) {
                 listHeader.append(line.section("|*|", -1));
@@ -133,7 +133,7 @@ bool mdbexport::readMain(QString mdbSource)
             } else {
                 strValue = line.section("|*|", i - 1, i - 1);
             }
-            //   QMessageBox::information(this,trUtf8("خطأ"),strHeaderName[i]+"  :
+            //   QMessageBox::information(this,tr("خطأ"),strHeaderName[i]+"  :
             //   "+strValue);
             if (headerName == "Bk") {
                 //   ui->lineEdit_booknam->setText(strValue);
@@ -156,7 +156,7 @@ bool mdbexport::readMain(QString mdbSource)
         ui->label_Info->setText(ui->label_Info->text() + "..." + m_bookTitle);
 
     } else if (mdbSource.contains(".mdb")) {
-        QFileInfo fi = mdbSource;
+        QFileInfo fi( mdbSource);
         m_bookTitle = fi.fileName();
         tableBook = "book";
         tableTitle = "title";
@@ -185,8 +185,8 @@ bool mdbexport::creatmdbTempFiles(QString mdbSource)
             "/tempbk.csv")
         == false) {
         QMessageBox::information(
-            this, trUtf8("خطأ"),
-            trUtf8("لم استطع انشاء ملف الكتاب ربما لا تملك صلاحيات الكتابة"));
+            this, tr("خطأ"),
+            tr("لم استطع انشاء ملف الكتاب ربما لا تملك صلاحيات الكتابة"));
         return false;
     }
 
@@ -194,10 +194,10 @@ bool mdbexport::creatmdbTempFiles(QString mdbSource)
         "/temptitle.csv");
     if (creatInfo(bookDir) == false) {
 
-        QMessageBox::information(this, trUtf8("معلومات"), trUtf8("no set"));
+        QMessageBox::information(this, tr("معلومات"), tr("no set"));
         return false;
     }
-    //  QMessageBox::information(this,trUtf8("معلومات"),trUtf8("تمت عملية اظافة
+    //  QMessageBox::information(this,tr("معلومات"),tr("تمت عملية اظافة
     //  الكتاب بنجاح"));
     return true;
 }
@@ -206,7 +206,7 @@ void mdbexport::on_toolButton_fileNam_clicked()
 {
     QStringList fn = QFileDialog::getOpenFileNames(
         this, tr("Open File..."), QString(),
-        trUtf8("ملفات الشاملة (*.mdb *.bok);;كل الملفات (*)"));
+        tr("ملفات الشاملة (*.mdb *.bok);;كل الملفات (*)"));
     if (!fn.isEmpty()) {
         ui->listWidget->addItems(fn);
     }
@@ -220,13 +220,13 @@ void mdbexport::on_buttonBox_clicked(QAbstractButton* button)
 
             QMessageBox msgBox;
             msgBox.setText(
-                trUtf8("لقد تم انشاء الكتب التالية بنجاح داخل المجموعة :  ") + m_addGroupeName);
+                tr("لقد تم انشاء الكتب التالية بنجاح داخل المجموعة :  ") + m_addGroupeName);
             msgBox.setInformativeText(
-                trUtf8("انقر على اظهار التفاصيل لمعرفة قائمة الكتب "));
+                tr("انقر على اظهار التفاصيل لمعرفة قائمة الكتب "));
             msgBox.setDetailedText(msgTitle);
             msgBox.setIcon(QMessageBox::Information);
             msgBox.setLayoutDirection(Qt::RightToLeft);
-            msgBox.setWindowTitle(trUtf8("تعليمات"));
+            msgBox.setWindowTitle(tr("تعليمات"));
             msgBox.setStandardButtons(QMessageBox::Ok);
             msgBox.exec();
 
@@ -278,7 +278,7 @@ bool mdbexport::creatXmlFile(QString f, QString table, QString csv)
     }
 
     QTextStream textStream(&fileCsv);
-    textStream.setCodec(QTextCodec::codecForName("Windows-1256"));
+    
 
     QString line;
     line = textStream.readLine(); // premier line
@@ -310,7 +310,7 @@ bool mdbexport::creatXmlFile(QString f, QString table, QString csv)
         ui->progressBar->setValue(1);
         line = textStream.readLine();
         if (!line.isEmpty()) {
-            //   QMessageBox::information(this,trUtf8("خطأ"),line);
+            //   QMessageBox::information(this,tr("خطأ"),line);
             stream.writeStartElement(table); //"book" or "title"
             //**************************************start book
 
@@ -322,7 +322,7 @@ bool mdbexport::creatXmlFile(QString f, QString table, QString csv)
                 } else {
                     strValue = line.section("|*|", i - 1, i - 1);
                 }
-                if (strValue.isEmpty() || strValue == 0) {
+                if (strValue.isEmpty() || strValue == "") {
                     strValue = "1";
                 }
                 if (headerName == "hno" || headerName == "na" || headerName == "sub") {
@@ -412,13 +412,13 @@ bool mdbexport::creatInfo(QString bookdir)
     if (Messages->addNewBook(bookdir, Add_Book_Name, Add_Autor_Name, Add_Betaka,
             groupeId, checked)
         == false) {
-        QMessageBox::information(this, trUtf8("خطأ"),
-            trUtf8("ربما احد بيانات الكتاب خاطئة "));
+        QMessageBox::information(this, tr("خطأ"),
+            tr("ربما احد بيانات الكتاب خاطئة "));
         return false;
     } else {
         Messages->saveBookInfo(bookdir, Add_Book_Name, Add_Autor_Name, Add_Betaka);
     }
-    msgTitle = msgTitle + Add_Book_Name + "\n" + trUtf8("المسار :") + m_path + "/" + bookdir + "\n";
+    msgTitle = msgTitle + Add_Book_Name + "\n" + tr("المسار :") + m_path + "/" + bookdir + "\n";
     return true;
 }
 
@@ -451,8 +451,8 @@ void mdbexport::on_toolButtonInfo_clicked()
 
     if (itemtxt.contains(".mdb")) {
         QMessageBox::information(
-            this, trUtf8("معلومات الكتاب"),
-            trUtf8("مالفات من نوع mdb لاتحمل معلومات عن الكتاب \n يمكنك اضافتها "
+            this, tr("معلومات الكتاب"),
+            tr("مالفات من نوع mdb لاتحمل معلومات عن الكتاب \n يمكنك اضافتها "
                    "يدويا بعد اضافة الكتاب"));
         return;
     }
@@ -462,7 +462,7 @@ void mdbexport::on_toolButtonInfo_clicked()
         prosses.execute(m_tempDir + "/out");
         prosses.waitForFinished();
         if (readMain(itemtxt) == true) {
-            QMessageBox::information(this, trUtf8("معلومات الكتاب"),
+            QMessageBox::information(this, tr("معلومات الكتاب"),
                 m_bookTitle + "\n" + m_bookAuthor + "\n" + m_bookBitaka + "\n");
         }
         prosses.execute("rm " + m_tempDir + "/out");

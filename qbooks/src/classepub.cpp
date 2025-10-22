@@ -8,7 +8,6 @@
 #include <QProcess>
 #include <QSettings>
 #include <QTextCharFormat>
-#include <QTextCodec>
 #include <QTextStream>
 #include <QXmlStreamReader>
 classepub::classepub() { }
@@ -323,8 +322,8 @@ QString classepub::ebubSetPage(QString fileName)
         return "";
     }
     QByteArray data = file.readAll();
-    QTextCodec* codec = Qt::codecForHtml(data);
-    QString str = codec->toUnicode(data);
+    
+    QString str = QString::fromUtf8(data);
 
     if (Qt::mightBeRichText(str)) {
         //        str=  str.replace("<img src=\"","EE&");

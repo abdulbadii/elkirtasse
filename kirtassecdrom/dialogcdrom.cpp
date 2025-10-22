@@ -28,14 +28,12 @@ w'.
 **
 ****************************************************************************/
 #include "dialogcdrom.h"
-#include "ui_Dialogcdrom.h"
+#include "ui_dialogcdrom.h"
 #include <QFile>
 #include <QFileDialog>
 #include <QStyle>
 
-Dialogcdrom::Dialogcdrom(QWidget* parent)
-    : QDialog(parent)
-    , ui(new Ui::Dialogcdrom)
+Dialogcdrom::Dialogcdrom(QWidget* parent)  : QDialog(parent), ui(new Ui::Dialogcdrom)
 {
     ui->setupUi(this);
 }

@@ -213,10 +213,10 @@ void DialogImportDvd::on_buttonBox_clicked(QAbstractButton* button)
 
                 if (QFile::exists(m_groupPath + "/" + idGroup + ".tar.gz")) {
                     if (itemGroup->checkState(0) == Qt::Checked) {
-                        ui->textEditConsole->insertPlainText(trUtf8("\n جاري استخراج : ") + itemGroup->text(0));
+                        ui->textEditConsole->insertPlainText(tr("\n جاري استخراج : ") + itemGroup->text(0));
 
                         if (unzipFile(m_groupPath + "/" + idGroup + ".tar.gz",
-                                QString::null)
+                                "")
                             == true)
                             qApp->processEvents();
 
@@ -228,7 +228,7 @@ void DialogImportDvd::on_buttonBox_clicked(QAbstractButton* button)
                             if (item->checkState(0) == Qt::Checked) {
                                 QString id = item->data(1, 1).toString();
                                 ui->textEditConsole->insertPlainText(
-                                    trUtf8("\n جاري استخراج : ") + item->text(0));
+                                    tr("\n جاري استخراج : ") + item->text(0));
 
                                 if (unzipFile(m_groupPath + "/" + idGroup + ".tar.gz", id) == true)
                                     qApp->processEvents();
@@ -251,9 +251,9 @@ void DialogImportDvd::on_buttonBox_clicked(QAbstractButton* button)
             }
         }
 
-        QMessageBox::information(this, "", trUtf8("تمت العملية"));
+        QMessageBox::information(this, "", tr("تمت العملية"));
         ui->textEditConsole->insertPlainText(
-            trUtf8("\n انقر على زر الغاء لغلق النافذة "));
+            tr("\n انقر على زر الغاء لغلق النافذة "));
         this->accept();
     }
 }

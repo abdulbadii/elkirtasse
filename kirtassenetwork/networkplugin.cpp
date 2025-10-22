@@ -54,7 +54,7 @@ QString networkplugin::loadFile(QString urlPath)
     return "";
 }
 //! [1]
-QString networkplugin::pluginTitle() { return trUtf8("تحميل الكتب"); }
+QString networkplugin::pluginTitle() { return tr("تحميل الكتب"); }
 
 //! [2]
 // Q_EXPORT_PLUGIN2(kirtassenet, networkplugin);

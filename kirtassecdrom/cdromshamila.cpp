@@ -29,7 +29,7 @@ w'.
 ****************************************************************************/
 #include "cdromshamila.h"
 #include "dialogcdrom.h"
-#include "ui_Dialogcdrom.h"
+#include "ui_dialogcdrom.h"
 #include <QMessageBox>
 #include <QProgressDialog>
 #ifdef Q_WS_WIN
@@ -128,18 +128,18 @@ bool cdromShamila::winCreatgroupXml()
     }
 
     QXmlStreamWriter stream;
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());
-    QTextCodec* codec = QTextCodec::codecForName("Windows-1256");
-    stream.setCodec(QTextCodec::codecForName("UTF-8"));
+    
+    
+    
     stream.setDevice(&file);
     stream.setAutoFormatting(true);
     stream.writeStartDocument();
     stream.writeStartElement("setting");
     stream.writeStartElement("root");
-    stream.writeAttribute("Name", trUtf8("كتب الشاملة"));
+    stream.writeAttribute("Name", tr("كتب الشاملة"));
     stream.writeAttribute("id", "0");
-    QProgressDialog progress(trUtf8("الرجاء الانتظار..جاري انشاءقائمة للكتب"),
-        trUtf8("الغاء"), 0, 0, 0);
+    QProgressDialog progress(tr("الرجاء الانتظار..جاري انشاءقائمة للكتب"),
+        tr("الغاء"), 0, 0, 0);
     progress.setWindowModality(Qt::WindowModal);
     progress.show();
     qApp->processEvents();
@@ -148,10 +148,10 @@ bool cdromShamila::winCreatgroupXml()
         QByteArray string;
 
         string = modelCat->record().field("name").value().toByteArray();
-        QString catName = codec->toUnicode(string);
+        QString catName = QString::fromUtf8(string);
 
         string = modelCat->record().field("id").value().toByteArray();
-        QString catId = codec->toUnicode(string);
+        QString catId = QString::fromUtf8(string);
 
         stream.writeAttribute("id", catId);
         stream.writeAttribute("Name", catName);
@@ -178,15 +178,15 @@ bool cdromShamila::winCreatgroupXml()
         qApp->processEvents();
         QByteArray string;
         string = modelBk->record().field("betaka").value().toByteArray();
-        QString bkBetaka = codec->toUnicode(string);
+        QString bkBetaka = QString::fromUtf8(string);
         string = modelBk->record().field("bkid").value().toByteArray();
-        QString bkId = codec->toUnicode(string);
+        QString bkId = QString::fromUtf8(string);
         string = modelBk->record().field("auth").value().toByteArray();
-        QString bkAut = codec->toUnicode(string);
+        QString bkAut = QString::fromUtf8(string);
         string = modelBk->record().field("bk").value().toByteArray();
-        QString bkName = codec->toUnicode(string);
+        QString bkName = QString::fromUtf8(string);
         string = modelBk->record().field("cat").value().toByteArray();
-        QString bkCat = codec->toUnicode(string);
+        QString bkCat = QString::fromUtf8(string);
 
         addNewBook(bkId, bkName, bkAut, bkBetaka, bkCat);
     }
@@ -207,7 +207,7 @@ bool cdromShamila::winCreatBooks()
     QDomElement racine = m_doc.documentElement(); // renvoie la balise racine
     QDomNode noeud = racine.firstChild();
 
-    QProgressDialog progress(trUtf8("الرجاء الانتظار...."), trUtf8("الغاء"), 0,
+    QProgressDialog progress(tr("الرجاء الانتظار...."), tr("الغاء"), 0,
         tbcount, 0);
     progress.setWindowModality(Qt::WindowModal);
     progress.show();
@@ -242,7 +242,7 @@ bool cdromShamila::winCreatBooks()
                     if (progress.wasCanceled())
                         break;
 
-                    progress.setLabelText(trUtf8("الرجاء الانتظار..جاري انشاء :") + title);
+                    progress.setLabelText(tr("الرجاء الانتظار..جاري انشاء :") + title);
                     qApp->processEvents();
                     if (winWriteBooks(fileMdb, bookname) == true)
                         saveBookInfo(bookname, title, author, betaka);
@@ -289,9 +289,9 @@ bool cdromShamila::winWriteBooks(QString fn, QString bookname)
     stream.writeStartDocument();
     stream.writeStartElement("dataroot");
 
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());
-    QTextCodec* codec = QTextCodec::codecForName("Windows-1256");
-    stream.setCodec(QTextCodec::codecForName("UTF-8"));
+    
+    
+    
 
     while (models->next()) {
         qApp->processEvents();
@@ -299,13 +299,13 @@ bool cdromShamila::winWriteBooks(QString fn, QString bookname)
 
         string = models->record().field("nass").value().toByteArray();
 
-        QString nass = codec->toUnicode(string);
+        QString nass = QString::fromUtf8(string);
         string = models->record().field("id").value().toByteArray();
-        QString id = codec->toUnicode(string);
+        QString id = QString::fromUtf8(string);
         string = models->record().field("part").value().toByteArray();
-        QString part = codec->toUnicode(string);
+        QString part = QString::fromUtf8(string);
         string = models->record().field("page").value().toByteArray();
-        QString page = codec->toUnicode(string);
+        QString page = QString::fromUtf8(string);
 
         stream.writeStartElement("book"); //"book" or "title"
         stream.writeTextElement("nass", nass);
@@ -337,13 +337,13 @@ bool cdromShamila::winWriteBooks(QString fn, QString bookname)
 
         QByteArray string;
         string = modeltitle->record().field("tit").value().toByteArray();
-        QString tit = codec->toUnicode(string);
+        QString tit = QString::fromUtf8(string);
 
         string = modeltitle->record().field("lvl").value().toByteArray();
-        QString lvl = codec->toUnicode(string);
+        QString lvl = QString::fromUtf8(string);
 
         string = modeltitle->record().field("id").value().toByteArray();
-        QString id = codec->toUnicode(string);
+        QString id = QString::fromUtf8(string);
         int newid = listId.indexOf(id);
         if (newid == -1) {
             newid = 0;
@@ -401,7 +401,7 @@ bool cdromShamila::creatCatigorie()
     }
 
     QTextStream textStream(&fileCsv);
-    textStream.setCodec(QTextCodec::codecForName("Windows-1256"));
+    
 
     QString line;
     line = textStream.readLine(); // premier line
@@ -426,7 +426,7 @@ bool cdromShamila::creatCatigorie()
     stream.writeStartDocument();
     stream.writeStartElement("setting");
     stream.writeStartElement("root");
-    stream.writeAttribute("Name", trUtf8("كتب الشاملة"));
+    stream.writeAttribute("Name", tr("كتب الشاملة"));
     stream.writeAttribute("id", "0");
     while (!line.isNull()) {
 
@@ -514,7 +514,7 @@ bool cdromShamila::creatBooksInfo()
     }
 
     QTextStream textStream(&fileCsv);
-    textStream.setCodec(QTextCodec::codecForName("Windows-1256"));
+    
 
     QString line;
     line = textStream.readLine(); // premier line
@@ -531,7 +531,7 @@ bool cdromShamila::creatBooksInfo()
     QString textcsv = textStream.readAll();
     int tb = textcsv.count("BL");
 
-    QProgressDialog progress(trUtf8("الرجاء الانتظار...."), trUtf8("الغاء"), 0,
+    QProgressDialog progress(tr("الرجاء الانتظار...."), tr("الغاء"), 0,
         tb, 0);
 
     progress.setWindowModality(Qt::WindowModal);
@@ -592,7 +592,7 @@ bool cdromShamila::creatBooksInfo()
         progress.setLabelText(bkName);
         qApp->processEvents();
         if (file.exists(fileMdb)) {
-            progress.setLabelText(trUtf8("الرجاء الانتظار..جاري انشاء :") + bkName);
+            progress.setLabelText(tr("الرجاء الانتظار..جاري انشاء :") + bkName);
             if (creatBook(bkId, bkCat) == true) {
 
                 addNewBook(bkId, bkName, bkAut, bkBetaka, bkCat);
@@ -744,7 +744,7 @@ bool cdromShamila::creatXmlFile(QString f, QString table, QString csv)
     }
 
     QTextStream textStream(&fileCsv);
-    textStream.setCodec(QTextCodec::codecForName("Windows-1256"));
+    
 
     QString line;
     line = textStream.readLine(); // premier line
@@ -775,7 +775,7 @@ bool cdromShamila::creatXmlFile(QString f, QString table, QString csv)
 
         line = textStream.readLine();
         if (!line.isEmpty()) {
-            //   QMessageBox::information(this,trUtf8("خطأ"),line);
+            //   QMessageBox::information(this,tr("خطأ"),line);
             stream.writeStartElement(table); //"book" or "title"
             //**************************************start book
 
@@ -786,7 +786,7 @@ bool cdromShamila::creatXmlFile(QString f, QString table, QString csv)
                 } else {
                     strValue = line.section("RRR", i - 1, i - 1);
                 }
-                if (strValue.isEmpty() || strValue == 0) {
+                if (strValue.isEmpty() || strValue == "") {
                     strValue = "1";
                 }
                 QString headerName = listHeader.at(i - 1);

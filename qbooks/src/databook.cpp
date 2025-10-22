@@ -113,22 +113,22 @@ void databook::moveToPosition(int position)
     bookPart[boocNumIndex] = noeud.firstChildElement("part").firstChild().toText().data();
     // convert_text(text);
     currentPosition[boocNumIndex] = pos;
-    // m_label_page->setText(trUtf8("الصفحة :")+page +"  "+trUtf8("الجزء
+    // m_label_page->setText(tr("الصفحة :")+page +"  "+tr("الجزء
     // :")+jozaa);
-    //  m_label_progress_info->setText(trUtf8(" كتاب : ")+m_Book_title +trUtf8(".
+    //  m_label_progress_info->setText(tr(" كتاب : ")+m_Book_title +tr(".
     //  المؤلف : ")+m_Book_Autors+". " +m_label_page->text());
 }
 QString databook::noTechkile(QString text) const
 {
     QString str = text;
-    str.replace(trUtf8("\331\213"), QString::null);
-    str.replace(trUtf8("\331\214"), QString::null);
-    str.replace(trUtf8("\331\215"), QString::null);
-    str.replace(trUtf8("\331\216"), QString::null);
-    str.replace(trUtf8("\331\217"), QString::null);
-    str.replace(trUtf8("\331\220"), QString::null);
-    str.replace(trUtf8("\331\221"), QString::null);
-    str.replace(trUtf8("\331\222"), QString::null);
+    str.replace(tr("\331\213"), "");
+    str.replace(tr("\331\214"), "");
+    str.replace(tr("\331\215"), "");
+    str.replace(tr("\331\216"), "");
+    str.replace(tr("\331\217"), "");
+    str.replace(tr("\331\220"), "");
+    str.replace(tr("\331\221"), "");
+    str.replace(tr("\331\222"), "");
     return str;
 }
 
@@ -203,7 +203,7 @@ void databook::treeOrganizFahrass(QTreeWidget* view, QString Bname)
         QDomElement racine = m_doc.documentElement(); // renvoie la balise racine
         QDomNode noeud = racine.firstChild();
 
-        QProgressDialog progress(trUtf8("الرجاء الانتظار...."), trUtf8("الغاء"), 0,
+        QProgressDialog progress(tr("الرجاء الانتظار...."), tr("الغاء"), 0,
             racine.childNodes().count(), 0);
         progress.setWindowModality(Qt::WindowModal);
         progress.setEnabled(false);
@@ -211,7 +211,7 @@ void databook::treeOrganizFahrass(QTreeWidget* view, QString Bname)
         qApp->processEvents();
 
         item = new QTreeWidgetItem(view);
-        item->setText(0, trUtf8("بسم الله الرحمن الرحيم"));
+        item->setText(0, tr("بسم الله الرحمن الرحيم"));
         item->setData(1, 1, 1);
         int r = 0;
         while (!noeud.isNull()) {
@@ -239,7 +239,7 @@ void databook::treeOrganizFahrass(QTreeWidget* view, QString Bname)
                         int dd = getPositionID(text);
                         QVariant ddv = dd;
                         id = ddv.toString();
-                        // QMessageBox::information(this,trUtf8("معلومات"),id);
+                        // QMessageBox::information(this,tr("معلومات"),id);
                     }
                 }
                 bool ok;
@@ -297,7 +297,7 @@ bool databook::chargeList()
     QDomElement racine = m_docBooK[boocNumIndex].documentElement(); // renvoie la balise racine
     int count = racine.childNodes().count();
 
-    QProgressDialog progress(trUtf8("الرجاء الانتظار...."), trUtf8("الغاء"), 0,
+    QProgressDialog progress(tr("الرجاء الانتظار...."), tr("الغاء"), 0,
         count, 0);
     progress.setWindowModality(Qt::WindowModal);
     progress.setEnabled(false);
@@ -350,7 +350,7 @@ void databook::insertPage(bool after)
     QDomElement mynass = m_docBooK[boocNumIndex].createElement("nass"); // انشاء عنصر جديد
     myel.appendChild(mynass);
     QDomText t2 = m_docBooK[boocNumIndex].createTextNode(
-        trUtf8("صفحة فارغة") + QString::number(rowsCount[boocNumIndex]));
+        tr("صفحة فارغة") + QString::number(rowsCount[boocNumIndex]));
     mynass.appendChild(t2);
     QDomElement mypart = m_docBooK[boocNumIndex].createElement("part"); // انشاء عنصر جديد
     myel.appendChild(mypart);

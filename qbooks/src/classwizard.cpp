@@ -48,7 +48,7 @@ ClassWizard::ClassWizard(QWidget* parent)
     setPixmap(QWizard::BannerPixmap, QPixmap(":/images/banner.png"));
     setPixmap(QWizard::BackgroundPixmap, QPixmap(":/images/background.png"));
 
-    setWindowTitle(trUtf8("معالج الارتباط التشعبي"));
+    setWindowTitle(tr("معالج الارتباط التشعبي"));
 }
 // ترتيب النوافذ
 int ClassWizard::nextId() const
@@ -86,7 +86,7 @@ void ClassWizard::accept()
         QString texte = field("UrlWebName").toString();
         if (texte.isEmpty()) {
             QMessageBox::information(this, "",
-                trUtf8("الرجاء انقر على الرجوع للخلف ثم ادخل "
+                tr("الرجاء انقر على الرجوع للخلف ثم ادخل "
                        "عنوان صفحة ويب في مربع النص"));
             return;
         }
@@ -103,11 +103,11 @@ IntroPage::IntroPage(QWidget* parent)
     : QWizardPage(parent)
 {
 
-    setTitle(trUtf8("مرحبا"));
+    setTitle(tr("مرحبا"));
     setPixmap(QWizard::WatermarkPixmap, QPixmap(":/images/watermark1.png"));
 
     label = new QLabel(
-        trUtf8("هذا المعالج سينشئ لك ارتباطا تشعبيا  "
+        tr("هذا المعالج سينشئ لك ارتباطا تشعبيا  "
                "بين صفحتك وصفحة أخرى سوء كانت في نفس الكتاب أو في كتاب أخر "));
 
     label->setWordWrap(true);
@@ -119,21 +119,21 @@ IntroPage::IntroPage(QWidget* parent)
 ClassInfoPage::ClassInfoPage(QWidget* parent)
     : QWizardPage(parent)
 {
-    setTitle(trUtf8("اختيار الصفحة"));
+    setTitle(tr("اختيار الصفحة"));
     setSubTitle(
-        trUtf8("يمكنك تحديد الصفحة التي تريد الارتباط بها مع الصفحة الحالية "
+        tr("يمكنك تحديد الصفحة التي تريد الارتباط بها مع الصفحة الحالية "
                "واختيار اسم لهذا الارتباط"));
     setPixmap(QWizard::LogoPixmap, QPixmap(":/images/image/groupbook.png"));
 
-    labelUrlName = new QLabel(trUtf8("&اسم الارتباط"));
+    labelUrlName = new QLabel(tr("&اسم الارتباط"));
     lineEditUrlName = new QLineEdit;
     labelUrlName->setBuddy(lineEditUrlName);
 
-    groupBox = new QGroupBox(trUtf8(" ارتبط مع "));
+    groupBox = new QGroupBox(tr(" ارتبط مع "));
 
-    radioButtonUrlBook = new QRadioButton(trUtf8(" كتاب محدد "));
-    radioButtonUrlFavorite = new QRadioButton(trUtf8(" صفحة كتاب في المفضلة "));
-    radioButtonUrlWeb = new QRadioButton(trUtf8(" ارتباط مع صفحة ويب "));
+    radioButtonUrlBook = new QRadioButton(tr(" كتاب محدد "));
+    radioButtonUrlFavorite = new QRadioButton(tr(" صفحة كتاب في المفضلة "));
+    radioButtonUrlWeb = new QRadioButton(tr(" ارتباط مع صفحة ويب "));
     lineEditUrlWebName = new QLineEdit;
     radioButtonUrlFavorite->setChecked(true);
     lineEditUrlWebName->setEnabled(false);
@@ -167,9 +167,9 @@ ClassInfoPage::ClassInfoPage(QWidget* parent)
 PageTreeBook::PageTreeBook(QWidget* parent)
     : QWizardPage(parent)
 {
-    setTitle(trUtf8("اختر كتابا"));
+    setTitle(tr("اختر كتابا"));
     setSubTitle(
-        trUtf8("اختر كتابا من شجرة الكتب حتى يتم اظافته للارتباط التشعبي"));
+        tr("اختر كتابا من شجرة الكتب حتى يتم اظافته للارتباط التشعبي"));
     setPixmap(QWizard::LogoPixmap, QPixmap(":/images/image/groupbook.png"));
 
     treeViewBook = new QTreeWidget();
@@ -206,8 +206,8 @@ void PageTreeBook::treeBookitemSelectionChanged()
 PageTreeFavorite::PageTreeFavorite(QWidget* parent)
     : QWizardPage(parent)
 {
-    setTitle(trUtf8("اشارة مرجعية في المفضلة"));
-    setSubTitle(trUtf8(" يمكنك اختيار صفحة من اشارة مرجعية في المفضلة  "
+    setTitle(tr("اشارة مرجعية في المفضلة"));
+    setSubTitle(tr(" يمكنك اختيار صفحة من اشارة مرجعية في المفضلة  "
                        " قم بتحديد عنصر من شجرة المفضلة"));
     setPixmap(QWizard::LogoPixmap, QPixmap(":/images/image/groupbook.png"));
 
@@ -244,7 +244,7 @@ void PageTreeFavorite::treeFavoriteItemSelectionChanged()
 ConclusionPage::ConclusionPage(QWidget* parent)
     : QWizardPage(parent)
 {
-    setTitle(trUtf8("انتهاء"));
+    setTitle(tr("انتهاء"));
     setPixmap(QWizard::WatermarkPixmap, QPixmap(":/images/watermark2.png"));
     label = new QLabel;
     label->setWordWrap(true);
@@ -258,5 +258,5 @@ void ConclusionPage::initializePage()
     // QTreeWidgetItem* item=
     QString finishText = wizard()->buttonText(QWizard::FinishButton);
     finishText.remove('&');
-    label->setText(trUtf8("انقر %1 لانهاء المعالج.").arg(finishText));
+    label->setText(tr("انقر %1 لانهاء المعالج.").arg(finishText));
 }

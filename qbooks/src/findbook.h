@@ -92,8 +92,8 @@ public slots:
     void findInAllBook(bool inbooks);
     void findInAllFahariss(QString bookpath);
 
-    void findFahariss(QTreeWidget* view, QString bookpath, QRegExp str1,
-        QRegExp str2, int rowcount);
+    void findFahariss(QTreeWidget* view, QString bookpath, QRegularExpression str1,
+        QRegularExpression str2, int rowcount);
     //*****************************
     bool searchInDoc(QTextDocument* document, QString searchString, QColor color);
     void searchInTreeview(QTreeWidget* view, QString searchString, int colum);

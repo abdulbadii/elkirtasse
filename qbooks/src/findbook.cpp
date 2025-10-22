@@ -118,7 +118,7 @@ void findbook::findInAllBook(bool inbooks) // بحث في مجموعة كتب
         QString path = mesures.attribute("path");
         QVariant ss = r + 1;
         QVariant cc = ir;
-        labelProgress->setText(trUtf8("جاري البحث في :") + findTitle + " " + ss.toString() + "/" + cc.toString());
+        labelProgress->setText(tr("جاري البحث في :") + findTitle + " " + ss.toString() + "/" + cc.toString());
 
         m_progresseValue = 0;
         QString bookpath;
@@ -183,25 +183,25 @@ void findbook::readXml()
             progressBar1->setValue(m_progresseValue);
             m_progresseValue = m_progresseValue + 1;
 
-            // label_progressImg->setText(trUtf8("الصفحة : ")+page+trUtf8(" / الجزء :
+            // label_progressImg->setText(tr("الصفحة : ")+page+tr(" / الجزء :
             // ")+part);
             QApplication::processEvents();
             if (stopFind == true) {
                 return;
             }
             // نزع التشكيل
-            str.replace(trUtf8("\331\213"), "");
-            str.replace(trUtf8("\331\214"), "");
-            str.replace(trUtf8("\331\215"), "");
-            str.replace(trUtf8("\331\216"), "");
-            str.replace(trUtf8("\331\217"), "");
-            str.replace(trUtf8("\331\220"), "");
-            str.replace(trUtf8("\331\221"), "");
-            str.replace(trUtf8("\331\222"), "");
+            str.replace(tr("\331\213"), "");
+            str.replace(tr("\331\214"), "");
+            str.replace(tr("\331\215"), "");
+            str.replace(tr("\331\216"), "");
+            str.replace(tr("\331\217"), "");
+            str.replace(tr("\331\220"), "");
+            str.replace(tr("\331\221"), "");
+            str.replace(tr("\331\222"), "");
             // نزع الهمزة
             if (noHamza == true) {
-                str.replace(trUtf8("أ"), trUtf8("ا"));
-                str.replace(trUtf8("إ"), trUtf8("ا"));
+                str.replace(tr("أ"), tr("ا"));
+                str.replace(tr("إ"), tr("ا"));
             }
             if (findMultiFind == true) {
                 readStrMultiFind();
@@ -228,7 +228,7 @@ void findbook::readStrMultiFind()
 
         if (findSawabik == false) {
             for (int pos = 0; pos < m_listStrToFind.count(); pos++) {
-                QRegExp textToFind("\\s(" + m_listStrToFind.at(pos) + ")\\s");
+                QRegularExpression textToFind("\\s(" + m_listStrToFind.at(pos) + ")\\s");
                 if (str.contains(textToFind)) {
                     counter++;
                 }
@@ -256,7 +256,7 @@ void findbook::readStr()
 
     for (int pos = 0; pos < m_listStrToFind.count(); pos++) {
         if (findSawabik == false) {
-            QRegExp rx("\\s(" + m_listStrToFind.at(pos) + ")\\s");
+            QRegularExpression rx("\\s(" + m_listStrToFind.at(pos) + ")\\s");
             if (!str1.contains(rx))
                 break;
         }
@@ -266,7 +266,7 @@ void findbook::readStr()
 
             str1.replace(QByteArray("\n"), QByteArray(" "));
             str1.replace(QByteArray("\r"), QByteArray(" "));
-            int tab = str1.count(QRegExp(textToFind));
+            int tab = str1.count(QRegularExpression(textToFind));
             int txtl = textToFind.length();
             // البحث في الصفحة الواحدة
             for (int i = 0; i < tab; ++i) {
@@ -288,7 +288,7 @@ void findbook::readStr()
                 item->setData(2, 1, isTefsir);
                 // item->setData(0,1,id);
                 str1.remove(0, of + txtl);
-                label_progressImg->setText(trUtf8("عدد النتائج : ") + QString::number(resultCount));
+                label_progressImg->setText(tr("عدد النتائج : ") + QString::number(resultCount));
             }
         }
     }
@@ -296,9 +296,12 @@ void findbook::readStr()
 }
 void findbook::readStrFirst()
 {
-    QRegExp rx(findText + "*");
-    rx.setPatternSyntax(QRegExp::Wildcard);
-    if (rx.exactMatch(str) == true) {
+  QString pattern = findText + "*";  //wildcard string
+  pattern.replace(".", "\\.");  //wildcard to regex
+  pattern.replace("*", ".*");
+  pattern.replace("?", ".");
+  QRegularExpression rx(pattern);
+  if (rx.match(str).hasMatch() == true) {
         QTreeWidgetItem* item = new QTreeWidgetItem;
         resultCount++;
 
@@ -313,7 +316,7 @@ void findbook::readStrFirst()
         QVariant newId = m_progresseValue;
         item->setData(0, 1, newId.toString());
         item->setData(3, 1, findName);
-        label_progressImg->setText(trUtf8("عدد النتائج : ") + QString::number(resultCount));
+        label_progressImg->setText(tr("عدد النتائج : ") + QString::number(resultCount));
     }
 }
 
@@ -329,47 +332,47 @@ bool findbook::chargelistStrToFind(QString search)
     m_listStrToFind.append(search);
     // 2 فاعل
     str = search;
-    str.insert(1, trUtf8("ا"));
+    str.insert(1, tr("ا"));
     m_listStrToFind.append(str);
     // 3 فوعل
     str = search;
-    str.insert(1, trUtf8("و"));
+    str.insert(1, tr("و"));
     m_listStrToFind.append(str);
     // 4 فيعل
     str = search;
-    str.insert(1, trUtf8("ي"));
+    str.insert(1, tr("ي"));
     m_listStrToFind.append(str);
     // 5 فعول
     str = search;
-    str.insert(2, trUtf8("و"));
+    str.insert(2, tr("و"));
     m_listStrToFind.append(str);
     // 6 فعيل
     str = search;
-    str.insert(2, trUtf8("ي"));
+    str.insert(2, tr("ي"));
     m_listStrToFind.append(str);
     // 7 فعال
     str = search;
-    str.insert(2, trUtf8("ا"));
+    str.insert(2, tr("ا"));
     m_listStrToFind.append(str);
     // 8 فتعال
     str = search;
-    str.insert(1, trUtf8("ت"));
-    str.insert(3, trUtf8("ا"));
+    str.insert(1, tr("ت"));
+    str.insert(3, tr("ا"));
     m_listStrToFind.append(str);
     // 9 فاعال
     str = search;
-    str.insert(1, trUtf8("ا"));
-    str.insert(3, trUtf8("ا"));
+    str.insert(1, tr("ا"));
+    str.insert(3, tr("ا"));
     m_listStrToFind.append(str);
     // 10 فاعيل
     str = search;
-    str.insert(1, trUtf8("ا"));
-    str.insert(3, trUtf8("ي"));
+    str.insert(1, tr("ا"));
+    str.insert(3, tr("ي"));
     m_listStrToFind.append(str);
     // 11 فاعول
     str = search;
-    str.insert(1, trUtf8("ا"));
-    str.insert(3, trUtf8("و"));
+    str.insert(1, tr("ا"));
+    str.insert(3, tr("و"));
     m_listStrToFind.append(str);
 
     return true;
@@ -506,7 +509,7 @@ bool findbook::searchTreeForString(const QString& searchString,
 bool findbook::showAllItems(QTreeWidgetItem* parent, QTreeWidget* view)
 {
     for (int i = 0; i < parent->childCount(); i++) {
-        view->setItemHidden(parent->child(i), false);
+        parent->child(i)->setHidden(false);
         showAllItems(parent->child(i), view);
     }
     return true;
@@ -565,16 +568,13 @@ void findbook::loadResultFind(QTreeWidget* view, QString fn)
 }
 bool findbook::saveResultFind(QTreeWidget* view, QString fn)
 {
-    if (!fn.contains(".xml"))
-        fn = fn + ".xml";
+    if (!fn.contains(".xml")) fn = fn + ".xml";
     QFile file(fn);
-    QTreeWidgetItem* item;
-    QXmlStreamWriter stream;
 
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
         return false;
     }
-    stream.setCodec(QTextCodec::codecForName("UTF-8"));
+    QXmlStreamWriter stream;
     stream.setDevice(&file);
     stream.setAutoFormatting(true);
     stream.writeStartDocument();
@@ -584,6 +584,8 @@ bool findbook::saveResultFind(QTreeWidget* view, QString fn)
     stream.writeAttribute("title", findText);
     stream.writeAttribute("multi", multi.toString());
     stream.writeAttribute("isnasstofind", isnasstofind.toString());
+
+    QTreeWidgetItem* item;
     for (int i = 0; i < view->topLevelItemCount(); ++i) {
         item = view->topLevelItem(i);
         QString txt = item->text(0);
@@ -612,8 +614,8 @@ bool findbook::saveResultFind(QTreeWidget* view, QString fn)
 
     return true;
 }
-void findbook::findFahariss(QTreeWidget* view, QString bookpath, QRegExp rx,
-    QRegExp rx2, int rowcount)
+void findbook::findFahariss(QTreeWidget* view, QString bookpath, QRegularExpression rx,
+    QRegularExpression rx2, int rowcount)
 {
     QFile file(bookpath + "/book.xml");
 
@@ -631,8 +633,8 @@ void findbook::findFahariss(QTreeWidget* view, QString bookpath, QRegExp rx,
 
     view->clear();
     item = new QTreeWidgetItem(view);
-    item->setText(0, trUtf8("بسم الله الرحمن الريم"));
-    QProgressDialog progress(trUtf8("الرجاء الانتظار...."), trUtf8("الغاء"), 0,
+    item->setText(0, tr("بسم الله الرحمن الريم"));
+    QProgressDialog progress(tr("الرجاء الانتظار...."), tr("الغاء"), 0,
         rowcount, 0);
     progress.setWindowModality(Qt::WindowModal);
     progress.show();
@@ -671,15 +673,15 @@ void findbook::findFahariss(QTreeWidget* view, QString bookpath, QRegExp rx,
                         QString text = highlightCursor.selectedText().trimmed();
                         if (text.length() >= 150)
                             text = text.mid(0, 150);
-                        int pos = rx.indexIn(text);
-                        int pos2 = rx2.indexIn(text);
+                        int pos = rx.match(text).capturedStart();
+                        int pos2 = rx2.match(text).capturedStart();
                         if (pos <= 3 && pos != -1) {
                             item = new QTreeWidgetItem(view);
                             item->setText(0, text.trimmed());
                             item->setData(1, 1, conter);
                             item->setText(1, QString::number(conter));
                         }
-                        if (!rx2.isEmpty())
+                        if (!rx2.pattern().isEmpty())
                             if (pos2 <= 3 && pos2 != -1) {
                                 osloItem = new QTreeWidgetItem(item);
                                 osloItem->setText(0, text.trimmed());
@@ -748,7 +750,7 @@ void findbook::findInAllFahariss(QString bookpath)
                         item->setText(5, QString::number(resultCount));
                         item->setData(0, 1, id);
                         item->setData(3, 1, findName);
-                        label_progressImg->setText(trUtf8("عدد النتائج : ") + QString::number(resultCount));
+                        label_progressImg->setText(tr("عدد النتائج : ") + QString::number(resultCount));
                     }
                 }
             }

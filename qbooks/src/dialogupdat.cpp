@@ -74,7 +74,7 @@ void dialogupdat::on_buttonBox_accepted()
         if (creat_xmlfile(m_newPathDir) == false)
             return;
         updateBook();
-        QMessageBox::information(this, trUtf8("معلومات"), m_newPathDir);
+        QMessageBox::information(this, tr("معلومات"), m_newPathDir);
     } else if (creatNewBook == "update") {
         Messages->treeMenuRemoveBook(BookName, false);
         updateBook();
@@ -125,7 +125,7 @@ bool dialogupdat::creat_xmlfile(QString path)
                         "<dataroot>"
                         "<book>"
                         "<nass>"
-        + trUtf8("صفحة فارغة") + "</nass>"
+        + tr("صفحة فارغة") + "</nass>"
                                  "<id>1</id>"
                                  "<part>1</part>"
                                  "<page>0</page>"
@@ -156,8 +156,8 @@ void dialogupdat::updateBook()
             addGroupId, checked)
         == false) {
         QMessageBox::information(
-            this, trUtf8("خطأ"),
-            trUtf8("ربما نسيت ملأ احد اخانات الضرورية أو ان بيانات الكتاب خاطئة"));
+            this, tr("خطأ"),
+            tr("ربما نسيت ملأ احد اخانات الضرورية أو ان بيانات الكتاب خاطئة"));
     } else {
         if (Messages->saveBookInfo(BookName, bookTitle, bookAutor, bookBetaka)) {
             if (imgChanged == true) {
@@ -165,12 +165,12 @@ void dialogupdat::updateBook()
                 QString imgScreenPath = m_pathCostum + "/" + BookName + "/screenshot.png";
                 pix.save(imgScreenPath, "PNG");
             }
-            QMessageBox::information(this, trUtf8("معلومات"),
-                trUtf8("تمت عملية تحديث بيانات الكتاب بنجاح"));
+            QMessageBox::information(this, tr("معلومات"),
+                tr("تمت عملية تحديث بيانات الكتاب بنجاح"));
         } else {
             QMessageBox::information(
-                this, trUtf8("خطأ"),
-                trUtf8("لا يمكن كتابة الملف تحقق من وجود الكتاب"));
+                this, tr("خطأ"),
+                tr("لا يمكن كتابة الملف تحقق من وجود الكتاب"));
         }
     }
 }
@@ -210,7 +210,7 @@ void dialogupdat::on_pushButtonImg_clicked()
 {
     QString fn = QFileDialog::getOpenFileName(
         this, tr("Open File..."), QString(),
-        trUtf8("ملفات الصور (*.png *.jpg);;كل الملفات (*)"));
+        tr("ملفات الصور (*.png *.jpg);;كل الملفات (*)"));
     if (!fn.isEmpty()) {
         ui->pushButtonImg->setIcon(QIcon(fn));
         imgChanged = true;
@@ -220,21 +220,21 @@ void dialogupdat::on_pushButtonImg_clicked()
 bool dialogupdat::copyDir(QString filname)
 {
     if (creat_dir() == false) {
-        QMessageBox::information(this, trUtf8("خطأ"),
-            trUtf8("خطأ لم استطع انشاء المجلد"));
+        QMessageBox::information(this, tr("خطأ"),
+            tr("خطأ لم استطع انشاء المجلد"));
 
         return false;
     }
 
     QFile file; // نسخ الملفات الى وجهة المكتبة
     if (file.copy(filname + "/title.xml", m_newPathDir + "/title.xml") == false) {
-        QMessageBox::information(this, trUtf8("خطأ"),
-            trUtf8("خطأ لم استطع انشاء الملف title.xml"));
+        QMessageBox::information(this, tr("خطأ"),
+            tr("خطأ لم استطع انشاء الملف title.xml"));
         // return false;
     }
     if (file.copy(filname + "/book.xml", m_newPathDir + "/book.xml") == false) {
-        QMessageBox::information(this, trUtf8("خطأ"),
-            trUtf8("خطأ لم استطع انشاء الملف book.xml"));
+        QMessageBox::information(this, tr("خطأ"),
+            tr("خطأ لم استطع انشاء الملف book.xml"));
         return false;
     }
 

@@ -120,7 +120,7 @@ void View::animChargePixmape(int level, int index, int indexParent)
 
     if (level == 1) {
 
-        label->setText(trUtf8("قائمة المجموعات"));
+        label->setText(tr("قائمة المجموعات"));
 
         int topItemCount = treeView->topLevelItemCount();
         int itemCount = 0;
@@ -229,7 +229,7 @@ void View::ThreeDChargePixmape(int level, int index, int indexParent)
     //--------------------------------------
     if (level == 1) {
 
-        label->setText(trUtf8("قائمة المجموعات"));
+        label->setText(tr("قائمة المجموعات"));
         int topItemCount = treeView->topLevelItemCount();
         int itemCount = 0;
         for (int i = 0; i < topItemCount; i++) {
@@ -249,7 +249,7 @@ void View::ThreeDChargePixmape(int level, int index, int indexParent)
                 QVariant chd = osloItem->childCount();
                 p.setFont(QFont("Arial", 10));
                 p.drawText(15, 85, 228, 20, Qt::AlignCenter | Qt::TextWordWrap,
-                    chd.toString() + trUtf8(":عدد الكتب "));
+                    chd.toString() + tr(":عدد الكتب "));
                 p.drawPixmap(14, 15, 231, 112, pixgren);
                 p.end();
                 Pixmap* item = new Pixmap(mypixmap);
@@ -501,7 +501,7 @@ void View::chargeRecent()
     mscene->clear();
     QPainter p;
 
-    label->setText(trUtf8("قائمة الكتب السابقة"));
+    label->setText(tr("قائمة الكتب السابقة"));
     if (threeD == false) {
         isThreeD = false;
         int rew = (recentNbr / 7) + 1;
@@ -712,28 +712,28 @@ void View::keyReleaseEvent(QKeyEvent* event)
     labBasmala->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
     labBasmala->setGeometry(0,0,500,36);
     labBasmala->setText("<span style=\" font-family:'arial,KacstLetter,DejaVu
-Serif'; font-size:18pt; font-weight:600; color:#ff5500;\">"+trUtf8("بسم الله
+Serif'; font-size:18pt; font-weight:600; color:#ff5500;\">"+tr("بسم الله
 الرحمن الرحيم")+"</span>");
 
     QString text="<p align=\"center\" dir='rtl' style=\" margin-top:0px;
 margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0;
 text-indent:0px;\"><span style=\" font-family:'arial,KacstLetter,DejaVu Serif';
-font-size:16pt; color:#000000;\">"+trUtf8("أخرج البخاري في صحيحه")+"</span><span
+font-size:16pt; color:#000000;\">"+tr("أخرج البخاري في صحيحه")+"</span><span
 style=\" font-family:'KacstLetter'; font-size:10pt;\"> </span></p>"
                  "<p align=\"center\" style=\" margin-top:0px;
 margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0;
 text-indent:0px;\"><span style=\" font-family:'arial,KacstLetter,DejaVu Serif';
-font-size:16pt; color:#0000ff;\">"+trUtf8("في كتاب بدء الوحي")+"</span><span
+font-size:16pt; color:#0000ff;\">"+tr("في كتاب بدء الوحي")+"</span><span
 style=\" font-family:'KacstLetter'; font-size:16pt;\"> </span></p>"
                  "<p align=\"center\" dir='rtl' style=\" margin-top:0px;
 margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0;
 text-indent:0px;\"><span style=\" font-family:'arial,KacstLetter,DejaVu Serif';
-font-size:16pt; color:#008000;\">"+trUtf8("باب: كيف كان بدء
+font-size:16pt; color:#008000;\">"+tr("باب: كيف كان بدء
 الوحي")+"</span></p>"
                  "<p dir='rtl' style=\" margin-top:0px; margin-bottom:0px;
 margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span
 style=\" font-family:'arial,KacstLetter,DejaVu Serif'; font-size:14pt;
-color:#000000;\">" +trUtf8("حدثنا الحميدي عبد الله بن الزبير قال: حدثنا سفيان
+color:#000000;\">" +tr("حدثنا الحميدي عبد الله بن الزبير قال: حدثنا سفيان
 قال: حدثنا يحيى بن سعيد الأنصاري قال : أخبرني محمد بن إبراهيم التيمي: أنه سمع
 علقمة بن وقاص الليثي يقول: سمعت عمر بن الخطاب رضي الله عنه على المنبر قال: سمعت
 رسول الله صلى الله عليه وسلم يقول: إنما الأعمال بالنيات، وإنما لكل امرىء ما نوى،
@@ -871,32 +871,32 @@ void View::chargeEnrto()
     labBasmala->setText(
         "<span style=\" font-family:'arial,KacstLetter,DejaVu Serif'; "
         "font-size:18pt; font-weight:600; color:#ff5500;\">"
-        + trUtf8("بسم الله الرحمن الرحيم") + "</span>");
+        + tr("بسم الله الرحمن الرحيم") + "</span>");
 
     QString text = "<p align=\"center\" dir='rtl' style=\" margin-top:0px; "
                    "margin-bottom:0px; margin-left:0px; margin-right:0px; "
                    "-qt-block-indent:0; text-indent:0px;\"><span style=\" "
                    "font-family:'arial,KacstLetter,DejaVu Serif'; font-size:16pt; "
                    "color:#000000;\">"
-        + trUtf8("أخرج البخاري في صحيحه") + "</span><span style=\" font-family:'KacstLetter'; font-size:10pt;\"> "
+        + tr("أخرج البخاري في صحيحه") + "</span><span style=\" font-family:'KacstLetter'; font-size:10pt;\"> "
                                             "</span></p>"
                                             "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; "
                                             "margin-left:0px; margin-right:0px; -qt-block-indent:0; "
                                             "text-indent:0px;\"><span style=\" font-family:'arial,KacstLetter,DejaVu "
                                             "Serif'; font-size:16pt; color:#0000ff;\">"
-        + trUtf8("في كتاب بدء الوحي") + "</span><span style=\" font-family:'KacstLetter'; font-size:16pt;\"> "
+        + tr("في كتاب بدء الوحي") + "</span><span style=\" font-family:'KacstLetter'; font-size:16pt;\"> "
                                         "</span></p>"
                                         "<p align=\"center\" dir='rtl' style=\" margin-top:0px; "
                                         "margin-bottom:0px; margin-left:0px; margin-right:0px; "
                                         "-qt-block-indent:0; text-indent:0px;\"><span style=\" "
                                         "font-family:'arial,KacstLetter,DejaVu Serif'; font-size:16pt; "
                                         "color:#008000;\">"
-        + trUtf8("باب: كيف كان بدء الوحي") + "</span></p>"
+        + tr("باب: كيف كان بدء الوحي") + "</span></p>"
                                              "<p dir='rtl' style=\" margin-top:0px; margin-bottom:0px; "
                                              "margin-left:0px; margin-right:0px; -qt-block-indent:0; "
                                              "text-indent:0px;\"><span style=\" font-family:'arial,KacstLetter,DejaVu "
                                              "Serif'; font-size:14pt; color:#000000;\">"
-        + trUtf8("حدثنا الحميدي عبد الله بن الزبير قال: حدثنا سفيان قال: حدثنا "
+        + tr("حدثنا الحميدي عبد الله بن الزبير قال: حدثنا سفيان قال: حدثنا "
                  "يحيى بن سعيد الأنصاري قال : أخبرني محمد بن إبراهيم التيمي: أنه "
                  "سمع علقمة بن وقاص الليثي يقول: سمعت عمر بن الخطاب رضي الله عنه "
                  "على المنبر قال: سمعت رسول الله صلى الله عليه وسلم يقول: إنما "

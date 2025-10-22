@@ -43,7 +43,7 @@ About::About(QWidget* parent)
     QGraphicsPixmapItem* lab = new QGraphicsPixmapItem(panelParent);
     // QGraphicsPixmapItem* labreflet=new QGraphicsPixmapItem(panelParent);
     m_scene = new QGraphicsScene();
-    // setText(trUtf8("القرطاس"),m_scene);
+    // setText(tr("القرطاس"),m_scene);
     lab->setPixmap(QPixmap(QString::fromUtf8(":/images/image/groupbook.png")));
     // labreflet->setPixmap(QPixmap(QString::fromUtf8(":/images/image/groupbook2.png")));
 #if QT_VERSION >= 0x040600
