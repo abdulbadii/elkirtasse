@@ -27,7 +27,10 @@ https://sourceforge.net/projects/elkirtasse/
 _______________________________________________________________________________________________________________________________________________
 ### Prerequisites  
 #### Dependencies   
-Dynamic/shared libraries   
+##### Build time   
+GCC, Cmake, Make   
+(Optional LLVM, Clang, Ninja)
+##### Dynamic/shared libraries   
 brotli, bzip2, curl   
 dbus, double-conversion, duktape   
 e2fsprogs, expat, fontconfig, freetype2   
@@ -52,7 +55,7 @@ configuring by option such as
 will get optimized binary result.   
 `cmake --build . --parallel` is just cmake's `make -j`   
 
+#### Books   
+https://sourceforge.net/projects/elkirtasse/files/allbooks/   
 
 
-
-   
