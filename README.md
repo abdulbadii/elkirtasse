@@ -49,11 +49,12 @@ Then configuring and building,
 On success,   
 `sudo cmake --install . --component Runtime`   
 
-Notes:
-configuring by option such as
+Notes:   
+configuring by option such   
 `cmake .. -DCMAKE_BUILD_TYPE=Release` 
 will get optimized binary result.   
-`cmake --build . --parallel` is just cmake's `make -j`   
+`cmake --build . --parallel`
+is just cmake version of `make -j`   
 
 #### Books   
 https://sourceforge.net/projects/elkirtasse/files/allbooks/   
