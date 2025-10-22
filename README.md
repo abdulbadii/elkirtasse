@@ -23,3 +23,36 @@ Features
 
 
 https://sourceforge.net/projects/elkirtasse/
+
+_______________________________________________________________________________________________________________________________________________
+### Prerequisites  
+#### Dependencies   
+Dynamic/shared libraries   
+brotli, bzip2, curl   
+dbus, double-conversion, duktape   
+e2fsprogs, expat, fontconfig, freetype2   
+gcc-libs, glib2, glibc, graphite   
+harfbuzz, icu, keyutils, krb5   
+libb2, libffi, libglvnd, libidn2, libnghttp2, libnghttp3   
+libpng, libproxy, libpsl, libssh2, libunistring, libx11   
+libxau, libxcb, libxdmcp, libxkbcommon, md4c, openssl   
+pcre2, qt6-base, util-linux-libs, zlib   
+
+### Installation  
+On user-owned top directory:   
+`mkdir build && cd build`   
+Then configuring and building,   
+`cmake .. -DCMAKE_INSTALL_PREFIX=/usr && cmake --build . --parallel`   
+On success,   
+`sudo cmake --install . --component Runtime`   
+
+Notes:
+configuring by option such as
+`cmake .. -DCMAKE_BUILD_TYPE=Release` 
+will get optimized binary result.   
+`cmake --build . --parallel` is just cmake's `make -j`   
+
+
+
+
+   
