@@ -30,16 +30,12 @@ ________________________________________________________________________________
 ##### Build time   
 GCC, Cmake, Make   
 (Optional LLVM, Clang, Ninja)
-##### Run time, dynamic/shared libraries   
-brotli, bzip2, curl   
-dbus, double-conversion, duktape   
-e2fsprogs, expat, fontconfig, freetype2   
-gcc-libs, glib2, glibc, graphite   
-harfbuzz, icu, keyutils, krb5   
-libb2, libffi, libglvnd, libidn2, libnghttp2, libnghttp3   
-libpng, libproxy, libpsl, libssh2, libunistring, libx11   
-libxau, libxcb, libxdmcp, libxkbcommon, md4c, openssl   
-pcre2, qt6-base, util-linux-libs, zlib   
+##### Run time, dynamic/shared libraries
+qt6-base   
+libglvnd   
+gcc   
+gcc-libs   
+glibc   
 
 ### Build and Installation  
 On user-owned top directory:   
@@ -50,13 +46,11 @@ Installing,
 `sudo cmake --install . --component Runtime`   
 
 Notes:   
-configuring by option   
-`cmake .. -DCMAKE_BUILD_TYPE=Release` 
-will generate a better optimized binary.   
-`cmake --build . --parallel`
-is just cmake;s for `make -j`   
+
+- `cmake .. -DCMAKE_BUILD_TYPE=Release`  
+configures to generate a better optimized binary.   
+- `cmake --build . --parallel`   
+is cmake's for `make -j`   
 
 #### Books   
 https://sourceforge.net/projects/elkirtasse/files/allbooks/   
-
-
