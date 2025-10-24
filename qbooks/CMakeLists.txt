@@ -83,7 +83,10 @@ if( WIN32)
     src/dialogmdb.h
     ui/dialogmdb.ui )
   target_link_libraries( qbooks PRIVATE Qt::Sql )
-
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files/${PROJECT_NAME}" CACHE PATH "" FORCE)
+  install( TARGETS qbooks
+      RUNTIME DESTINATION "."
+      LIBRARY DESTINATION "." )
 elseif( APPLE)
   message(STATUS "MacOS build is experimental, no file known yet")
   install( TARGETS qbooks BUNDLE DESTINATION .)
@@ -91,8 +94,8 @@ elseif( UNIX)
   target_sources( qbooks PUBLIC
     src/mdbexport.cpp
     src/mdbexport.h
-    ui/mdbexport.ui
-  )
+    ui/mdbexport.ui )
+  set( CMAKE_INSTALL_PREFIX "/usr" CACHE STRING "Install path prefix" FORCE)
   install( TARGETS	qbooks
 	RUNTIME		DESTINATION ${CMAKE_INSTALL_BINDIR}
 	COMPONENT	Runtime )
@@ -100,5 +103,4 @@ elseif( UNIX)
 	DESTINATION	${CMAKE_INSTALL_DATAROOTDIR}	# trailing / in source name is crucial
 	COMPONENT	Runtime )
   install( CODE "execute_process(COMMAND gtk-update-icon-cache ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor)")
-
 endif()
