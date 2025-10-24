@@ -28,7 +28,7 @@ ________________________________________________________________________________
 ### Prerequisites  
 #### Dependencies   
 ##### Build time   
-GCC, Cmake, Make   
+qt6-base, gcc, cmake, make   
 (Optional LLVM, Clang, Ninja)
 ##### Run time, dynamic/shared libraries
 qt6-base   
@@ -46,11 +46,11 @@ Installing
 `sudo cmake --install . --component Runtime`   
 
 Notes:   
-Do  
-- `cmake .. -DCMAKE_BUILD_TYPE=Release`  
-to configure generating a better optimized binary.   
-- `cmake --build . --parallel`   
-is cmake's for `make -j`   
+
+To configure generating a better optimized binary, do   
+`cmake .. -DCMAKE_BUILD_TYPE=Release`  
+
+`cmake --build . --parallel` is Cmake's for `make -j`   
 
 #### Books   
 https://sourceforge.net/projects/elkirtasse/files/allbooks/   
