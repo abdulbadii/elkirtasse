@@ -40,15 +40,15 @@ glibc
 ### Build and Installation  
 On user-owned top directory:   
 `mkdir build && cd build`   
-Then configuring and building,   
-`cmake .. -DCMAKE_INSTALL_PREFIX=/usr && cmake --build . --parallel`   
-Installing,   
+Then configuring and building   
+`cmake .. && cmake --build . --parallel`   
+Installing   
 `sudo cmake --install . --component Runtime`   
 
 Notes:   
-
+Do  
 - `cmake .. -DCMAKE_BUILD_TYPE=Release`  
-configures to generate a better optimized binary.   
+to configure generating a better optimized binary.   
 - `cmake --build . --parallel`   
 is cmake's for `make -j`   
 
