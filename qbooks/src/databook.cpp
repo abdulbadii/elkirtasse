@@ -31,7 +31,7 @@ w'.
 
 #include <QProgressDialog>
 
-databook::databook()
+DataBook::DataBook()
 {
     boocNumIndex = 0;
     currentPosition[boocNumIndex] = 0;
@@ -39,8 +39,8 @@ databook::databook()
     newPosition[boocNumIndex] = 0;
     removeTechkile = false;
 }
-databook::~databook() { }
-bool databook::openBook(QString bookName, int position, QString bkpath)
+DataBook::~DataBook() { }
+bool DataBook::openBook(QString bookName, int position, QString bkpath)
 {
 
     QFile file(bkpath);
@@ -67,13 +67,13 @@ bool databook::openBook(QString bookName, int position, QString bkpath)
     isTefsir = getIfTefsir();
     return true;
 }
-void databook::claerBook(int num)
+void DataBook::claerBook(int num)
 {
     m_docBooK[num].clear();
     bookNass[num].clear();
     listId.clear();
 }
-bool databook::getIfTefsir()
+bool DataBook::getIfTefsir()
 {
 
     for (int i = 0; i < 100; i++) {
@@ -93,7 +93,7 @@ bool databook::getIfTefsir()
     return false;
 }
 
-void databook::moveToPosition(int position)
+void DataBook::moveToPosition(int position)
 {
     int pos = position;
     // prevPosition[boocNumIndex]=currentPosition[boocNumIndex];
@@ -118,7 +118,7 @@ void databook::moveToPosition(int position)
     //  m_label_progress_info->setText(tr(" كتاب : ")+m_Book_title +tr(".
     //  المؤلف : ")+m_Book_Autors+". " +m_label_page->text());
 }
-QString databook::noTechkile(QString text) const
+QString DataBook::noTechkile(QString text) const
 {
     QString str = text;
     str.replace(tr("\331\213"), "");
@@ -132,7 +132,7 @@ QString databook::noTechkile(QString text) const
     return str;
 }
 
-bool databook::findAya(QString soura, QString aya)
+bool DataBook::findAya(QString soura, QString aya)
 {
     QDomElement racine = m_docBooK[boocNumIndex].documentElement(); // renvoie la balise racine
     QString textsora;
@@ -154,7 +154,7 @@ bool databook::findAya(QString soura, QString aya)
     }
     return false;
 }
-void databook::updatPage(QString oldText, QString newText, bool fullText)
+void DataBook::updatPage(QString oldText, QString newText, bool fullText)
 {
     if (fullText == true) {
         bookNass[boocNumIndex] = newText;
@@ -167,7 +167,7 @@ void databook::updatPage(QString oldText, QString newText, bool fullText)
     noeud.firstChildElement("nass").firstChild().setNodeValue(
         bookNass[boocNumIndex]);
 }
-bool databook::saveBook()
+bool DataBook::saveBook()
 {
     // QString path=QCoreApplication::applicationDirPath ();
     // مسار الكتاب
@@ -182,7 +182,7 @@ bool databook::saveBook()
     return true;
 }
 
-void databook::treeOrganizFahrass(QTreeWidget* view, QString Bname)
+void DataBook::treeOrganizFahrass(QTreeWidget* view, QString Bname)
 {
 
     if (chargeList() == true) {
@@ -190,7 +190,9 @@ void databook::treeOrganizFahrass(QTreeWidget* view, QString Bname)
         QDomDocument m_doc;
         QString titlepath = Bname + "/title.xml";
         QFile file(titlepath);
-        file.open(QIODevice::ReadOnly);
+        if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString();return;
+	};
         if (!m_doc.setContent(&file)) {
             return;
         }
@@ -283,7 +285,7 @@ void databook::treeOrganizFahrass(QTreeWidget* view, QString Bname)
     }
 }
 
-QTreeWidgetItem* databook::getItem(QTreeWidgetItem* item)
+QTreeWidgetItem* DataBook::getItem(QTreeWidgetItem* item)
 {
 
     int index = item->childCount() - 1;
@@ -291,7 +293,7 @@ QTreeWidgetItem* databook::getItem(QTreeWidgetItem* item)
     return item->child(index);
 }
 
-bool databook::chargeList()
+bool DataBook::chargeList()
 {
     listId.clear();
     QDomElement racine = m_docBooK[boocNumIndex].documentElement(); // renvoie la balise racine
@@ -313,7 +315,7 @@ bool databook::chargeList()
     return true;
 }
 
-int databook::getPositionID(QString id)
+int DataBook::getPositionID(QString id)
 {
 
     int newid = listId.indexOf(id);
@@ -326,7 +328,7 @@ int databook::getPositionID(QString id)
     return newid + 2;
 }
 
-void databook::insertPage(bool after)
+void DataBook::insertPage(bool after)
 {
     int i = currentPosition[boocNumIndex];
     QString newPage = "0";
@@ -371,7 +373,7 @@ void databook::insertPage(bool after)
 
     // saveBook();
 }
-void databook::removeCurPage()
+void DataBook::removeCurPage()
 {
     QDomElement racine = m_docBooK[boocNumIndex].documentElement(); // renvoie la balise racine
     QDomNode curNoeud = racine.childNodes().item(currentPosition[boocNumIndex]);

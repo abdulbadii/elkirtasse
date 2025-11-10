@@ -27,8 +27,7 @@ w'.
 ** $elkirtasse_END_LICENSE$
 **
 ****************************************************************************/
-#ifndef MESSAGES_H
-#define MESSAGES_H
+#pragma once
 #include <QAction>
 #include <QComboBox>
 #include <QDomDocument>
@@ -38,29 +37,34 @@ w'.
 #include <QTimer>
 #include <QTreeWidget>
 #include <QWidget>
-
 class QComboBox;
 class QProgressBar;
 class QPushButton;
 class QTextDocument;
-class messages : public QObject {
+
+class Messages : public QObject {
     Q_OBJECT
-
 public:
-    messages();
-    ~messages();
-
+	Messages();
     // QDomDocument docfind;
     QComboBox* comboGroup;
     QTreeWidget* treeView;
-
     enum { MaxRecentFiles = 16 };
-    QAction* recentFileActs[MaxRecentFiles];
+
+	QAction* recentFileActs[MaxRecentFiles];
     QString infoBookTitle;
     QString infoBookAutor;
     QString infoBookBetaka;
-
     QString m_pathCostum;
+	~Messages();
+
+private:
+	QString pathApp;
+	QString pathUser;
+	QList<QString> listId;
+
+	QDomDocument m_doc;
+	QDomDocument m_docR; // وثيقة الكتب السابقة
 
 public slots:
     void treeChargeSoura(QTreeWidget* view);
@@ -77,7 +81,6 @@ public slots:
     void recentCharge();
     void recentSave();
     bool fahrasSave(QTreeWidget* view, QString bkname);
-
     //*************************
 
     //***************
@@ -98,7 +101,7 @@ public slots:
         QString betaka);
     bool loadBookInfo(QString bookname);
     QString geniratNewBookName(QString groupParent);
-    //**********************load save result searsh
+    //**********************load save result of search
     bool loadTarGz(QString path);
     void removeTempDirs(QString dirName);
 private slots:
@@ -107,11 +110,4 @@ private slots:
     bool writeInDoc(QString tit, QString data, QString lvl);
     //*******************************
 
-private:
-    QString m_pathUser;
-    QList<QString> listId;
-
-    QDomDocument m_doc;
-    QDomDocument m_docR; // وثيقة الكتب السابقة
 };
-#endif // MESSAGES_H

@@ -49,10 +49,10 @@ Dialogmdb::Dialogmdb(QWidget* parent)
     ui->toolButton_fileNam->setIcon(
         style()->standardPixmap(QStyle::SP_DirOpenIcon));
     ui->progressBar->setVisible(false);
-    Messages = new messages();
+    message = new Messages();
     //    m_path=QCoreApplication::applicationDirPath ();
     m_path = QDir::homePath() + "/.kirtasse";
-    Messages->comboCharge(ui->comboBox);
+    message->comboCharge(ui->comboBox);
 
     if (QSqlDatabase::addDatabase("QODBC").isValid()) {
 
@@ -223,8 +223,8 @@ void Dialogmdb::creatBook(QString fn)
     if (ui->checkBox_curan->checkState() == Qt::Checked) {
         checked = true;
     }
-    Messages->m_pathCostum = m_path;
-    if (Messages->addNewBook(m_bookDir, Add_Book_Name, Add_Autor_Name, Add_Betaka,
+    message->m_pathCostum = m_path;
+    if (message->addNewBook(m_bookDir, Add_Book_Name, Add_Autor_Name, Add_Betaka,
             m_addGroupeId, checked)
         == false) {
 
@@ -233,7 +233,7 @@ void Dialogmdb::creatBook(QString fn)
 
         return;
     } else {
-        Messages->saveBookInfo(m_bookDir, Add_Book_Name, Add_Autor_Name,
+        message->saveBookInfo(m_bookDir, Add_Book_Name, Add_Autor_Name,
             Add_Betaka);
 
         // QMessageBox::information(this,tr("معلومات"),Add_Book_Name
@@ -296,7 +296,9 @@ void Dialogmdb::on_buttonBox_clicked(QAbstractButton* button)
 }
 bool Dialogmdb::creatDir()
 {
-    QString newBooName = Messages->geniratNewBookName(m_addGroupeId);
+    QString newBooName = message->geniratNewBookName(m_addGroupeId);
+	if (!newBooName) {
+		qWarning() << "Cannot generate new book name"; return false;}
     QDir newdir = m_path + "/" + newBooName;
     if (!newdir.exists()) {
         QDir dir(m_path);

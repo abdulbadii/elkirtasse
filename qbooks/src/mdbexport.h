@@ -39,7 +39,7 @@ class mdbexport;
 
 class mdbexport : public QDialog {
     Q_OBJECT
-    messages* Messages;
+    Messages* message;
 
 public:
     mdbexport(QWidget* parent = 0);

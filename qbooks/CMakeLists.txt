@@ -83,7 +83,7 @@ if( WIN32)
     src/dialogmdb.h
     ui/dialogmdb.ui )
   target_link_libraries( qbooks PRIVATE Qt::Sql )
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files/${PROJECT_NAME}" CACHE PATH "" FORCE)
+  set( CMAKE_INSTALL_PREFIX "C:/Program Files/${PROJECT_NAME}" CACHE PATH "" FORCE)
   install( TARGETS qbooks
       RUNTIME DESTINATION "."
       LIBRARY DESTINATION "." )
@@ -99,8 +99,8 @@ elseif( UNIX)
   install( TARGETS	qbooks
 	RUNTIME		DESTINATION ${CMAKE_INSTALL_BINDIR}
 	COMPONENT	Runtime )
-  install( DIRECTORY	../usr/share/
-	DESTINATION	${CMAKE_INSTALL_DATAROOTDIR}	# trailing / in source name is crucial
+  install( DIRECTORY	../usr/share/			# trailing / in source name is crucial
+	DESTINATION	${CMAKE_INSTALL_DATAROOTDIR}
 	COMPONENT	Runtime )
   install( CODE "execute_process(COMMAND gtk-update-icon-cache ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor)")
 endif()

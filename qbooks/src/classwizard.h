@@ -27,10 +27,10 @@ w'.
 ** $elkirtasse_END_LICENSE$
 **
 ****************************************************************************/
-#ifndef CLASSWIZARD_H
-#define CLASSWIZARD_H
-#include "messages.h"
+#pragma once
 #include <QWizard>
+#include "messages.h"
+
 QT_BEGIN_NAMESPACE
 class QCheckBox;
 class QGroupBox;
@@ -41,12 +41,11 @@ class QTreeWidget;
 QT_END_NAMESPACE
 
 //! [0]
-
 class ClassWizard : public QWizard {
     Q_OBJECT
 
 public:
-    ClassWizard(QWidget* parent = 0);
+    ClassWizard(QWidget* parent = nullptr);
 
     enum {
         Page_Intro,
@@ -66,7 +65,7 @@ class IntroPage : public QWizardPage {
     Q_OBJECT
 
 public:
-    IntroPage(QWidget* parent = 0);
+    IntroPage(QWidget* parent = nullptr);
 
 private:
     QLabel* label;
@@ -78,7 +77,7 @@ class ClassInfoPage : public QWizardPage {
     Q_OBJECT
 
 public:
-    ClassInfoPage(QWidget* parent = 0);
+    ClassInfoPage(QWidget* parent = nullptr);
 
 private:
     QLabel* labelUrlName;
@@ -96,8 +95,8 @@ class PageTreeBook : public QWizardPage {
     Q_OBJECT
 
 public:
-    PageTreeBook(QWidget* parent = 0);
-    messages* Messages;
+    PageTreeBook(QWidget* parent = nullptr);
+    Messages* message;
     QTreeWidget* treeViewBook;
 private slots:
     void treeBookitemSelectionChanged();
@@ -112,7 +111,7 @@ class PageTreeFavorite : public QWizardPage {
 
 public:
     PageTreeFavorite(QWidget* parent = 0);
-    messages* Messages;
+    Messages* message;
     QTreeWidget* treeViewFavorite;
     QString curentBook;
 
@@ -136,5 +135,3 @@ protected:
 private:
     QLabel* label;
 };
-
-#endif

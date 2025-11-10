@@ -41,8 +41,8 @@ dialogconvert::dialogconvert(QWidget* parent)
     ui->toolButton_down->setIcon(style()->standardPixmap(QStyle::SP_ArrowDown));
     ui->toolButton_up->setIcon(style()->standardPixmap(QStyle::SP_ArrowUp));
 
-    Messages = new messages();
-    Messages->comboCharge(ui->comboBox_group);
+    message = new Messages();
+    message->comboCharge(ui->comboBox_group);
     creatId = 0;
 }
 dialogconvert::~dialogconvert()
@@ -72,8 +72,8 @@ void dialogconvert::on_pushButton_clicked()
         QString Add_Betaka = ui->textBrowser->textCursor().document()->toPlainText();
 
         bool checked = false;
-        Messages->m_pathCostum = m_pathCostum;
-        if (Messages->addNewBook(m_newPathDir, Add_Book_Name, Add_Autor_Name,
+        message->m_pathCostum = m_pathCostum;
+        if (message->addNewBook(m_newPathDir, Add_Book_Name, Add_Autor_Name,
                 Add_Betaka, m_addGroupeId, checked)
             == false) {
 
@@ -82,7 +82,7 @@ void dialogconvert::on_pushButton_clicked()
                 tr(
                     "ربما نسيت ملأ احد اخانات الضرورية أو ان بيانات الكتاب خاطئة"));
         } else {
-            Messages->saveBookInfo(m_newPathDir, Add_Book_Name, Add_Autor_Name,
+            message->saveBookInfo(m_newPathDir, Add_Book_Name, Add_Autor_Name,
                 Add_Betaka);
 
             QMessageBox::information(this, tr("معلومات"),
@@ -115,7 +115,9 @@ bool dialogconvert::load(const QString& f)
 }
 bool dialogconvert::creat_dir()
 {
-    QString newBooName = Messages->geniratNewBookName(m_addGroupeId);
+    QString newBooName = message->geniratNewBookName(m_addGroupeId);
+	if (newBooName ==""){
+		qWarning() << "Cannot generate new book name"; return false;}
     QDir newdir = m_pathCostum + "/" + newBooName;
     if (!newdir.exists()) {
         QDir dir(m_pathCostum);
@@ -124,23 +126,17 @@ bool dialogconvert::creat_dir()
         m_newPath = m_pathCostum + "/" + newBooName;
         return true;
     }
-
-    bool exit = false;
     int i = 0;
-    while (exit == false) {
-        i = i + 1;
-        QVariant m = i;
+    while (true) {
+        ++i;
         QString path = m_pathCostum;
-        QDir newdir = path + "/" + newBooName + "_" + m.toString();
-        if (newdir.exists()) {
-            exit = false;
-        } else {
-            QDir dir(path);
-            dir.mkdir(newBooName + "_" + m.toString());
-            m_newPathDir = newBooName + "_" + m.toString();
-            m_newPath = path + "/" + newBooName + "_" + m.toString();
-            exit = true;
-        }
+        QDir newdir = path + "/" + newBooName + "_" +  QString::number(i);
+        if (newdir.exists()) continue;
+		QDir dir(path);
+		dir.mkdir(newBooName + "_" +  QString::number(i));
+		m_newPathDir = newBooName + "_" +  QString::number(i);
+		m_newPath = path + "/" + newBooName + "_" +  QString::number(i);
+		break;
     }
     return true;
 }

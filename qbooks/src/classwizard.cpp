@@ -176,7 +176,7 @@ PageTreeBook::PageTreeBook(QWidget* parent)
     bookInfo = new QLineEdit();
 
     //**********تحميل الشجرة********
-    Messages->treeChargeGroupe(treeViewBook, 0, true);
+    message->treeChargeGroupe(treeViewBook, 0, true);
 
     connect(treeViewBook, SIGNAL(itemSelectionChanged()), this,
         SLOT(treeBookitemSelectionChanged()));
@@ -219,7 +219,7 @@ PageTreeFavorite::PageTreeFavorite(QWidget* parent)
     connect(treeViewFavorite, SIGNAL(itemSelectionChanged()), this,
         SLOT(treeFavoriteItemSelectionChanged()));
     //**********تحميل الشجرة********
-    Messages->favorite_charge(treeViewFavorite, icon, icon2);
+    message->favorite_charge(treeViewFavorite, icon, icon2);
 
     QGridLayout* layout = new QGridLayout;
     layout->addWidget(treeViewFavorite, 0, 0);

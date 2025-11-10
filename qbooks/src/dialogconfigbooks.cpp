@@ -55,8 +55,8 @@ DialogConfigBooks::DialogConfigBooks(QWidget* parent)
     ui->toolButtonReloadAll->setIcon(
         QIcon(style()->standardPixmap(QStyle::SP_BrowserReload)));
 
-    Messages = new messages();
-    Messages->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
+    message = new Messages();
+    message->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
     int count = ui->treeWidgetBooks->topLevelItemCount();
     for (int i = 0; i < count; i++) {
 
@@ -231,7 +231,7 @@ void DialogConfigBooks::on_toolButtonGroupAdd_clicked()
         QTreeWidgetItem* itemNew = new QTreeWidgetItem;
         QTreeWidgetItem* itembk = new QTreeWidgetItem;
         QVariant newId;
-        newId = Messages->genirateId(ui->treeWidgetBooks);
+        newId = message->genirateId(ui->treeWidgetBooks);
         qDebug() << newId;
         itemNew->setText(0, text);
         itemNew->setIcon(0, icon);
@@ -488,8 +488,8 @@ void DialogConfigBooks::on_toolButtonUpdatBk_clicked()
         QString authur = ui->lineEditAautor->text();
         QString betaka = ui->textBrowserBetaka->toPlainText();
         QString BookName = item->data(1, 1).toString();
-        Messages->m_pathCostum = pathCostm;
-        if (Messages->saveBookInfo(BookName, title, authur, betaka) == true) {
+        message->m_pathCostum = pathCostm;
+        if (message->saveBookInfo(BookName, title, authur, betaka) == true) {
             item->setText(0, title);
             item->setText(1, authur);
             item->setText(2, betaka);
@@ -528,7 +528,7 @@ void DialogConfigBooks::on_toolButtonOPenGroup_clicked()
 
             if (file.rename(groupPath, groupPathNew)) {
                 if (file.copy(fn, groupPath)) {
-                    Messages->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
+                    message->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
                     ui->lineEditGroup->setText(fn);
                     ui->toolButtonGroupUpdat->setEnabled(true);
                 }
@@ -548,7 +548,7 @@ void DialogConfigBooks::on_toolButtonGroupUpdat_clicked()
             file.remove(groupPath);
 
         file.rename(groupPathOld, groupPath);
-        Messages->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
+        message->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
         ui->lineEditGroup->setText(groupPath);
     } else {
         QDir appDir(QCoreApplication::applicationDirPath());
@@ -607,7 +607,7 @@ void DialogConfigBooks::on_buttonBox_accepted()
 {
 
     QDir dir(pathCostm);
-    if (Messages->treeSaveGroupe(ui->treeWidgetBooks) == true) {
+    if (message->treeSaveGroupe(ui->treeWidgetBooks) == true) {
         int count = listRenameBk.count();
         if (count > 0) {
             for (int i = 0; i < count; i++) {
@@ -647,7 +647,7 @@ void DialogConfigBooks::on_toolButtonFindBKOld_clicked()
     QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
     file.copy(pathApp + "/data/group.xml", groupPath);
     // تحميل القائمة الى الشجرة
-    Messages->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
+    message->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
     // اضافة قسم جديد فارغ
     QIcon icon(":/images/image/groupb.png");
     QTreeWidgetItem* sectionNew = new QTreeWidgetItem;
@@ -658,7 +658,7 @@ void DialogConfigBooks::on_toolButtonFindBKOld_clicked()
     QTreeWidgetItem* groupNew = new QTreeWidgetItem;
     groupNew->setText(0, tr("مجموعة غير مصنفة"));
     groupNew->setIcon(0, icon);
-    QVariant newId = Messages->genirateId(ui->treeWidgetBooks);
+    QVariant newId = message->genirateId(ui->treeWidgetBooks);
     groupNew->setData(2, 1, newId.toString());
     sectionNew->addChild(groupNew);
 
@@ -667,10 +667,10 @@ void DialogConfigBooks::on_toolButtonFindBKOld_clicked()
     QDir dirImage(newBkPath);
     foreach (subdir, dirImage.entryList(QDir::AllDirs | QDir::NoDotAndDotDot | QDir::Hidden)) {
         if (file.exists(newBkPath + "/" + subdir + "/bookinfo.info")) {
-            Messages->loadBookInfo(newBkPath + "/" + subdir);
-            QString title = Messages->infoBookTitle;
-            QString author = Messages->infoBookAutor;
-            QString bitka = Messages->infoBookBetaka;
+            message->loadBookInfo(newBkPath + "/" + subdir);
+            QString title = message->infoBookTitle;
+            QString author = message->infoBookAutor;
+            QString bitka = message->infoBookBetaka;
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, title);
             item->setText(1, author);
@@ -724,6 +724,6 @@ void DialogConfigBooks::on_toolButtonReloadAll_clicked()
 {
     on_toolButtonGroupUpdat_clicked();
     setPathCostum(pathCostmOld);
-    Messages->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
+    message->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
     ui->toolButtonReloadAll->setEnabled(false);
 }

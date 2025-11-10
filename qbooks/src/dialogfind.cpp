@@ -36,15 +36,15 @@ Dialogfind::Dialogfind(QWidget* parent)
     , ui(new Ui::Dialogfind)
 {
     ui->setupUi(this);
-    Messages = new messages();
-    Findbook = new findbook();
+    message = new Messages();
+    findbook = new FindBook();
 
     findList = false;
     findFirst = false;
     findAnd = true;
     findSawabik = true;
 
-    Messages->treeChargeGroupe(ui->treeWidget, 1, true);
+    message->treeChargeGroupe(ui->treeWidget, 1, true);
     QString myxmlfind = "<?xml version='1.0' encoding='UTF-8'?>"
                         "<root>"
                         "</root>";
@@ -56,7 +56,7 @@ Dialogfind::~Dialogfind() { }
 
 void Dialogfind::on_lineEdit_2_textChanged(QString searchString)
 {
-    Findbook->searchInTreeview(ui->treeWidget, searchString, 0);
+    findbook->searchInTreeview(ui->treeWidget, searchString, 0);
 }
 
 void Dialogfind::on_buttonBox_clicked(QAbstractButton* button)

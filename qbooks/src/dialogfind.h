@@ -40,8 +40,8 @@ class Dialogfind;
 
 class Dialogfind : public QDialog {
     Q_OBJECT
-    messages* Messages;
-    findbook* Findbook;
+    Messages* message;
+    FindBook* findbook;
 
 public:
     Dialogfind(QWidget* parent = 0);

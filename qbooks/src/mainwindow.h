@@ -27,27 +27,26 @@ w'.
 ** $elkirtasse_END_LICENSE$
 **
 ****************************************************************************/
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 #include "classwizard.h"
+#include "messages.h"
 #include "databook.h"
 #include "findbook.h"
-#include "messages.h"
-// #include "rowat.h"
 #include "booksInterface.h"
 #include "toolrubon.h"
-#if QT_VERSION >= 0x040600
 #include "animation.h"
-#endif
-
+// #include "rowat.h"
 #include <QDomDocument>
 #include <QGridLayout>
 #include <QMainWindow>
 #include <QStandardItem>
 #include <QTextBrowser>
 #include <QTreeWidgetItem>
-
 #include <QtPrintSupport/QPrinter>
+#include <string>
+#include <unordered_map>
+using std::make_unique;using std::unique_ptr;using std::string;using std::unordered_map;
+
 class QLabel;
 class QTreeWidget;
 class QLabel;
@@ -56,47 +55,46 @@ class QComboBox;
 class QPushButton;
 class QLineEdit;
 
-namespace Ui {
-class MainWindowClass;
-}
+namespace Ui { class MainWindowClass; }
+
 class MainWindow : public QMainWindow {
     Q_OBJECT
-    messages* Messages;
-    findbook* Findbook;
-    ClassWizard* Wizard;
-    // rowat *Rowat;
+    unique_ptr<FindBook> findBook;
+    ClassWizard* Wizard;	// rowat *Rowat;
     NetInterface* netInterface;
     RowatInterface* rowatInterface;
     ShamilaInterface* shamilaInterface;
-#if QT_VERSION >= 0x040600
     View* view;
-#endif
+
 public:
-    MainWindow(QWidget* parent = 0);
+    explicit MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
-    databook* DataBook;
+    unique_ptr<Messages> message;
+    unique_ptr<DataBook> databook;
+	//QString m_pathApp;	QString m_pathUser; // مسار البرنامج
 
 protected:
     virtual void closeEvent(QCloseEvent* e);
     bool eventFilter(QObject* obj, QEvent* ev);
-    void changeEvent(QEvent* e);
+    void changeEvent(QEvent* e) override;
+
 signals:
     void bookAvailable(bool);
 
 private:
-    Ui::MainWindowClass* ui;
-    // BooksInterface *booksInterface;
-    // QGraphicsScene m_scene;
+	unique_ptr<Ui::MainWindowClass> ui;
+    QTranslator m_translator;
     toolrubon* toolRubon;
-
+	string langLoc;
+	void setLanguage(const QString &qmFilePath);
+    int m_recentNbr;
     int m_currentIndex;
-    // enum  { NumIndex = 10};
-    // enum { MaxRecentFiles = 15 };
     static const int NumIndex = 10;
     static const int MaxRecentFiles = 16;
-    int m_recentNbr;
-    QTextBrowser* txtBrowserBook;
+    // BooksInterface *booksInterface;
+    // QGraphicsScene m_scene;
 
+	QTextBrowser* txtBrowserBook;
     QIcon m_icondir;
     QIcon m_icondfile;
     QIcon m_iconbook;
@@ -126,7 +124,6 @@ private:
     QAction* AC_groupeRename;
     QAction* AC_colapsTreeFah;
     QAction* AC_expandTreeFah;
-
     QPushButton* BtnStopFind;
 
     QLabel* labelPagePart; // عنوان الصفحة
@@ -136,12 +133,9 @@ private:
     // QLabel *labelBetaka;
     QLabel* labelAnim;
     QLabel* labelTextFind;
-
     QProgressBar* progressBarFind; // شريط الحالة للبحث
 
-    QString m_textfind; // النص الذي يتم البحث عنه
-    QString m_pathUser; // مسار البرنامج
-    QString m_pathApp;
+	QString m_textfind; // النص الذي يتم البحث عنه
     QString m_pathCostm;
     QString m_bookName[NumIndex]; // اسم مسار الكتاب الحالي
     QString m_bookTitle[NumIndex]; // اسم الكتاب الحالي
@@ -376,5 +370,3 @@ private slots:
     void on_actionDvd_triggered();
     void on_actionCostumActions_triggered();
 };
-
-#endif // MAINWINDOW_H

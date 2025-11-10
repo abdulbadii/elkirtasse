@@ -37,7 +37,7 @@ class dialogupdat;
 
 class dialogupdat : public QDialog {
     Q_OBJECT
-    messages* Messages;
+    Messages* message;
 
 public:
     dialogupdat(QWidget* parent = 0);

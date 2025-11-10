@@ -41,7 +41,7 @@ class Dialogmdb;
 
 class Dialogmdb : public QDialog {
     Q_OBJECT
-    messages* Messages;
+    Messages* message;
 
 public:
     Dialogmdb(QWidget* parent = 0);

@@ -695,176 +695,19 @@ void View::keyReleaseEvent(QKeyEvent* event)
         m_timer->stop();
 }
 
-/*void View::chargeEnrto()
-{
-    for (int i = 0; i <items.count(); ++i) {
-        mscene->removeItem(items.at(i));
-    }
-    items.clear();
-    mscene->clear();
-    this->setAlignment(Qt::AlignHCenter|Qt::AlignHCenter);
-    mscene->setSceneRect(0,0,500,500);
-    mscene->setBackgroundBrush(Qt::white);
-
-    QLabel *labBasmala=new QLabel;
-    QLabel *labHadith=new QLabel;
-    labBasmala->setAlignment(Qt::AlignCenter);
-    labBasmala->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
-    labBasmala->setGeometry(0,0,500,36);
-    labBasmala->setText("<span style=\" font-family:'arial,KacstLetter,DejaVu
-Serif'; font-size:18pt; font-weight:600; color:#ff5500;\">"+tr("بسم الله
-الرحمن الرحيم")+"</span>");
-
-    QString text="<p align=\"center\" dir='rtl' style=\" margin-top:0px;
-margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0;
-text-indent:0px;\"><span style=\" font-family:'arial,KacstLetter,DejaVu Serif';
-font-size:16pt; color:#000000;\">"+tr("أخرج البخاري في صحيحه")+"</span><span
-style=\" font-family:'KacstLetter'; font-size:10pt;\"> </span></p>"
-                 "<p align=\"center\" style=\" margin-top:0px;
-margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0;
-text-indent:0px;\"><span style=\" font-family:'arial,KacstLetter,DejaVu Serif';
-font-size:16pt; color:#0000ff;\">"+tr("في كتاب بدء الوحي")+"</span><span
-style=\" font-family:'KacstLetter'; font-size:16pt;\"> </span></p>"
-                 "<p align=\"center\" dir='rtl' style=\" margin-top:0px;
-margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0;
-text-indent:0px;\"><span style=\" font-family:'arial,KacstLetter,DejaVu Serif';
-font-size:16pt; color:#008000;\">"+tr("باب: كيف كان بدء
-الوحي")+"</span></p>"
-                 "<p dir='rtl' style=\" margin-top:0px; margin-bottom:0px;
-margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span
-style=\" font-family:'arial,KacstLetter,DejaVu Serif'; font-size:14pt;
-color:#000000;\">" +tr("حدثنا الحميدي عبد الله بن الزبير قال: حدثنا سفيان
-قال: حدثنا يحيى بن سعيد الأنصاري قال : أخبرني محمد بن إبراهيم التيمي: أنه سمع
-علقمة بن وقاص الليثي يقول: سمعت عمر بن الخطاب رضي الله عنه على المنبر قال: سمعت
-رسول الله صلى الله عليه وسلم يقول: إنما الأعمال بالنيات، وإنما لكل امرىء ما نوى،
-فمن كانت هجرته إلى دنيا يصيبها، أو إلى امرأة ينكحها، فهجرته إلى ما هاجر
-إليه")+"</span></p></td></tr></table></body></html>";
-    //  labHadith->setAlignment(Qt::AlignCenter);
-    labHadith->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
-    labHadith->setGeometry(0,500,500,300);
-    labHadith->setWordWrap(true);
-    labHadith->setText(text);
-
-    mscene->addWidget(labBasmala);
-    mscene->addWidget(labHadith);
-
-    QParallelAnimationGroup *groupRotate = new QParallelAnimationGroup;
-    QParallelAnimationGroup *groupTransform = new QParallelAnimationGroup;
-    QParallelAnimationGroup *groupCercle = new QParallelAnimationGroup;
-    QParallelAnimationGroup *groupOpacity = new QParallelAnimationGroup;
-
-    QParallelAnimationGroup *paralleGroup=new QParallelAnimationGroup;
-
-    QSequentialAnimationGroup *sequentGroup=new QSequentialAnimationGroup;
-
-    QPixmap   mypixmap(QPixmap(":/images/image/groupbook.png")) ;
-    QPixmap   pixtitle(QPixmap(":/images/image/titlekirtasse.png")) ;
-
-
-    qreal real=0.0;
-    for(int i=0;i <10; ++i){
-        real=real+0.05;
-        Pixmap *item = new Pixmap(mypixmap);
-        item->setGeometry(QRect(190,200,128.0,128.0));
-        item->setOpacity(real);
-        mscene->addItem(item);
-        items << item;
-    }
-    items[9]->setOpacity(1.0);
-    //! [0]
-    int r=-360;
-    for (int i = 0; i < items.count(); ++i) {
-        r=r+36;
-        QPropertyAnimation * anim = new QPropertyAnimation(items[i],
-"rotation"); anim->setStartValue(-r); anim->setEndValue(-360);
-        anim->setDuration(1000);
-        groupCercle->addAnimation(anim);
-    }
-    //! [1]
-    for (int i = 0; i < items.count(); ++i) {
-
-        QPropertyAnimation * anim = new QPropertyAnimation(items[i],
-"transformOriginPoint"); anim->setEndValue(QPointF(64,64));
-        groupTransform->addAnimation(anim);
-    }
-    //! [2]
-    //r=0;
-    for (int i = 0; i < items.count(); ++i) {
-        r=r-36;
-        QPropertyAnimation * anim = new QPropertyAnimation(items[i],
-"rotation"); anim->setStartValue(r); anim->setEndValue(360);
-        anim->setDuration(500);
-        groupRotate->addAnimation(anim);
-    }
-
-    //! [3]
-    for (int i = 0; i < items.count()-1; ++i) {
-        QPropertyAnimation * anim = new QPropertyAnimation(items[i], "opacity");
-        anim->setEndValue(0.0);
-        groupOpacity->addAnimation(anim);
-    }
-    //! [4]
-    QPropertyAnimation * animBook = new QPropertyAnimation(items[9], "pos");
-    animBook->setDuration(1000);
-    animBook->setStartValue(QPointF(200,200));
-    animBook->setEndValue(QPointF(200,30));
-    animBook->setEasingCurve(QEasingCurve::OutBounce);
-
-    Pixmap *itemTitle = new Pixmap(pixtitle);
-    itemTitle->setGeometry(QRect(130,150,266,1117));
-    itemTitle->setOpacity(0.0);
-    mscene->addItem(itemTitle);
-    //! [5]
-    QPropertyAnimation * animTitle = new QPropertyAnimation(itemTitle,
-"opacity"); animTitle->setDuration(1000); animTitle->setStartValue(0.0);
-    animTitle->setEndValue(1.0);
-    animTitle->setEasingCurve(QEasingCurve::InCirc);
-     connect( animTitle, SIGNAL(finished()), this, SLOT(animEtoileTitle()));
-    //! [6]
-    QPropertyAnimation * animHadith = new QPropertyAnimation(labHadith, "pos");
-    animHadith->setDuration(800);
-    animHadith->setStartValue(QPointF(0,500));
-    animHadith->setEndValue(QPointF(0,200));
-    animHadith->setEasingCurve(QEasingCurve::Linear);
-
-    paralleGroup->addAnimation(animTitle);
-    paralleGroup->addAnimation(animHadith);
-
-    sequentGroup->addPause(300);
-    sequentGroup->addAnimation(groupCercle);
-    sequentGroup->addAnimation(groupTransform);
-    sequentGroup->addAnimation(groupRotate);
-    sequentGroup->addAnimation(groupOpacity);
-    sequentGroup->addAnimation(animBook);
-    sequentGroup->addAnimation(paralleGroup);
-    sequentGroup->addPause(700);
-    connect( sequentGroup, SIGNAL(finished()), this, SLOT(animEtoileBook()));
- //   sequentGroup->addAnimation(groupReflet);
-
-     sequentGroup->start();
-    items[9]->setCursor(Qt::PointingHandCursor);
-    connect( items[9], SIGNAL(release()), this, SLOT(chargeLevelOne()));
-    QGraphicsDropShadowEffect *efet=new QGraphicsDropShadowEffect;
-    efet->setOffset(8,8);
-   efet->setColor(QColor(0, 0, 0, 80));
-   efet->setBlurRadius(12);
-    itemTitle->setGraphicsEffect(efet);
-
-    //          anim->start();
-}*/
 void View::chargeEnrto()
 {
-    for (int i = 0; i < items.count(); ++i) {
+    for (int i = 0; i < items.count(); ++i)
         mscene->removeItem(items.at(i));
-    }
+    
     items.clear();
     mscene->clear();
     this->setAlignment(Qt::AlignHCenter | Qt::AlignHCenter);
     mscene->setSceneRect(0, 0, 500, 500);
     mscene->setBackgroundBrush(Qt::white);
 
-    QLabel* labBasmala = new QLabel;
-    QLabel* labHadith = new QLabel;
+    QLabel *labBasmala = new QLabel,
+				*labHadith = new QLabel;
     labBasmala->setAlignment(Qt::AlignCenter);
     labBasmala->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
     labBasmala->setGeometry(0, 0, 500, 36);
@@ -908,33 +751,30 @@ void View::chargeEnrto()
     labHadith->setGeometry(0, 500, 500, 300);
     labHadith->setWordWrap(true);
     labHadith->setText(text);
-
     mscene->addWidget(labBasmala);
     mscene->addWidget(labHadith);
-
     QParallelAnimationGroup* paralleGroup = new QParallelAnimationGroup;
 
-    QPixmap mypixmap(QPixmap(":/images/image/groupbook.png"));
-    QPixmap pixtitle(QPixmap(":/images/image/titlekirtasse.png"));
+    QPixmap mypixmap(QPixmap(":/images/image/groupbook.png")),
+    			pixtitle(QPixmap(":/images/image/titlekirtasse.png"));
 
-    qreal real = 0.0;
-    for (int i = 0; i < 1; ++i) {
-        real = real + 0.05;
-        Pixmap* item = new Pixmap(mypixmap);
-        item->setGeometry(QRect(200, 30, 128.0, 128.0));
-        item->setOpacity(0.0);
-        mscene->addItem(item);
-        items << item;
-    }
-
-    QPropertyAnimation* animBook = new QPropertyAnimation(items[0], "opacity");
-    animBook->setDuration(1000);
-    // animBook->setStartValue(QPointF(200,200));
-    animBook->setEndValue(1.0);
-    animBook->setEasingCurve(QEasingCurve::InCirc);
+	qreal real = 0.0;
+	for (int i = 0; i < 1; ++i) { //Only one now; loop kept for multi pixmaps extension
+	  real = real + 0.05;
+	  Pixmap* item = new Pixmap(mypixmap);
+	  item->setGeometry(QRect(200, 30, 128.0, 128.0));
+	  item->setOpacity(0.0);
+	  mscene->addItem(item);
+	  items << item;
+	}
+	QPropertyAnimation* animBook = new QPropertyAnimation(items[0], "opacity");
+	animBook->setDuration(1000);
+	// animBook->setStartValue(QPointF(200,200));
+	animBook->setEndValue(1.0);
+	animBook->setEasingCurve(QEasingCurve::InCirc);
 
     Pixmap* itemTitle = new Pixmap(pixtitle);
-    itemTitle->setGeometry(QRect(130, 150, 266, 1117));
+    itemTitle->setGeometry(QRect(130, 131, 266, 1117));
     itemTitle->setOpacity(0.0);
     mscene->addItem(itemTitle);
     //! [5]
@@ -965,7 +805,6 @@ void View::chargeEnrto()
     efet->setColor(QColor(0, 0, 0, 80));
     efet->setBlurRadius(12);
     itemTitle->setGraphicsEffect(efet);
-
     //          anim->start();
 }
 void View::animEtoileTitle() { animEtoile(QRect(155, 190, 32, 32)); }

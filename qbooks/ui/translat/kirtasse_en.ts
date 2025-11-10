@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="en_US">
-<defaultcodec>UTF-8</defaultcodec>
+<TS version="2.1" language="en_US">
 <context>
     <name>About</name>
     <message>
@@ -182,64 +181,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>Dialogcdrom</name>
-    <message>
-        <location filename="../../../kirtassecdrom/Dialogcdrom.ui" line="14"/>
-        <source>تحويل كتب الشاملة</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassecdrom/Dialogcdrom.ui" line="144"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Hacen Casablanca Light&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p dir=&apos;rtl&apos; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;تنبيه : &lt;/span&gt;&lt;span style=&quot; color:#000000;&quot;&gt;اذا كنت تستخدم لنكس تأكد من وجود mdbtools على جهازك&lt;/span&gt;&lt;/p&gt;
-&lt;p dir=&apos;rtl&apos; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;اذا كانت الشاملة مثبتة على جهازك فهذا افضل من تحويلها من القرص &lt;/span&gt;&lt;/p&gt;
-&lt;p dir=&apos;rtl&apos; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;اذاكان لديك قرص الشاملة الاصدار 3 فما فوق تأكد من ان كل الكتب قد تم اخراجها من الارشيف&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassecdrom/Dialogcdrom.ui" line="161"/>
-        <source>مسار ملف بيانات الشاملة main.mdb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassecdrom/Dialogcdrom.ui" line="170"/>
-        <location filename="../../../kirtassecdrom/Dialogcdrom.ui" line="212"/>
-        <location filename="../../../kirtassecdrom/Dialogcdrom.ui" line="254"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassecdrom/Dialogcdrom.ui" line="203"/>
-        <source>مسار الكتب مجلد books الذي يحتوي كتب الشاملة</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassecdrom/Dialogcdrom.ui" line="245"/>
-        <source>المسار الذي سيتم انشاء الكتب فيه</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassecdrom/dialogcdrom.cpp" line="84"/>
-        <source>Open File...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassecdrom/dialogcdrom.cpp" line="85"/>
-        <source>main.mdb (*.mdb *.MDB)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassecdrom/dialogcdrom.cpp" line="95"/>
-        <location filename="../../../kirtassecdrom/dialogcdrom.cpp" line="107"/>
-        <source>Open Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Dialogfind</name>
     <message>
         <source>بحث متقدم</source>
@@ -411,106 +352,32 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Dialognet</name>
     <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="14"/>
         <source>تحميل كتب2</source>
-        <translation>Download books</translation>
+        <translation type="vanished">Download books</translation>
     </message>
     <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="25"/>
         <source>رابط قائمة الكتب</source>
-        <translation>link of list bgooks</translation>
+        <translation type="vanished">link of list bgooks</translation>
     </message>
     <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="32"/>
-        <source>هذا رابط لقائمة الكتب المتفرة يمكنك ادخال رابط جديد في حال حصلك على رابط جديد </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="35"/>
-        <source>http://dl.dropbox.com/u/13013844/update_liste/bookslist.xml</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="42"/>
         <source>تحديث قائمة الكتب</source>
-        <translation type="unfinished">update list books</translation>
+        <translation type="obsolete">update list books</translation>
     </message>
     <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="45"/>
-        <source>تحديث قائمة الكتب ان كان هناك تغيير في قائمة الكتب</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="48"/>
         <source>تحديث</source>
-        <translation>update</translation>
+        <translation type="vanished">update</translation>
     </message>
     <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="66"/>
         <source>ابحث عن كتاب</source>
-        <translation>Find a book</translation>
+        <translation type="vanished">Find a book</translation>
     </message>
     <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="76"/>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="87"/>
-        <source>...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="109"/>
         <source>المؤلف</source>
-        <translation>Author</translation>
+        <translation type="vanished">Author</translation>
     </message>
     <message>
-        <location filename="../../../kirtassenetwork/dialognet.ui" line="154"/>
         <source>حدد كتابا من القائمة</source>
-        <translation>select a book</translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="186"/>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="197"/>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="217"/>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="258"/>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="287"/>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="307"/>
-        <source>HTTP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="187"/>
-        <source>There already exists a file called %1 in the current directory. Overwrite?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="198"/>
-        <source>Unable to save the file %1: %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="218"/>
-        <source>Downloading %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="259"/>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="288"/>
-        <source>Download failed: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="307"/>
-        <source>Download canceled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="324"/>
-        <source>HTTP </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtassenetwork/dialognet.cpp" line="325"/>
-        <source>One or more SSL errors has occurred: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">select a book</translation>
     </message>
 </context>
 <context>
@@ -1301,11 +1168,11 @@ You can also edit and put the pages in special folders</translation>
     </message>
     <message>
         <source>الصفحة الأولى</source>
-        <translation type="obsolete">first page</translation>
+        <translation type="obsolete">the first page</translation>
     </message>
     <message>
         <source>الانتقال الى الصفحة الاولى</source>
-        <translation type="obsolete">go to first page</translation>
+        <translation type="obsolete">to the first page</translation>
     </message>
     <message>
         <source>الصفحة التالية</source>
@@ -1313,28 +1180,28 @@ You can also edit and put the pages in special folders</translation>
     </message>
     <message>
         <source>الانتقال الى الصفحة التالية</source>
-        <translation type="obsolete">go to next page</translation>
+        <translation type="obsolete">to next page</translation>
     </message>
     <message>
         <source>الانتقال الى الصفحة التالية
 </source>
-        <translation type="obsolete">go to next page</translation>
+        <translation type="obsolete">to next page</translation>
     </message>
     <message>
         <source>الصفحة السابقة</source>
-        <translation type="obsolete">first page</translation>
+        <translation type="obsolete">previous page</translation>
     </message>
     <message>
         <source>الانتقال الى الصفحة السابقة</source>
-        <translation type="obsolete">go to first page</translation>
+        <translation type="obsolete">to previous page</translation>
     </message>
     <message>
         <source>الصفحة الأخيرة</source>
-        <translation type="obsolete">last page</translation>
+        <translation type="obsolete">the last page</translation>
     </message>
     <message>
         <source>الانتقال الى الصفحة الاخيرة</source>
-        <translation type="obsolete">go to last page</translation>
+        <translation type="obsolete">to the last page</translation>
     </message>
     <message>
         <source>حول البرنامج</source>
@@ -1354,11 +1221,11 @@ You can also edit and put the pages in special folders</translation>
     </message>
     <message>
         <source>عرض ملأ الشاشة</source>
-        <translation type="obsolete">viewer full screen</translation>
+        <translation type="obsolete">full screen</translation>
     </message>
     <message>
         <source>عرض ملا الشاشة</source>
-        <translation type="obsolete">viewer full screen</translation>
+        <translation type="obsolete">full screen</translation>
     </message>
     <message>
         <source>بحث متقدم</source>
@@ -1374,7 +1241,7 @@ You can also edit and put the pages in special folders</translation>
     </message>
     <message>
         <source>استيراد ملفات نصية</source>
-        <translation type="obsolete">import documents file</translation>
+        <translation type="obsolete">import document file</translation>
     </message>
     <message>
         <source>خروج</source>
@@ -1386,7 +1253,7 @@ You can also edit and put the pages in special folders</translation>
     </message>
     <message>
         <source>اضافة للمفضلة</source>
-        <translation type="obsolete">Add to Favorites</translation>
+        <translation type="obsolete">Add to Favorite</translation>
     </message>
     <message>
         <source>هذا الخيار يضيف الصفحة الحالية الى المفضلة</source>
@@ -1424,7 +1291,7 @@ Such as the links in web pages</translation>
     </message>
     <message>
         <source>تصديرالكتاب الى ملف</source>
-        <translation type="obsolete">Export the book to a file</translation>
+        <translation type="obsolete">Export book to a file</translation>
     </message>
     <message>
         <source>يفتح لك نافذة تمكنك من تصدير الكتاب الحالى الى عدة صيغ\npdf , odf ,html</source>
@@ -1754,34 +1621,24 @@ Do you want to continue?</translation>
 <context>
     <name>cdromShamila</name>
     <message>
-        <location filename="../../../kirtassecdrom/cdromshamila.cpp" line="137"/>
-        <location filename="../../../kirtassecdrom/cdromshamila.cpp" line="444"/>
         <source>كتب الشاملة</source>
-        <translation>shamila books</translation>
+        <translation type="vanished">shamila books</translation>
     </message>
     <message>
-        <location filename="../../../kirtassecdrom/cdromshamila.cpp" line="139"/>
         <source>الرجاء الانتظار..جاري انشاءقائمة للكتب</source>
-        <translation>Please wait </translation>
+        <translation type="vanished">Please wait </translation>
     </message>
     <message>
-        <location filename="../../../kirtassecdrom/cdromshamila.cpp" line="139"/>
-        <location filename="../../../kirtassecdrom/cdromshamila.cpp" line="211"/>
-        <location filename="../../../kirtassecdrom/cdromshamila.cpp" line="551"/>
         <source>الغاء</source>
-        <translation>cancel</translation>
+        <translation type="vanished">cancel</translation>
     </message>
     <message>
-        <location filename="../../../kirtassecdrom/cdromshamila.cpp" line="211"/>
-        <location filename="../../../kirtassecdrom/cdromshamila.cpp" line="551"/>
         <source>الرجاء الانتظار....</source>
-        <translation>Please wait ....</translation>
+        <translation type="vanished">Please wait ....</translation>
     </message>
     <message>
-        <location filename="../../../kirtassecdrom/cdromshamila.cpp" line="249"/>
-        <location filename="../../../kirtassecdrom/cdromshamila.cpp" line="619"/>
         <source>الرجاء الانتظار..جاري انشاء :</source>
-        <translation>Please wait ....:</translation>
+        <translation type="vanished">Please wait ....:</translation>
     </message>
 </context>
 <context>
@@ -2138,384 +1995,8 @@ Do you want to continue?</translation>
 <context>
     <name>networkplugin</name>
     <message>
-        <location filename="../../../kirtassenetwork/networkplugin.cpp" line="49"/>
         <source>تحميل الكتب</source>
-        <translation>Download books</translation>
-    </message>
-</context>
-<context>
-    <name>rowat</name>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="66"/>
-        <source>، </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="68"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="522"/>
-        <source>صلى الله عليه وسلم</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="390"/>
-        <source>10 : كبارالآخذين عن تبع الأتباع</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="391"/>
-        <source>12 : صغارالآخذين عن تبع الأتباع</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="392"/>
-        <source> 11 : أوساط الآخذين عن تبع الأتباع</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="393"/>
-        <source>9  : من صغار أتباع التابعين</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="394"/>
-        <source>3  : من الوسطى من التابعين</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="395"/>
-        <source>1 : صحابى</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="396"/>
-        <source>4  : طبقة تلى الوسطى من التابعين</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="397"/>
-        <source> 6  : من الذين عاصروا صغارالتابعين</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="398"/>
-        <source>7  : من كبار أتباع التابعين</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="399"/>
-        <source>8  : من الوسطى من أتباع التابعين</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="400"/>
-        <source> 2  : من كبار التابعين</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="401"/>
-        <source> 5  : من صغار التابعين </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="406"/>
-        <source>قال المزي في تهذيب الكمال</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="407"/>
-        <source>. قال الحافظ في تهذيب التهذيب</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="409"/>
-        <source>#قال المزي في تهذيب الكمال : روى عن</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="410"/>
-        <source>#قال المزي في تهذيب الكمال  :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="411"/>
-        <source>#قال الحافظ في تهذيب التهذيب</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="412"/>
-        <source>#ذكر المزي في تهذيب الكمال</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="414"/>
-        <source>#قال المزي في تهذيب الكمال : روى عنه</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="415"/>
-        <source> #قال المزي في تهذيب الكمال  :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="416"/>
-        <source> #قال الحافظ في تهذيب التهذيب</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="417"/>
-        <source> #ذكر المزي في تهذيب الكمال</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="419"/>
-        <source>المولد : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="419"/>
-        <source>الوفاة : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="419"/>
-        <source>الطبقة : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="420"/>
-        <source>روى له : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="420"/>
-        <source>رتبته عند ابن حجر : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="421"/>
-        <source>رتبته عند الذهبي : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="432"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="441"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="462"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="471"/>
-        <source>تهذيب</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="432"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="441"/>
-        <source>النبى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="498"/>
-        <source>ملخص</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="502"/>
-        <source>الجرح والتعديل</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="506"/>
-        <source>شيوخ</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="514"/>
-        <source>تلاميذ</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="579"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="794"/>
-        <source>أبو عبد</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="579"/>
-        <source>أبى عبد</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="591"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="744"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="797"/>
-        <source>أبو</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="591"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="615"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="806"/>
-        <source>أبى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="615"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="806"/>
-        <source>بن</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="615"/>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="806"/>
-        <source>عبد</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="718"/>
-        <source>البخارى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="718"/>
-        <source>محمد بن إسماعيل بن إبراهيم بن المغيرة الجعفى مولاهم</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="719"/>
-        <source>النسائى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="719"/>
-        <source>أحمد بن شعيب بن على بن سنان بن بحر بن دينار</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="720"/>
-        <source>ابن ماجة</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="720"/>
-        <source>محمد بن يزيد الربعى مولاهم</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="721"/>
-        <source>الترمذى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="721"/>
-        <source>محمد بن عيسى بن سورة بن موسى بن الضحاك السلمى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="722"/>
-        <source>أبو داود</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="722"/>
-        <source>سليمان بن الأشعث بن إسحاق بن بشير بن شداد</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="723"/>
-        <source>مسلم</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="723"/>
-        <source>مسلم بن الحجاج بن مسلم القشيرى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="724"/>
-        <source>أحمد بن حنبل</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="724"/>
-        <source>أحمد بن محمد بن حنبل بن هلال بن أسد الشيبانى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="725"/>
-        <source>الزهرى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="725"/>
-        <source>محمد بن مسلم بن عبيد الله بن عبد الله بن شهاب</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="727"/>
-        <source>أبو بكر الصديق</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="727"/>
-        <source>أبى بكر الصديق</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="727"/>
-        <source>عبد الله بن أبى قحافة</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="729"/>
-        <source>عمر بن الخطاب</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="729"/>
-        <source>عمر بن الخطاب بن نفيل بن عبد العزى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="731"/>
-        <source>أبى هريرة</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="731"/>
-        <source>أبو هريرة</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="731"/>
-        <source>أبو هريرة الدوسى اليمانى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="732"/>
-        <source>عائشة</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="732"/>
-        <source>عائشة بنت أبى بكر</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="733"/>
-        <source>الشعبى</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="733"/>
-        <source>عامر بن شراحيل</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="735"/>
-        <source>أم سلمة</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../kirtasserowat/rowat.cpp" line="735"/>
-        <source>هند بنت أبى أمية</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Download books</translation>
     </message>
 </context>
 </TS>

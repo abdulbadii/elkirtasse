@@ -43,8 +43,8 @@ mdbexport::mdbexport(QWidget* parent)
     ui->toolButton_fileNam->setIcon(
         style()->standardPixmap(QStyle::SP_DirOpenIcon));
 
-    Messages = new messages();
-    Messages->comboCharge(ui->comboBox);
+    message = new Messages();
+    message->comboCharge(ui->comboBox);
     ui->progressBar->setVisible(false);
     m_tempDir = QDir::homePath() + "/.kirtasse/temp";
     QProcess prosses;
@@ -361,32 +361,28 @@ QString mdbexport::creatBooKDir()
     int index = ui->comboBox->currentIndex();
     idx = ui->comboBox->itemData(index);
     QString groupeId = idx.toString();
-    // انشاء مجلد الكتاب******************************************
+    // انشاء مجلد الكتاب   *********************************
     QString mbookDir;
-    QString newBooName = Messages->geniratNewBookName(groupeId);
-    QDir newdir = m_path + "/" + newBooName;
-    if (!newdir.exists()) {
-        QDir dir(m_path);
-        dir.mkdir(newBooName);
+    QString newBooName = message->geniratNewBookName(groupeId);
+	if (newBooName =="") {
+		qWarning() << "Cannot generate new book name"; return "";}
+    QDir newd{ m_path + "/" + newBooName};
+    if (!newd.exists()) {
+        newd = QDir{m_path};
+        newd.mkdir(newBooName);
         mbookDir = newBooName;
         // m_newPath=m_path+"/"+ newBooName;
     } else {
-        bool exit = false;
         int i = 0;
-        while (exit == false) {
-            i = i + 1;
-            QVariant m = i;
-            QString path = m_path;
-            QDir newdir = path + "/" + newBooName + "_" + m.toString();
-            if (newdir.exists()) {
-                exit = false;
-            } else {
-                QDir dir(path);
-                dir.mkdir(newBooName + "_" + m.toString());
-                mbookDir = newBooName + "_" + m.toString();
-                //  m_newPath=path+"/"+ newBooName+"_"+ m.toString();
-                exit = true;
-            }
+        while (true) {
+            QString newDir = newBooName + "_" + QString::number(++i);
+            QDir newd{ m_path + "/" + newDir};
+            if (newd.exists()) continue;
+			newd = QDir{m_path};
+			newd.mkdir(newDir);
+			mbookDir = newDir;
+			//  m_newPath=m_path+"/"+ newDir;
+			break;
         }
     }
 
@@ -408,15 +404,15 @@ bool mdbexport::creatInfo(QString bookdir)
     if (ui->checkBox_curan->checkState() == Qt::Checked) {
         checked = true;
     }
-    Messages->m_pathCostum = m_path;
-    if (Messages->addNewBook(bookdir, Add_Book_Name, Add_Autor_Name, Add_Betaka,
+    message->m_pathCostum = m_path;
+    if (message->addNewBook(bookdir, Add_Book_Name, Add_Autor_Name, Add_Betaka,
             groupeId, checked)
         == false) {
         QMessageBox::information(this, tr("خطأ"),
             tr("ربما احد بيانات الكتاب خاطئة "));
         return false;
     } else {
-        Messages->saveBookInfo(bookdir, Add_Book_Name, Add_Autor_Name, Add_Betaka);
+        message->saveBookInfo(bookdir, Add_Book_Name, Add_Autor_Name, Add_Betaka);
     }
     msgTitle = msgTitle + Add_Book_Name + "\n" + tr("المسار :") + m_path + "/" + bookdir + "\n";
     return true;

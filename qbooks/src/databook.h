@@ -34,14 +34,14 @@ w'.
 #include <QTreeWidget>
 #include <QtGui>
 
-class databook : public QObject {
+class DataBook : public QObject {
     Q_OBJECT
 
 public:
     // enum  { NumRows = 10};
     static const int NumRows = 10;
-    databook();
-    ~databook();
+    DataBook();
+    ~DataBook();
     bool isTefsir;
     int newPosition[NumRows];
     // int prevPosition[NumRows];

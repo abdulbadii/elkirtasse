@@ -1,5 +1,9 @@
 cmake_minimum_required( VERSION 3.24)
 project( elkirtasse VERSION 3.6.8) # LANGUAGES CXX)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND
+    CMAKE_CXX_COMPILER_VERSION VERSION_LESS "12")
+  message(FATAL_ERROR "GCC ≥ 12 required (found ${CMAKE_CXX_COMPILER_VERSION})")
+endif()
 
 find_package(
   Qt6 REQUIRED COMPONENTS Core Widgets Gui Network PrintSupport Sql Xml )

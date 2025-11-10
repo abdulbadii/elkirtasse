@@ -1,0 +1,45 @@
+{
+  "name": "elkirtasse",
+  "files": [
+   {
+    "directory": "qbooks/src",
+    "recursive": 1,
+    "filters": ["*.cpp","*.h"] },
+   {
+    "directory": "qbooks/ui",
+    "filters": ["*.ui","*.qrc","*.qm","*.ts","*.png","*.xcf"] }
+  ],
+  "build": {
+    "directory": "build",
+    "targets": [
+      { "name": "configure",
+        "directory": ".", "build_cmd": "cmake .."
+      },
+      { "name": "build",
+        "build_cmd": "cmake --build . --parallel 2 && qbooks/elkirtasse"
+      },
+      { "name": "rebuild",
+        "build_cmd": "cmake --build . --target clean && cmake --build . --parallel 2"
+      },
+      { "name": "configure, Debug",
+        "build_cmd": "cmake -DCMAKE_BUILD_TYPE=Debug .."
+      },
+      { "name": "build, Debug",
+        "build_cmd": "cmake --build . --parallel 2 --config Debug &&qbooks/elkirtasse"
+      },
+      { "name": "rebuild, Debug",
+        "build_cmd": "cmake --build . --target clean --config Debug && cmake --build . --parallel 2 --config Debug"
+      },
+      { "name": "configure, Release",
+        "build_cmd": "cmake -DCMAKE_BUILD_TYPE=Release .."
+      },
+      { "name": "build, Release",
+        "build_cmd": "cmake --build . --parallel 2 --config Release"
+      },
+      { "name": "rebuild, Release",
+        "build_cmd": "cmake --build . --target clean --config Release && cmake --build . --parallel 2 --config Release"
+      },
+      { "name": "run", "run_cmd": "qbooks/elkirtasse" }
+    ]
+  }
+}

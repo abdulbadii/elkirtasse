@@ -117,7 +117,8 @@ void DialogImportDvd::treeChargeGroupe()
     QTreeWidgetItem* itemBook = new QTreeWidgetItem(itemGroup);
     QFile file(m_pathApp + "/data/group.xml");
     qDebug() << m_pathApp + "/data/group.xml";
-    file.open(QIODevice::ReadOnly);
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return;}
 
     ui->treeWidget->clear();
 

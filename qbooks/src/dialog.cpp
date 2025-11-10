@@ -38,31 +38,30 @@ w'.
 
 Dialog::Dialog(QWidget* parent)
     : QDialog(parent)
-    , ui(new Ui::Dialog)
+    , ui(std::make_unique<Ui::Dialog>())
 {
     ui->setupUi(this);
     ui->toolButtonInfo->setIcon(
         style()->standardPixmap(QStyle::SP_MessageBoxInformation));
     ui->toolButton_fileNam->setIcon(
         style()->standardPixmap(QStyle::SP_DirOpenIcon));
+    ui->progressBar->setVisible(false);
     //  ui->toolButton_zipFileNam->setIcon( QIcon::fromTheme("tgz",
     //  QIcon(":/images/image/tar-gz.png")));
-    ui->progressBar->setVisible(false);
-    Messages = new messages();
     // m_path=QCoreApplication::applicationDirPath ();
+    message = std::make_unique<Messages>();
 
-    Messages->comboCharge(ui->comboBox_group);
-    Messages->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
+    message->comboCharge(ui->comboBox_group);
+    message->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
 }
 
 Dialog::~Dialog()
 {
-    Messages->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
+    message->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
 }
 
 void Dialog::on_comboBox_group_currentIndexChanged(int index)
 {
-
     QVariant idx;
     idx = ui->comboBox_group->itemData(index);
     m_addGroupeId = idx.toString();
@@ -86,14 +85,14 @@ void Dialog::on_buttonBox_clicked(QAbstractButton* button)
         ui->progressBar->setMaximum(countItem - 1);
         ui->progressBar->setVisible(true);
         QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-        for (int i = 0; i < countItem; i++) {
+        for (int i = 0; i < countItem; ++i) {
             ui->progressBar->setValue(i);
             QString filname = ui->listWidget->item(i)->text();
             QFileInfo fi(filname);
             QString ext = fi.completeSuffix();
             if (ext.toLower() == "tar.gz" || ext.toLower() == "krts") {
-                Messages->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
-                if (Messages->loadTarGz(filname) == true) {
+                message->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
+                if (message->loadTarGz(filname) == true) {
 
                     QString tempFile = QDir::homePath() + "/.kirtasse/download/";
                     loadBookInfo(tempFile);
@@ -102,7 +101,7 @@ void Dialog::on_buttonBox_clicked(QAbstractButton* button)
                     //  archiveDir="";
                 }
             } else if (ext.toLower() == ("epub")) {
-                Messages->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
+                message->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
                 classepub* Classepub = new classepub;
                 if (Classepub->ebubUnzip(filname) == true) {
                     Add_Book_Name = Classepub->infoBookTitle;
@@ -115,7 +114,7 @@ void Dialog::on_buttonBox_clicked(QAbstractButton* button)
             } else {
 
                 loadBookInfo(filname);
-                if (copyDir(filname, countItem) == true)
+                if (copyDir( filname, countItem))
                     msgTitle = msgTitle + "\n" + Add_Book_Name + "\n" + m_newPathDir;
             }
             qApp->processEvents();
@@ -135,7 +134,7 @@ void Dialog::on_buttonBox_clicked(QAbstractButton* button)
             msgBox.setWindowTitle(tr("تعليمات"));
             msgBox.setStandardButtons(QMessageBox::Ok);
             msgBox.exec();
-            Messages->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
+            message->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
             qApp->processEvents();
 
             this->accept();
@@ -167,17 +166,17 @@ bool Dialog::copyDir(QString filname, int)
         return false;
     }
 
-    //    if(items==1){
+    //if(items==1){
     //    Add_Book_Name=ui->lineEdit_booknam->text();
     //    Add_Autor_Name =ui->lineEdit_autor->text()  ;
     //    Add_Betaka=ui->textEdit_betaka->textCursor().document()->toPlainText();
-    //    }
+    //}
     bool checked = false;
-    Messages->m_pathCostum = m_path;
+    message->m_pathCostum = m_path;
     if (ui->checkBox_curan->checkState() == Qt::Checked) {
         checked = true;
     }
-    if (Messages->addNewBook(m_bookDir, Add_Book_Name, Add_Autor_Name, Add_Betaka,
+    if (message->addNewBook(m_bookDir, Add_Book_Name, Add_Autor_Name, Add_Betaka,
             m_addGroupeId, checked)
         == false) {
         QMessageBox::information(
@@ -186,7 +185,7 @@ bool Dialog::copyDir(QString filname, int)
         return false;
     } else {
 
-        Messages->saveBookInfo(m_bookDir, Add_Book_Name, Add_Autor_Name,
+        message->saveBookInfo(m_bookDir, Add_Book_Name, Add_Autor_Name,
             Add_Betaka);
     }
     return true;
@@ -194,34 +193,30 @@ bool Dialog::copyDir(QString filname, int)
 
 bool Dialog::creat_dir()
 {
-    QString newBooName = Messages->geniratNewBookName(m_addGroupeId);
-    QDir newdir = m_path + "/" + newBooName;
-    if (!newdir.exists()) {
-        QDir dir(m_path);
-        dir.mkdir(newBooName);
+    QString newBooName = message->geniratNewBookName(m_addGroupeId);
+	if (newBooName =="") {
+		qWarning() << "Cannot generate new book name"; return false;}
+	QString newDir = m_path + "/" + newBooName;
+    QDir newd{ newDir};
+    if (!newd.exists()) {
+        newd = QDir{ m_path};
+		newd.mkdir(newBooName);
         m_bookDir = newBooName;
-        m_newPathDir = m_path + "/" + newBooName;
+        m_newPathDir = newDir;
         return true;
     }
-
-    bool exit = false;
     int i = 0;
-    while (exit == false) {
-        i = i + 1;
-        QVariant m = i;
-        QString path = m_path;
-        QDir newdir = path + "/" + newBooName + "_" + m.toString();
-        if (newdir.exists()) {
-            exit = false;
-        } else {
-            QDir dir(path);
-            if (dir.mkdir(newBooName + "_" + m.toString()) == false) {
-                return false;
-            }
-            m_bookDir = newBooName + "_" + m.toString();
-            m_newPathDir = path + "/" + newBooName + "_" + m.toString();
-            exit = true;
-        }
+	while (true) {
+		++i;
+		//QString path = m_path;
+		QDir newdir = newDir + "_" +  QString::number(i);
+		if (newdir.exists()) continue;
+		QDir dir{ m_path};
+		if (dir.mkdir(newBooName + "_" +  QString::number(i)) == false)
+			return false;
+		m_bookDir = newBooName + "_" +  QString::number(i);
+		m_newPathDir = newDir + "_" +  QString::number(i);
+		break;
     }
     return true;
 }
@@ -248,17 +243,17 @@ void Dialog::on_toolButton_fileNam_clicked()
 void Dialog::loadBookInfo(QString path)
 {
     //    ui->lineEdit_fileNam->setText(path);
-    if (Messages->loadBookInfo(path) == false) {
-        Messages->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
+    if (message->loadBookInfo(path) == false) {
+        message->removeTempDirs(QDir::homePath() + "/.kirtasse/download/");
         QMessageBox::information(this, "info.xml", "this info.xml no valid");
         return;
     }
-    Add_Book_Name = Messages->infoBookTitle;
-    Add_Autor_Name = Messages->infoBookAutor;
-    Add_Betaka = Messages->infoBookBetaka;
-    //    ui->lineEdit_booknam->setText(Messages->infoBookTitle);
-    //    ui->lineEdit_autor->setText(Messages->infoBookAutor);
-    //    ui->textEdit_betaka->setText(Messages->infoBookBetaka);
+    Add_Book_Name = message->infoBookTitle;
+    Add_Autor_Name = message->infoBookAutor;
+    Add_Betaka = message->infoBookBetaka;
+    //    ui->lineEdit_booknam->setText(message->infoBookTitle);
+    //    ui->lineEdit_autor->setText(message->infoBookAutor);
+    //    ui->textEdit_betaka->setText(message->infoBookBetaka);
 }
 // --***************tar.gz
 void Dialog::on_toolButton_zipFileNam_clicked()
@@ -323,13 +318,13 @@ void Dialog::on_toolButtonInfo_clicked()
                 titles + "\n" + tr("الكتاب حزمة مضغوطة"));
         }
     }
-    if (Messages->loadBookInfo(path) == false) {
+    if (message->loadBookInfo(path) == false) {
 
         return;
     }
-    QString title = Messages->infoBookTitle;
-    QString autor = Messages->infoBookAutor;
-    QString betaka = Messages->infoBookBetaka;
+    QString title = message->infoBookTitle;
+    QString autor = message->infoBookAutor;
+    QString betaka = message->infoBookBetaka;
     QMessageBox::information(this, tr("معلومات الكتاب"),
         title + "\n" + autor + "\n" + betaka);
 }

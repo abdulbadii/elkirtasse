@@ -39,7 +39,7 @@ class dialogconvert;
 
 class dialogconvert : public QDialog {
     Q_OBJECT
-    messages* Messages;
+    Messages* message;
 
 public:
     dialogconvert(QWidget* parent = 0);

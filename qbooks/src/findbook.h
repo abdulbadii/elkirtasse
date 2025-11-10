@@ -40,12 +40,12 @@ class QLabel;
 class QTextDocument;
 class QPushButton;
 
-class findbook : public QObject {
+class FindBook : public QObject {
     Q_OBJECT
 
 public:
-    findbook();
-    ~findbook();
+    FindBook();
+    ~FindBook();
 
     QTreeWidget* treeView;
     QLabel* labelProgress;

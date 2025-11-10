@@ -39,7 +39,7 @@ class DialogConfigBooks;
 
 class DialogConfigBooks : public QDialog {
     Q_OBJECT
-    messages* Messages;
+    Messages* message;
 
 public:
     explicit DialogConfigBooks(QWidget* parent = 0);

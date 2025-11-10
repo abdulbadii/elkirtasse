@@ -39,9 +39,9 @@ dialogupdat::dialogupdat(QWidget* parent)
     , ui(new Ui::dialogupdat)
 {
     ui->setupUi(this);
-    Messages = new messages();
+    message = new Messages();
 
-    Messages->comboCharge(ui->comboBox_group);
+    message->comboCharge(ui->comboBox_group);
 
     connect(ui->lineEdit_autor, SIGNAL(textEdited(QString)), this,
         SLOT(okEnabled()));
@@ -67,7 +67,7 @@ void dialogupdat::on_buttonBox_accepted()
     bookTitle = ui->lineEdit_booknam->text();
     bookAutor = ui->lineEdit_autor->text();
     bookBetaka = ui->textBrowser->textCursor().document()->toPlainText();
-    Messages->m_pathCostum = m_pathCostum;
+    message->m_pathCostum = m_pathCostum;
     if (creatNewBook == "creat") {
         if (creat_dir() == false)
             return;
@@ -76,7 +76,7 @@ void dialogupdat::on_buttonBox_accepted()
         updateBook();
         QMessageBox::information(this, tr("معلومات"), m_newPathDir);
     } else if (creatNewBook == "update") {
-        Messages->treeMenuRemoveBook(BookName, false);
+        message->treeMenuRemoveBook(BookName, false);
         updateBook();
 
     } else if (creatNewBook == "add") {
@@ -88,34 +88,31 @@ void dialogupdat::on_buttonBox_accepted()
 bool dialogupdat::creat_dir()
 {
 
-    QString newBooName = Messages->geniratNewBookName(addGroupId);
-    QDir newdir = m_pathCostum + "/" + newBooName;
-    if (!newdir.exists()) {
-        QDir dir(m_pathCostum);
-        dir.mkdir(newBooName);
+    QString newBooName = message->geniratNewBookName(addGroupId);
+	if (newBooName =="") {
+		qWarning() << "Cannot generate new book name"; return false;}
+    QString newDir = m_pathCostum + "/" + newBooName;
+    QDir newd( newDir);
+    if (! newd.exists()) {
+        newd = QDir{ m_pathCostum};
+        newd.mkdir(newBooName);
         BookName = newBooName;
-        m_newPathDir = m_pathCostum + "/" + newBooName;
+        m_newPathDir = newDir;
         return true;
     }
-
-    bool exit = false;
     int i = 0;
-    while (exit == false) {
-        i = i + 1;
-        QVariant m = i;
-        QString path = m_pathCostum;
-        QDir newdir = path + "/" + newBooName + "_" + m.toString();
-        if (newdir.exists()) {
-            exit = false;
-        } else {
-            QDir dir(path);
-            if (dir.mkdir(newBooName + "_" + m.toString()) == false) {
-                return false;
-            }
-            BookName = newBooName + "_" + m.toString();
-            m_newPathDir = path + "/" + newBooName + "_" + m.toString();
-            exit = true;
-        }
+    while (true) {
+        //QString path = m_pathCostum;
+		++i;
+        newDir = m_pathCostum + "/" + newBooName + "_" + QString::number(i);
+        QDir newd( newDir);
+        if (newd.exists()) continue;
+		QDir dir{ m_pathCostum};
+		if (dir.mkdir(newBooName + "_" + QString::number(i)) == false)
+			return false;
+		BookName = newBooName + "_" + QString::number(i);
+		m_newPathDir = newDir;
+		break;
     }
     return true;
 }
@@ -152,14 +149,14 @@ bool dialogupdat::creat_xmlfile(QString path)
 void dialogupdat::updateBook()
 {
     bool checked = ui->checkBox_curan->isChecked();
-    if (Messages->addNewBook(BookName, bookTitle, bookAutor, bookBetaka,
+    if (message->addNewBook(BookName, bookTitle, bookAutor, bookBetaka,
             addGroupId, checked)
         == false) {
         QMessageBox::information(
             this, tr("خطأ"),
             tr("ربما نسيت ملأ احد اخانات الضرورية أو ان بيانات الكتاب خاطئة"));
     } else {
-        if (Messages->saveBookInfo(BookName, bookTitle, bookAutor, bookBetaka)) {
+        if (message->saveBookInfo(BookName, bookTitle, bookAutor, bookBetaka)) {
             if (imgChanged == true) {
                 QPixmap pix(ui->pushButtonImg->icon().pixmap(128, 128));
                 QString imgScreenPath = m_pathCostum + "/" + BookName + "/screenshot.png";

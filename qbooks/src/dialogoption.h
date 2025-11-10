@@ -27,8 +27,7 @@ w'.
 ** $elkirtasse_END_LICENSE$
 **
 ****************************************************************************/
-#ifndef DIALOGOPTION_H
-#define DIALOGOPTION_H
+#pragma once
 #include <QDialog>
 
 namespace Ui {
@@ -39,7 +38,7 @@ class Dialogoption : public QDialog {
     Q_OBJECT
 
 public:
-    Dialogoption(QWidget* parent = 0);
+    Dialogoption(QWidget* parent = nullptr);
     ~Dialogoption();
 
 private:
@@ -134,8 +133,5 @@ public slots:
     int getLng();
     /*
 
-
-
   */
 };
-#endif // DIALOGOPTION_H

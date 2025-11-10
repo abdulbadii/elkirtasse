@@ -28,29 +28,33 @@ w'.
 **
 ****************************************************************************/
 #include "messages.h"
+#include "mw.h"
 #include <QMessageBox>
 #include <QProgressDialog>
 #include <QXmlStreamReader>
 #include <QtGui>
-messages::messages()
+
+Messages::Messages()
 {
-    // m_path=QCoreApplication::applicationDirPath ();
-    m_pathUser = QDir::homePath() + "/.kirtasse";
-    // m_pathCostum=QDir::homePath()+"/.kirtasse/books";
     recentLoad();
+    // m_path=QCoreApplication::applicationDirPath ();
+    // m_pathCostum=QDir::homePath()+"/.kirtasse/books";
 }
-messages::~messages() { }
+Messages::~Messages() {}
+
 //*********************chargement*******************************
-void messages::treeChargeJozaa(QTreeWidget* view)
+void Messages::treeChargeJozaa(QTreeWidget* view)
 {
     QTreeWidgetItem* item = new QTreeWidgetItem(view);
     QTreeWidgetItem* osloItem = new QTreeWidgetItem(item);
     QTreeWidgetItem* osloItem2;
-    QDir appDir(qApp->applicationDirPath());
-    appDir.cdUp();
-    QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
-    QFile file(pathApp + "/data/ajzaa.xml");
-    file.open(QIODevice::ReadOnly);
+
+	//QDir appDir(qApp->applicationDirPath());
+	//qDebug() << "MW::pathApp = "<<MW::pathApp;
+    QFile file( MW::pathApp + "/data/ajzaa.xml");
+	if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString();return;
+	}
     view->clear();
     QXmlStreamReader xml;
     xml.setDevice(&file);
@@ -86,16 +90,17 @@ void messages::treeChargeJozaa(QTreeWidget* view)
     xml.clear();
     file.close();
 }
-void messages::treeChargeSoura(QTreeWidget* view)
+void Messages::treeChargeSoura(QTreeWidget* view)
 {
 
     QTreeWidgetItem* itemsora = new QTreeWidgetItem(view);
     QTreeWidgetItem* itemaya;
-    QDir appDir(qApp->applicationDirPath());
-    appDir.cdUp();
-    QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
-    QFile file(pathApp + "/data/curan.xml");
-    file.open(QIODevice::ReadOnly);
+    //QDir appDir(qApp->applicationDirPath());
+    //appDir.cdUp();
+    //QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
+	QFile file( MW::pathApp + "/data/curan.xml");
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return;}
 
     view->clear();
     QXmlStreamReader xml;
@@ -125,7 +130,7 @@ void messages::treeChargeSoura(QTreeWidget* view)
     file.close();
 }
 
-void messages::treeChargeGroupe(QTreeWidget* view, int checked,
+void Messages::treeChargeGroupe(QTreeWidget* view, int checked,
     bool asCombobox)
 {
 
@@ -135,7 +140,8 @@ void messages::treeChargeGroupe(QTreeWidget* view, int checked,
     QTreeWidgetItem* itemGroup = new QTreeWidgetItem(itemRoot);
     QTreeWidgetItem* itemBook;
     QFile file(path + "/data/group.xml");
-    file.open(QIODevice::ReadOnly);
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return;}
 
     view->clear();
     if (asCombobox == false) {
@@ -215,7 +221,7 @@ void messages::treeChargeGroupe(QTreeWidget* view, int checked,
     file.close();
 }
 
-void messages::treeUpdateGroupe(QTreeWidget* view, bool remove)
+void Messages::treeUpdateGroupe(QTreeWidget* view, bool remove)
 {
     QString path = QDir::homePath() + "/.kirtasse";
 
@@ -223,7 +229,8 @@ void messages::treeUpdateGroupe(QTreeWidget* view, bool remove)
     QTreeWidgetItem* itemGroup = new QTreeWidgetItem(itemRoot);
     QTreeWidgetItem* itemBook;
     QFile file(path + "/data/group.xml");
-    file.open(QIODevice::ReadOnly);
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return;}
 
     view->clear();
 
@@ -303,7 +310,7 @@ void messages::treeUpdateGroupe(QTreeWidget* view, bool remove)
     file.close();
 }
 
-bool messages::treeSaveGroupe(QTreeWidget* view)
+bool Messages::treeSaveGroupe(QTreeWidget* view)
 {
     QString myxmlgroup = "<?xml version='1.0' encoding='UTF-8'?>"
                          "<setting>"
@@ -347,7 +354,7 @@ bool messages::treeSaveGroupe(QTreeWidget* view)
             }
         }
     }
-    QFile file(m_pathUser + "/data/group.xml");
+    QFile file( MW::pathUser + "/data/group.xml");
     file.open(QIODevice::WriteOnly); // فتح الملف للكتابة
     QTextStream out(&file); // الكتابة
     m_doc.save(out, 1); // حفظ الملف
@@ -355,13 +362,14 @@ bool messages::treeSaveGroupe(QTreeWidget* view)
     m_doc.clear();
     return true;
 }
-void messages::treeChargeFahrass(QTreeWidget* view, QString Bname)
+void Messages::treeChargeFahrass(QTreeWidget* view, QString Bname)
 {
 
     QString titlepath = Bname + "/title.xml";
     // QString titlepath= Bname;
     QFile file(titlepath);
-    file.open(QIODevice::ReadOnly);
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return;}
     view->clear();
     int d = 1;
     //   enum  { NumIndex = 10};
@@ -440,7 +448,7 @@ void messages::treeChargeFahrass(QTreeWidget* view, QString Bname)
     xml.clear();
 }
 
-QTreeWidgetItem* messages::getItem(QTreeWidgetItem* item)
+QTreeWidgetItem* Messages::getItem(QTreeWidgetItem* item)
 {
 
     int index = item->childCount() - 1;
@@ -449,10 +457,11 @@ QTreeWidgetItem* messages::getItem(QTreeWidgetItem* item)
 }
 
 // حذف الكتاب المحدد
-bool messages::treeMenuRemoveBook(QString BKname, bool removall)
+bool Messages::treeMenuRemoveBook(QString BKname, bool removall)
 {
-    QFile file(m_pathUser + "/data/group.xml");
-    file.open(QIODevice::ReadOnly);
+    QFile file( MW::pathUser + "/data/group.xml");
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return false;}
     if (!m_doc.setContent(&file)) {
         return false;
     }
@@ -514,19 +523,21 @@ bool messages::treeMenuRemoveBook(QString BKname, bool removall)
 }
 //***end chargement***
 //****************************bigen recent****************************
-void messages::recentLoad()
+void Messages::recentLoad()
 {
     QString myxmlgroup = "<?xml version='1.0' encoding='UTF-8'?>"
                          "<setting>"
                          "</setting>";
-    QFile file(m_pathUser + "/data/recent.xml");
-    file.open(QIODevice::ReadOnly);
+    QFile file( MW::pathUser + "/data/recent.xml");
+	qDebug() << "mw::pathUser="<<MW::pathUser;
+	if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File:" << file.fileName() << file.errorString(); return;}
     if (!m_docR.setContent(&file)) {
         m_docR.setContent(myxmlgroup);
     }
     file.close();
 }
-void messages::recentCharge()
+void Messages::recentCharge()
 {
 
     QDomElement racine = m_docR.documentElement(); // renvoie la balise racine
@@ -549,7 +560,7 @@ void messages::recentCharge()
         noeud = noeud.previousSibling();
     }
 }
-void messages::recentChange(QString Bname, QString Btitle, QString Baut,
+void Messages::recentChange(QString Bname, QString Btitle, QString Baut,
     QString Bid, int nbr, bool isTefsir)
 {
     QDomElement racine = m_docR.documentElement(); // renvoie la balise racine
@@ -580,9 +591,9 @@ void messages::recentChange(QString Bname, QString Btitle, QString Baut,
 
     myel.setAttribute("isTefsir", isTefsir);
 }
-void messages::recentSave()
+void Messages::recentSave()
 {
-    QFile file(m_pathUser + "/data/recent.xml");
+    QFile file( MW::pathUser + "/data/recent.xml");
     file.open(QIODevice::WriteOnly); // فتح الملف للكتابة عليها
     QTextStream out(&file); // الكتابة
     const int IndentSize = 1;
@@ -591,17 +602,17 @@ void messages::recentSave()
     m_docR.clear();
 }
 //***end recent***
-bool messages::fahrasSave(QTreeWidget* view, QString bkname)
+bool Messages::fahrasSave(QTreeWidget* view, QString bkname)
 {
-    QDir appDir(qApp->applicationDirPath());
-    appDir.cdUp();
-    QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
-    QFile file;
-    QString path;
+    //QDir appDir(qApp->applicationDirPath());
+    //appDir.cdUp();
+    //QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
+	QFile file;
+	QString path;
     if (file.exists(m_pathCostum + "/" + bkname + "/title.xml")) {
         path = m_pathCostum + "/" + bkname + "/title.xml";
-    } else if (file.exists(pathApp + "/books/" + bkname + "/title.xml")) {
-        path = pathApp + "/books/" + bkname + "/title.xml";
+    } else if (file.exists( MW::pathApp + "/books/" + bkname + "/title.xml")) {
+        path = MW::pathApp + "/books/" + bkname + "/title.xml";
     } else {
         return false;
     }
@@ -646,7 +657,7 @@ bool messages::fahrasSave(QTreeWidget* view, QString bkname)
     return true;
 }
 
-bool messages::writeInDoc(QString tit, QString data, QString lvl)
+bool Messages::writeInDoc(QString tit, QString data, QString lvl)
 {
     if (data.isEmpty() || data.isNull())
         data = "1";
@@ -671,42 +682,44 @@ bool messages::writeInDoc(QString tit, QString data, QString lvl)
 //******************bigen find *************************************************
 
 //***end find***************************************************
-void messages::comboCharge(QComboBox* combo)
+void Messages::comboCharge(QComboBox* combo)
 {
     QDomDocument docCombo;
-    QFile file(m_pathUser + "/data/group.xml");
+    QFile file( MW::pathUser + "/data/group.xml");
 
-    file.open(QIODevice::ReadOnly);
-    if (!docCombo.setContent(&file)) {
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return;}
+    if (!docCombo.setContent(&file))
         return;
-    }
-    QDomElement racine = docCombo.documentElement(); // renvoie la balise racine
-    QDomNode noeud = racine.firstChild();
-    while (!noeud.isNull()) {
-        QDomNodeList tab;
-        QDomNodeList tab2;
-        QDomElement groupPer;
-        groupPer = noeud.toElement();
-        if (groupPer.tagName() == "root") {
-            tab = groupPer.childNodes();
-            for (int i = 0; i < (int)tab.length(); ++i) {
-                QDomNode noeud2 = tab.item(i);
-                QDomElement mygroup = noeud2.toElement();
-                QString mygroupname = mygroup.attribute("Name");
-                QString mygroupid = mygroup.attribute("id");
-                combo->addItem(mygroupname, mygroupid);
-            }
-        }
-        noeud = noeud.nextSibling();
-    }
-    docCombo.clear();
-    file.close();
+
+	QDomElement racine = docCombo.documentElement(); // renvoie la balise racine
+	QDomNode noeud = racine.firstChild();
+	while (!noeud.isNull()) {
+		QDomNodeList tab;
+		QDomNodeList tab2;
+		QDomElement groupPer;
+		groupPer = noeud.toElement();
+		if (groupPer.tagName() == "root") {
+			tab = groupPer.childNodes();
+			for (int i = 0; i < (int)tab.length(); ++i) {
+			QDomNode noeud2 = tab.item(i);
+			QDomElement mygroup = noeud2.toElement();
+			QString mygroupname = mygroup.attribute("Name");
+			QString mygroupid = mygroup.attribute("id");
+			combo->addItem(mygroupname, mygroupid);
+			}
+		}
+		noeud = noeud.nextSibling();
+	}
+	docCombo.clear();
+file.close();
 }
-bool messages::addNewBook(QString bkpath, QString bktitle, QString bkauth,
+
+bool Messages::addNewBook(QString bkpath, QString bktitle, QString bkauth,
     QString bkbetaka, QString groupid, bool cheked)
 {
     // QFile filepath(m_pathCostum+"/" +bkpath);
-    QFile file(m_pathUser + "/data/group.xml");
+    QFile file( MW::pathUser + "/data/group.xml");
     if (bkpath.isEmpty()) {
         return false;
     }
@@ -717,11 +730,11 @@ bool messages::addNewBook(QString bkpath, QString bktitle, QString bkauth,
     if (bkauth.isEmpty()) {
         bkauth = tr("غير معروف");
     }
-    file.open(QIODevice::ReadOnly);
-    if (!m_doc.setContent(&file)) {
-        return false;
-    }
-    file.close();
+    if (!file.open(QIODevice::ReadOnly) || !m_doc.setContent(&file)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return false;}
+    //if (!m_doc.setContent(&file))        return false;
+
+	file.close();
     QDomElement racine = m_doc.documentElement(); // عنصر الشجرة الاصلي
     QDomNode noeud = racine.firstChild(); // تحديد اول عنصر من ابناء العنصر الاصلي
     while (!noeud.isNull()) // كلما كان العنصر غير فارغا
@@ -767,7 +780,7 @@ bool messages::addNewBook(QString bkpath, QString bktitle, QString bkauth,
 }
 
 //***********************favorite***********************************************
-void messages::favorite_charge(QTreeWidget* view, QIcon icong, QIcon iconf)
+void Messages::favorite_charge(QTreeWidget* view, QIcon icong, QIcon iconf)
 {
     //    QString path=QCoreApplication::applicationDirPath ();
     QString path = QDir::homePath() + "/.kirtasse";
@@ -778,7 +791,8 @@ void messages::favorite_charge(QTreeWidget* view, QIcon icong, QIcon iconf)
                             " <groupe name='عام' />"
                             "</dataroot>";
     QFile file(path + "/data/favorite.xml");
-    file.open(QIODevice::ReadOnly);
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return;}
     if (file.exists()) {
         if (!doc.setContent(&file))
             doc.setContent(myxmlfavorite);
@@ -820,7 +834,7 @@ void messages::favorite_charge(QTreeWidget* view, QIcon icong, QIcon iconf)
     doc.clear();
 }
 
-void messages::favorite_save(QTreeWidget* view)
+void Messages::favorite_save(QTreeWidget* view)
 {
     QString myxmlfavorite = "<?xml version='1.0' encoding='UTF-8'?>"
                             "<dataroot>"
@@ -852,7 +866,7 @@ void messages::favorite_save(QTreeWidget* view)
             items.setAttribute("autname", autname);
         }
     }
-    QFile file(m_pathUser + "/data/favorite.xml");
+    QFile file( MW::pathUser + "/data/favorite.xml");
     file.open(QIODevice::WriteOnly); // فتح الملف للكتابة
     QTextStream out(&file); // الكتابة
     m_doc.save(out, 1); // حفظ الملف
@@ -860,7 +874,7 @@ void messages::favorite_save(QTreeWidget* view)
     m_doc.clear();
 }
 //************************************
-bool messages::treeviewItemRemove(QTreeWidget* view)
+bool Messages::treeviewItemRemove(QTreeWidget* view)
 {
     QTreeWidgetItem* item = view->currentItem();
     if (!item) {
@@ -876,7 +890,7 @@ bool messages::treeviewItemRemove(QTreeWidget* view)
     }
     return true;
 }
-bool messages::treeviewItemUp(QTreeWidget* view)
+bool Messages::treeviewItemUp(QTreeWidget* view)
 {
     int t;
     QTreeWidgetItem* new_item; // العنصر الجديد
@@ -905,7 +919,7 @@ bool messages::treeviewItemUp(QTreeWidget* view)
     view->setCurrentItem(new_item); //
     return true;
 }
-bool messages::treeviewItemDown(QTreeWidget* view)
+bool Messages::treeviewItemDown(QTreeWidget* view)
 {
     int t;
     int r;
@@ -942,7 +956,7 @@ bool messages::treeviewItemDown(QTreeWidget* view)
 }
 //**************************************************************************
 
-int messages::genirateId(QTreeWidget* view)
+int Messages::genirateId(QTreeWidget* view)
 {
     int newid = 0;
     QList<QString> list;
@@ -968,18 +982,19 @@ int messages::genirateId(QTreeWidget* view)
     list.clear();
     return newid;
 }
-QString messages::geniratNewBookName(QString groupParent)
+QString Messages::geniratNewBookName(QString groupParent)
 {
 
     QList<QString> list;
-    QFile file(m_pathUser + "/data/group.xml");
-    file.open(QIODevice::ReadOnly);
-    if (!m_doc.setContent(&file)) {
+    QFile file( MW::pathUser + "/data/group.xml");
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return "";}
+    if (!m_doc.setContent(&file))
         return "bk" + groupParent;
-    }
-    file.close();
-    QDomElement racine = m_doc.documentElement(); // renvoie la balise racine
-    QDomNode noeud = racine.firstChild();
+
+	file.close();
+    QDomElement root_ = m_doc.documentElement(); //returns the root tag
+    QDomNode noeud = root_.firstChild();
     while (!noeud.isNull()) {
         QDomNodeList tab;
         QDomNodeList tab2;
@@ -1018,28 +1033,20 @@ QString messages::geniratNewBookName(QString groupParent)
     list.clear();
     return newBookName;
 }
-bool messages::saveBookInfo(QString bookname, QString title, QString author,
+bool Messages::saveBookInfo(QString bookname, QString title, QString author,
     QString betaka)
 {
-    QDir appDir(qApp->applicationDirPath());
-    appDir.cdUp();
-    QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
-    QFile file;
-    QString path;
+	QFile file;
     if (file.exists(m_pathCostum + "/" + bookname + "/bookinfo.info")) {
-        path = m_pathCostum + "/" + bookname + "/bookinfo.info";
-    } else if (file.exists(pathApp + "/books/" + bookname + "/bookinfo.info")) {
-        path = pathApp + "/books/" + bookname + "/bookinfo.info";
-    } else {
-        path = m_pathCostum + "/" + bookname + "/bookinfo.info";
-    }
-    file.setFileName(path);
+        file.setFileName( m_pathCostum + "/" + bookname + "/bookinfo.info");
+    } else if (file.exists(MW::pathApp + "/books/" + bookname + "/bookinfo.info"))
+        file.setFileName( MW::pathApp + "/books/" + bookname + "/bookinfo.info");
+    else
+        file.setFileName( m_pathCostum + "/" + bookname + "/bookinfo.info");
 
-    if (!file.open(QIODevice::WriteOnly)) {
-        return false;
-    }
+    if (!file.open(QIODevice::WriteOnly)) return false;
+
     // فتح الملف للكتابة
-
     QString myxmltitle = "<?xml version='1.0' encoding='UTF-8'?>"
                          "<dataroot>"
                          "</dataroot>";
@@ -1059,7 +1066,7 @@ bool messages::saveBookInfo(QString bookname, QString title, QString author,
     m_doc.clear();
     return true;
 }
-bool messages::loadBookInfo(QString bookname)
+bool Messages::loadBookInfo(QString bookname)
 {
 
     QFile file(bookname + "/bookinfo.info");
@@ -1086,7 +1093,7 @@ bool messages::loadBookInfo(QString bookname)
 
 //**********************
 
-bool messages::loadTarGz(QString path)
+bool Messages::loadTarGz(QString path)
 {
     // verifier
     QProcess prosses;
@@ -1172,7 +1179,7 @@ bool messages::loadTarGz(QString path)
 #endif
 }
 
-void messages::removeTempDirs(QString dirName)
+void Messages::removeTempDirs(QString dirName)
 {
     removeTempFiles(dirName);
     QString subdir;
@@ -1189,7 +1196,7 @@ void messages::removeTempDirs(QString dirName)
     }
 }
 
-bool messages::removeTempFiles(QString tempDir)
+bool Messages::removeTempFiles(QString tempDir)
 {
 
     QDir dirS(tempDir);

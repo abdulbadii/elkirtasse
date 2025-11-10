@@ -240,7 +240,7 @@ QString Print::convertText(QString txt, QString part, QString page, int id)
     txt.replace(QByteArray("\n"), QByteArray("<br>"));
     txt.replace(QByteArray("\r"), QByteArray("<br>"));
     //*******************************************
-    // QString id=DataBook->bookCurentId[m_currentBookIndex];
+    // QString id=databook->bookCurentId[m_currentBookIndex];
     if (txt.contains("$")) {
         txt.replace("$", "");
     }

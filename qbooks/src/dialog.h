@@ -27,27 +27,24 @@ w'.
 ** $elkirtasse_END_LICENSE$
 **
 ****************************************************************************/
-#ifndef DIALOG_H
-#define DIALOG_H
+#pragma once
 #include "messages.h"
 #include <QAbstractButton>
 #include <QDialog>
-namespace Ui {
-class Dialog;
-}
+namespace Ui {	class Dialog;	}
 
 class Dialog : public QDialog {
     Q_OBJECT
-    messages* Messages;
+	std::unique_ptr<Messages> message;
 
 public:
-    Dialog(QWidget* parent = 0);
+    Dialog(QWidget* parent = nullptr);
     ~Dialog();
     QString m_path;
 
 private:
-    Ui::Dialog* ui;
-    QString m_addGroupeName;
+	std::unique_ptr<Ui::Dialog> ui;
+	QString m_addGroupeName;
     QString m_addGroupeId;
 
     QString m_bookDir;
@@ -77,4 +74,3 @@ public slots:
 
     //  bool loadTarGz(QString path);
 };
-#endif // DIALOG_H

@@ -36,7 +36,7 @@ w'.
 #include <QProgressDialog>
 #include <QtGui>
 
-findbook::findbook()
+FindBook::FindBook()
 {
 
     m_pathUser = QDir::homePath() + "/.kirtasse";
@@ -50,10 +50,10 @@ findbook::findbook()
     isNassToFind = true;
     noHamza = false;
 }
-findbook::~findbook() { stopFind = true; }
+FindBook::~FindBook() { stopFind = true; }
 //******************bigen find *************************************************
 
-void findbook::findOneBook(QString bookpath) // بحث في كتاب الحالي
+void FindBook::findOneBook(QString bookpath) // بحث في كتاب الحالي
 {
 
     QFile file(bookpath + "/book.xml");
@@ -85,11 +85,12 @@ void findbook::findOneBook(QString bookpath) // بحث في كتاب الحال�
     xml.clear();
     file.close();
 }
-void findbook::findInAllBook(bool inbooks) // بحث في مجموعة كتب
+void FindBook::findInAllBook(bool inbooks) // بحث في مجموعة كتب
 {
 
     QFile file(m_pathUser + "/data/find.xml");
-    file.open(QIODevice::ReadOnly);
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return;}
 
     if (!m_docBKfindlist.setContent(&file)) {
         return;
@@ -147,7 +148,7 @@ void findbook::findInAllBook(bool inbooks) // بحث في مجموعة كتب
     file.close();
 }
 
-void findbook::readXml()
+void FindBook::readXml()
 {
     if (findMultiFind == true) {
         chargelistStrMultiFind(findText);
@@ -217,7 +218,7 @@ void findbook::readXml()
         }
     }
 }
-void findbook::readStrMultiFind()
+void FindBook::readStrMultiFind()
 {
     if (findAnd == false) {
 
@@ -249,7 +250,7 @@ void findbook::readStrMultiFind()
         }
     }
 }
-void findbook::readStr()
+void FindBook::readStr()
 {
     QTreeWidgetItem* item = new QTreeWidgetItem;
     QString str1 = str;
@@ -294,7 +295,7 @@ void findbook::readStr()
     }
     //*******listString************************
 }
-void findbook::readStrFirst()
+void FindBook::readStrFirst()
 {
   QString pattern = findText + "*";  //wildcard string
   pattern.replace(".", "\\.");  //wildcard to regex
@@ -320,7 +321,7 @@ void findbook::readStrFirst()
     }
 }
 
-bool findbook::chargelistStrToFind(QString search)
+bool FindBook::chargelistStrToFind(QString search)
 {
     m_listStrToFind.clear();
     if (findToList == false) {
@@ -377,7 +378,7 @@ bool findbook::chargelistStrToFind(QString search)
 
     return true;
 }
-bool findbook::chargelistStrMultiFind(QString search)
+bool FindBook::chargelistStrMultiFind(QString search)
 {
 
     m_listStrToFind.clear();
@@ -398,7 +399,7 @@ bool findbook::chargelistStrMultiFind(QString search)
     return true;
 }
 
-bool findbook::searchInDoc(QTextDocument* document, QString searchString,
+bool FindBook::searchInDoc(QTextDocument* document, QString searchString,
     QColor color)
 {
 
@@ -446,7 +447,7 @@ bool findbook::searchInDoc(QTextDocument* document, QString searchString,
 }
 
 //***end find***************************************************
-void findbook::searchInTreeview(QTreeWidget* view, QString searchString,
+void FindBook::searchInTreeview(QTreeWidget* view, QString searchString,
     int colum)
 {
     for (int i = 0; i < view->topLevelItemCount(); i++) {
@@ -461,7 +462,7 @@ void findbook::searchInTreeview(QTreeWidget* view, QString searchString,
     }
 }
 
-bool findbook::searchTreeForString(const QString& searchString,
+bool FindBook::searchTreeForString(const QString& searchString,
     QTreeWidgetItem* parent, bool itemtop,
     int topindex, QTreeWidget* view, int colum)
 {
@@ -506,7 +507,7 @@ bool findbook::searchTreeForString(const QString& searchString,
     return true;
 }
 
-bool findbook::showAllItems(QTreeWidgetItem* parent, QTreeWidget* view)
+bool FindBook::showAllItems(QTreeWidgetItem* parent, QTreeWidget* view)
 {
     for (int i = 0; i < parent->childCount(); i++) {
         parent->child(i)->setHidden(false);
@@ -515,7 +516,7 @@ bool findbook::showAllItems(QTreeWidgetItem* parent, QTreeWidget* view)
     return true;
 }
 //**********************
-void findbook::loadResultFind(QTreeWidget* view, QString fn)
+void FindBook::loadResultFind(QTreeWidget* view, QString fn)
 {
 
     QFile file(fn);
@@ -566,7 +567,7 @@ void findbook::loadResultFind(QTreeWidget* view, QString fn)
     xml.clear();
     file.close();
 }
-bool findbook::saveResultFind(QTreeWidget* view, QString fn)
+bool FindBook::saveResultFind(QTreeWidget* view, QString fn)
 {
     if (!fn.contains(".xml")) fn = fn + ".xml";
     QFile file(fn);
@@ -614,7 +615,7 @@ bool findbook::saveResultFind(QTreeWidget* view, QString fn)
 
     return true;
 }
-void findbook::findFahariss(QTreeWidget* view, QString bookpath, QRegularExpression rx,
+void FindBook::findFahariss(QTreeWidget* view, QString bookpath, QRegularExpression rx,
     QRegularExpression rx2, int rowcount)
 {
     QFile file(bookpath + "/book.xml");
@@ -707,11 +708,12 @@ void findbook::findFahariss(QTreeWidget* view, QString bookpath, QRegularExpress
     xml.clear();
     file.close();
 }
-void findbook::findInAllFahariss(QString bookpath)
+void FindBook::findInAllFahariss(QString bookpath)
 {
     QString titlepath = bookpath + "/title.xml";
     QFile file(titlepath);
-    file.open(QIODevice::ReadOnly);
+    if (!file.open(QIODevice::ReadOnly)){
+    	qWarning() << "File: " << file.fileName() << file.errorString(); return;}
 
     QTreeWidgetItem* item;
     QString tit;
