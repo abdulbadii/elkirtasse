@@ -55,10 +55,12 @@ is cmake's for `make -j`
 #### Books   
 https://sourceforge.net/projects/elkirtasse/files/allbooks/   
 
-In Compressed archived form not really complete;, around 2/3 of total size:   
+Compressed archive not complete, around 2/3 of them:   
 https://drive.google.com/file/d/0BwPwCxaPvz2xYld5aXlmLUpfOW8/view?usp=sharing&resourcekey=0-hBOd-1lOPi20-fSiNLFpdQ   
 https://drive.google.com/file/d/0BwPwCxaPvz2xaUJndFBxbDdFWjQ/view?usp=sharing&resourcekey=0-Nia2L2qtG8rTYtmfXipdfQ    
 https://drive.google.com/file/d/0BwPwCxaPvz2xZWpxdTI4bTE3eGc/view?usp=sharing&resourcekey=0-J9BY6vTWapBW5Fjv5DAWug     
 
 #### The Holy Quran    
 https://drive.google.com/drive/folders/1rYsthUQz9iG-OHo3-aPrXBCamp59n4Ut?usp=sharing   
+compressed archive   
+https://drive.google.com/file/d/1UcLJdr5VbG7Hs1jl0mx3MNdJgOCpMvDj/view?usp=sharing
