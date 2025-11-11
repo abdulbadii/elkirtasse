@@ -59,8 +59,7 @@ public:
 	~Messages();
 
 private:
-	QString pathApp;
-	QString pathUser;
+	//QString pathApp;	QString pathUser;
 	QList<QString> listId;
 
 	QDomDocument m_doc;

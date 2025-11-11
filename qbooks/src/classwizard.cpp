@@ -53,25 +53,25 @@ ClassWizard::ClassWizard(QWidget* parent)
 // ترتيب النوافذ
 int ClassWizard::nextId() const
 {
-    switch (currentId()) {
-    case Page_Intro:
-        return Page_InfoPage;
-    case Page_InfoPage:
-        if (field("rUrlBook").toBool()) {
-            return ClassWizard::Page_TreeBook;
-        } else if (field("rUrlFavorite").toBool()) {
-            return ClassWizard::Page_Details;
-        } else {
-            return ClassWizard::Page_Conclusion;
-        }
-    case Page_TreeBook:
-        return ClassWizard::Page_Conclusion;
-    case Page_Details:
-        return ClassWizard::Page_Conclusion;
-    case Page_Conclusion:
-    default:
-        return -1;
-    }
+	switch (currentId()) {
+	case Page_Intro:
+	return Page_InfoPage;
+	case Page_InfoPage:
+	if (field("rUrlBook").toBool()) {
+		return ClassWizard::Page_TreeBook;
+	} else if (field("rUrlFavorite").toBool()) {
+		return ClassWizard::Page_Details;
+	} else {
+		return ClassWizard::Page_Conclusion;
+	}
+	case Page_TreeBook:
+	return ClassWizard::Page_Conclusion;
+	case Page_Details:
+	return ClassWizard::Page_Conclusion;
+	case Page_Conclusion:
+	default:
+	return -1;
+	}
 }
 // عند الانتهاء والقبول
 void ClassWizard::accept()
@@ -108,7 +108,7 @@ IntroPage::IntroPage(QWidget* parent)
 
     label = new QLabel(
         tr("هذا المعالج سينشئ لك ارتباطا تشعبيا  "
-               "بين صفحتك وصفحة أخرى سوء كانت في نفس الكتاب أو في كتاب أخر "));
+               "بين صفحتك وصفحة أخرى سواء كانت في نفس الكتاب أو في كتاب أخر "));
 
     label->setWordWrap(true);
     QVBoxLayout* layout = new QVBoxLayout;

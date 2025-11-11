@@ -30,10 +30,11 @@ w'.
 
 #include "dialogconfigbooks.h"
 #include "ui_dialogconfigbooks.h"
-#include <QDebug>
+#include "mw.h"
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QDebug>
 DialogConfigBooks::DialogConfigBooks(QWidget* parent)
     : QDialog(parent)
     , ui(new Ui::DialogConfigBooks)
@@ -553,8 +554,8 @@ void DialogConfigBooks::on_toolButtonGroupUpdat_clicked()
     } else {
         QDir appDir(QCoreApplication::applicationDirPath());
         appDir.cdUp();
-        QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
-        file.copy(pathApp + "/data/group.xml", groupPath);
+        //pathApp = appDir.absolutePath() + "/share/elkirtasse";
+        file.copy( MW::pathApp + "/data/group.xml", groupPath);
     }
     ui->toolButtonGroupUpdat->setEnabled(false);
 }
@@ -644,8 +645,8 @@ void DialogConfigBooks::on_toolButtonFindBKOld_clicked()
     // نسخ الاصلية الى دليل المنزل
     QDir appDir(QCoreApplication::applicationDirPath());
     appDir.cdUp();
-    QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
-    file.copy(pathApp + "/data/group.xml", groupPath);
+    //QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
+    file.copy( MW::pathApp + "/data/group.xml", groupPath);
     // تحميل القائمة الى الشجرة
     message->treeChargeGroupe(ui->treeWidgetBooks, 0, true);
     // اضافة قسم جديد فارغ

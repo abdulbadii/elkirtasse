@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QStyleFactory>
 #include <QtGui>
+#include "mw.h"
 
 Dialogoption::Dialogoption(QWidget* parent)
     : QDialog(parent)
@@ -43,12 +44,12 @@ Dialogoption::Dialogoption(QWidget* parent)
         tr("الافتراضي"));
     QDir appDir(qApp->applicationDirPath());
     appDir.cdUp();
-    QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
-    QDir dirImage(pathApp + "/data/images");
+    //QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
+    QDir dirImage( MW::pathApp + "/data/images");
     QString subdir;
     foreach (subdir, dirImage.entryList(QDir::AllDirs | QDir::NoDotAndDotDot | QDir::Hidden)) {
         ui->comboBoxCadre->addItem(
-            QIcon(pathApp + "/data/images/" + subdir + "/top.png"), subdir);
+            QIcon( MW::pathApp + "/data/images/" + subdir + "/top.png"), subdir);
     }
 }
 Dialogoption::~Dialogoption() { }
@@ -332,8 +333,7 @@ void Dialogoption::on_toolButton_3_clicked()
 //{
 //     QDir appDir(qApp->applicationDirPath());
 //     appDir.cdUp();
-//     QString pathApp=  appDir.absolutePath()+"/share/elkirtasse";
-//     QString image=pathApp+"/data/images/"+img+"/preview.png";
+//     QString image= MW::pathApp+"/data/images/"+img+"/preview.png";
 //     QFile file(image);
 //     if (file.exists()){
 //         ui->labelCadre->setPixmap(image);

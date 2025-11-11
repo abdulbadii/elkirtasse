@@ -28,6 +28,7 @@ w'.
 **
 ****************************************************************************/
 #include "findbook.h"
+#include "mw.h"
 #include <QAction>
 #include <QApplication>
 #include <QLabel>
@@ -128,8 +129,8 @@ void FindBook::findInAllBook(bool inbooks) // بحث في مجموعة كتب
         } else {
             QDir appDir(qApp->applicationDirPath());
             appDir.cdUp();
-            QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
-            bookpath = pathApp + "/books/" + findName;
+            //QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
+            bookpath = MW::pathApp + "/books/" + findName;
         }
         if (inbooks == true) {
             findOneBook(bookpath);

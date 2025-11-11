@@ -29,6 +29,7 @@ w'.
 ****************************************************************************/
 #include "dialogfind.h"
 #include "ui_dialogfind.h"
+#include "mw.h"
 #include <QMessageBox>
 #include <QtGui>
 Dialogfind::Dialogfind(QWidget* parent)
@@ -121,7 +122,12 @@ void Dialogfind::on_buttonBox_clicked(QAbstractButton* button)
 
         QString path = QDir::homePath() + "/.kirtasse/data/";
         QFile file(path + "find.xml");
-        file.open(QIODevice::WriteOnly); // فتح الملف للكتابة عليها
+        //file.open(QIODevice::WriteOnly);
+		if (!file.open(QIODevice::WriteOnly)) {			// فتح الملف للكتابة عليها
+			QMessageBox::critical(this,
+				"File Error", "Failed to open file for writing:\n" + file.errorString());
+			return;
+		}
         QTextStream out(&file); // الكتابة
         const int IndentSize = 1;
         m_docFind.save(out, IndentSize); // حفظ الملف
@@ -168,10 +174,10 @@ void Dialogfind::on_treeWidget_itemChanged(QTreeWidgetItem* item, int)
             QFile file;
             QDir appDir(qApp->applicationDirPath());
             appDir.cdUp();
-            QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
+            //QString pathApp = appDir.absolutePath() + "/share/elkirtasse";
             if (file.exists(bookPath + "/" + mydata + "/book.xml")) {
                 item->setData(2, 2, "user");
-            } else if (file.exists(pathApp + "/books/" + mydata + "/book.xml")) {
+            } else if (file.exists( MW::pathApp + "/books/" + mydata + "/book.xml")) {
                 item->setData(2, 2, "apath");
             } else {
                 QString mytxt = item->text(0);

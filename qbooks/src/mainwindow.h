@@ -59,7 +59,7 @@ namespace Ui { class MainWindowClass; }
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
-    unique_ptr<FindBook> findBook;
+    FindBook *findBook;
     ClassWizard* Wizard;	// rowat *Rowat;
     NetInterface* netInterface;
     RowatInterface* rowatInterface;
@@ -69,9 +69,8 @@ class MainWindow : public QMainWindow {
 public:
     explicit MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
-    unique_ptr<Messages> message;
-    unique_ptr<DataBook> databook;
-	//QString m_pathApp;	QString m_pathUser; // مسار البرنامج
+    Messages *message;
+    DataBook *databook;
 
 protected:
     virtual void closeEvent(QCloseEvent* e);
@@ -82,7 +81,7 @@ signals:
     void bookAvailable(bool);
 
 private:
-	unique_ptr<Ui::MainWindowClass> ui;
+	Ui::MainWindowClass *ui;
     QTranslator m_translator;
     toolrubon* toolRubon;
 	string langLoc;

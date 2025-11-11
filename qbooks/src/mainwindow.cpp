@@ -62,7 +62,7 @@ w'.
 #include <stdexcept>
 // تحميل البرنامج
 MainWindow::MainWindow(QWidget* parent) :
-	QMainWindow(parent), ui(std::make_unique<Ui::MainWindowClass>())
+	QMainWindow(parent), ui(new Ui::MainWindowClass)
 {
     ui->setupUi(this);
     view = new View(this);
@@ -83,8 +83,8 @@ MainWindow::MainWindow(QWidget* parent) :
 	if (!dir.exists( h + ".fonts"))	dir.mkdir( h + ".fonts");		// التاكد من وجود مجلد مؤقت
 
 	QDir appDir( QCoreApplication::applicationDirPath());
-	MW::pathApp = appDir.absolutePath();
-	if (QRegularExpression{"^/(?:usr/(local/)?)?bin$"}.match( MW::pathApp).hasMatch() || MW::pathApp == h+".local/bin") {
+	if (QRegularExpression{"^/(?:usr/(local/)?)?bin$"}.match(appDir.absolutePath()).hasMatch()
+		|| appDir.absolutePath() == h+".local/bin") {
 		appDir.cdUp();
 		MW::pathApp = appDir.absolutePath() + "/share/elkirtasse/";
 		if (! dir.exists(MW::pathApp)) {
@@ -111,9 +111,9 @@ MainWindow::MainWindow(QWidget* parent) :
 	if (!file.exists( h + F))
 		file.copy( MW::pathApp + "data/" +F, h + F);
 
-	message = make_unique<Messages>();
-	findBook = make_unique<FindBook>();
-	databook = make_unique<DataBook>();
+	message = new Messages;
+	findBook = new FindBook;
+	databook = new DataBook;
 
 	m_currentIndex = 0;
     for (int r = 0; r < 10; ++r) {
